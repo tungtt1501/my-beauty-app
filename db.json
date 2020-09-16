@@ -1,197 +1,270 @@
 {
-  "blogs": [{
-	"id" : 1,
-        "image": "/images/image_1.jpg",
-        "day": 25,
-        "month": "September",
-        "year": 2019,
-        "heading": "Is wellness the new luxury",
-        "description": "A small river named Duden flows by their place and supplies it with the necessary regelialia."
+  "blogs": [
+    {
+      "id": 1,
+      "image": "/images/image_1.jpg",
+      "day": 25,
+      "month": "September",
+      "year": 2019,
+      "heading": "Is wellness the new luxury",
+      "description": "A small river named Duden flows by their place and supplies it with the necessary regelialia."
     },
     {
-        "id": 2,
-        "image": "/images/image_2.jpg",
-        "day": 26,
-        "month": "September",
-        "year": 2019,
-        "heading": "Is wellness the new luxury2",
-        "description": "A small river named Duden flows by their place and supplies it with the necessary regelialia2."
-    }],
-  "services":
-	[
-		{
-			"categoryId": 1,
-			"categoryName": "BEAUTÉ DES MAINS",
-			"seviceItems": [
-				{
-					"serviceItemId": 1,
-					"serviceItemName": "Pose gel nouveaux ongles",
-					"serviceItemTime": 40,
-					"serviceItemPrice": 90
-				},
-				{
-					"serviceItemId": 2,
-					"serviceItemName": "Pose acrylique nouveaux ongles ",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 90
-				},
-				{
-					"serviceItemId": 3,
-					"serviceItemName": "Remplissage gel",
-					"serviceItemTime": 60,
-					"serviceItemPrice": 70
-				},
-				{
-					"serviceItemId": 4,
-					"serviceItemName": "Remplissage acrylique",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 65
-				},
-				{
-					"serviceItemId": 5,
-					"serviceItemName": "Dépose gel ou acrylique",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 35
-				},
-				{
-					"serviceItemId": 6,
-					"serviceItemName": "Manucure vernis semi permanent",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 55
-				},
-				{
-					"serviceItemId": 7,
-					"serviceItemName": "Pose semi permanent",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 25
-				},
-				{
-					"serviceItemId": 8,
-					"serviceItemName": "Manucure avec vernis",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 35
-				},
-				{
-					"serviceItemId": 9,
-					"serviceItemName": "Manucure sans vernis",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 28
-				},
-				{
-					"serviceItemId": 10,
-					"serviceItemName": "Pose vernis normal",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 15
-				},
-				{
-					"serviceItemId": 11,
-					"serviceItemName": "Réparation l’ongle cassé",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 10
-				}
-			]
-		},
-		{
-			"categoryId": 2,
-			"categoryName": "BEAUTÉ DES PIEDS",
-			"seviceItems": [
-				{
-					"serviceItemId": 12,
-					"serviceItemName": "Pédicure SPA avec vernis permanent",
-					"serviceItemTime": 40,
-					"serviceItemPrice": 80
-				},
-				{
-					"serviceItemId": 13,
-					"serviceItemName": "Pédicure SPA avec vernis normal",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 55
-				},
-				{
-					"serviceItemId": 14,
-					"serviceItemName": "Pédicure SPA sans vernis",
-					"serviceItemTime": 60,
-					"serviceItemPrice": 48
-				},
-				{
-					"serviceItemId": 15,
-					"serviceItemName": "Pose vernis permanent",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 40
-				},
-				{
-					"serviceItemId": 16,
-					"serviceItemName": "Pose vernis normal",
-					"serviceItemTime": 40,
-					"serviceItemPrice": 15
-				},
-				{
-					"serviceItemId": 17,
-					"serviceItemName": "Pédicure SPA avec gommage, masque et massage",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 100
-				},
-				{
-					"serviceItemId": 18,
-					"serviceItemName": "Réparation l’ongle incarné",
-					"serviceItemTime": 60,
-					"serviceItemPrice": 10
-				}
-			]
-		},
-		{
-			"categoryId": 3,
-			"categoryName": "ÉPILATION À LA CIRE",
-			"seviceItems": [
-				{
-					"serviceItemId": 19,
-					"serviceItemName": "Sourcils",
-					"serviceItemTime": 40,
-					"serviceItemPrice": 15
-				},
-				{
-					"serviceItemId": 20,
-					"serviceItemName": "Lèvres",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 10
-				},
-				{
-					"serviceItemId": 21,
-					"serviceItemName": "Menton",
-					"serviceItemTime": 60,
-					"serviceItemPrice": 10
-				},
-				{
-					"serviceItemId": 22,
-					"serviceItemName": "Visage complet",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 45
-				}
-			]
-		},
-		{
-			"categoryId": 4,
-			"categoryName": "* * * FORFAIT",
-			"seviceItems": [
-				{
-					"serviceItemId": 23,
-					"serviceItemName": "Jambes, intégrale, aisselles ",
-					"serviceItemTime": 40,
-					"serviceItemPrice": 100
-				},
-				{
-					"serviceItemId": 24,
-					"serviceItemName": "Jambes, bikini, aisselles ",
-					"serviceItemTime": 30,
-					"serviceItemPrice": 75
-				},
-				{
-					"serviceItemId": 25,
-					"serviceItemName": "Demi-jambes, bikini ",
-					"serviceItemTime": 60,
-					"serviceItemPrice": 50
-				}
-			]
-		}
-	]
+      "id": 2,
+      "image": "/images/image_2.jpg",
+      "day": 26,
+      "month": "September",
+      "year": 2019,
+      "heading": "Is wellness the new luxury2",
+      "description": "A small river named Duden flows by their place and supplies it with the necessary regelialia2."
+    }
+  ],
+  "services": [
+    {
+      "categoryId": 1,
+      "categoryName": "BEAUTÉ DES MAINS",
+      "seviceItems": [
+        {
+          "serviceItemId": 1,
+          "serviceItemName": "Pose gel nouveaux ongles",
+          "serviceItemTime": 40,
+          "serviceItemPrice": 90
+        },
+        {
+          "serviceItemId": 2,
+          "serviceItemName": "Pose acrylique nouveaux ongles ",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 90
+        },
+        {
+          "serviceItemId": 3,
+          "serviceItemName": "Remplissage gel",
+          "serviceItemTime": 60,
+          "serviceItemPrice": 70
+        },
+        {
+          "serviceItemId": 4,
+          "serviceItemName": "Remplissage acrylique",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 65
+        },
+        {
+          "serviceItemId": 5,
+          "serviceItemName": "Dépose gel ou acrylique",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 35
+        },
+        {
+          "serviceItemId": 6,
+          "serviceItemName": "Manucure vernis semi permanent",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 55
+        },
+        {
+          "serviceItemId": 7,
+          "serviceItemName": "Pose semi permanent",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 25
+        },
+        {
+          "serviceItemId": 8,
+          "serviceItemName": "Manucure avec vernis",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 35
+        },
+        {
+          "serviceItemId": 9,
+          "serviceItemName": "Manucure sans vernis",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 28
+        },
+        {
+          "serviceItemId": 10,
+          "serviceItemName": "Pose vernis normal",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 15
+        },
+        {
+          "serviceItemId": 11,
+          "serviceItemName": "Réparation l’ongle cassé",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 10
+        }
+      ]
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "BEAUTÉ DES PIEDS",
+      "seviceItems": [
+        {
+          "serviceItemId": 12,
+          "serviceItemName": "Pédicure SPA avec vernis permanent",
+          "serviceItemTime": 40,
+          "serviceItemPrice": 80
+        },
+        {
+          "serviceItemId": 13,
+          "serviceItemName": "Pédicure SPA avec vernis normal",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 55
+        },
+        {
+          "serviceItemId": 14,
+          "serviceItemName": "Pédicure SPA sans vernis",
+          "serviceItemTime": 60,
+          "serviceItemPrice": 48
+        },
+        {
+          "serviceItemId": 15,
+          "serviceItemName": "Pose vernis permanent",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 40
+        },
+        {
+          "serviceItemId": 16,
+          "serviceItemName": "Pose vernis normal",
+          "serviceItemTime": 40,
+          "serviceItemPrice": 15
+        },
+        {
+          "serviceItemId": 17,
+          "serviceItemName": "Pédicure SPA avec gommage, masque et massage",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 100
+        },
+        {
+          "serviceItemId": 18,
+          "serviceItemName": "Réparation l’ongle incarné",
+          "serviceItemTime": 60,
+          "serviceItemPrice": 10
+        }
+      ]
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "ÉPILATION À LA CIRE",
+      "seviceItems": [
+        {
+          "serviceItemId": 19,
+          "serviceItemName": "Sourcils",
+          "serviceItemTime": 40,
+          "serviceItemPrice": 15
+        },
+        {
+          "serviceItemId": 20,
+          "serviceItemName": "Lèvres",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 10
+        },
+        {
+          "serviceItemId": 21,
+          "serviceItemName": "Menton",
+          "serviceItemTime": 60,
+          "serviceItemPrice": 10
+        },
+        {
+          "serviceItemId": 22,
+          "serviceItemName": "Visage complet",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 45
+        }
+      ]
+    },
+    {
+      "categoryId": 4,
+      "categoryName": "* * * FORFAIT",
+      "seviceItems": [
+        {
+          "serviceItemId": 23,
+          "serviceItemName": "Jambes, intégrale, aisselles ",
+          "serviceItemTime": 40,
+          "serviceItemPrice": 100
+        },
+        {
+          "serviceItemId": 24,
+          "serviceItemName": "Jambes, bikini, aisselles ",
+          "serviceItemTime": 30,
+          "serviceItemPrice": 75
+        },
+        {
+          "serviceItemId": 25,
+          "serviceItemName": "Demi-jambes, bikini ",
+          "serviceItemTime": 60,
+          "serviceItemPrice": 50
+        }
+      ]
+    }
+  ],
+  "serviceBooks": [
+    {
+      "id": 1,
+      "firstName": "Lisa",
+      "lastName": "Elsa",
+      "email": "lisa@gmail.com",
+      "phone": "0985915781",
+      "serviceType": "BEAUTÉ DES MAINS",
+      "date": "18/10/2020",
+      "time": "20:00"
+    },
+    {
+      "id": 2,
+      "txtFirstName": "aaaaa",
+      "txtLastName": "",
+      "txtEmail": "",
+      "txtPhone": "",
+      "selService": "",
+      "date": "",
+      "time": ""
+    },
+    {
+      "id": 3,
+      "txtFirstName": "Tung",
+      "txtLastName": "Tran",
+      "txtEmail": "tungcontin@gmail.com",
+      "txtPhone": "0985015781",
+      "selService": "saab",
+      "date": "2020-09-16",
+      "time": "22:16"
+    },
+    {
+      "id": 4,
+      "txtFirstName": "Tung",
+      "txtLastName": "Tran",
+      "txtEmail": "tung",
+      "txtPhone": "098691512",
+      "selService": "",
+      "date": "",
+      "time": ""
+    },
+    {
+      "id": 5,
+      "txtFirstName": "",
+      "txtLastName": "",
+      "txtEmail": "",
+      "txtPhone": "",
+      "selService": "",
+      "date": "",
+      "time": ""
+    },
+    {
+      "id": 6,
+      "txtFirstName": "",
+      "txtLastName": "",
+      "txtEmail": "",
+      "txtPhone": "",
+      "selService": "",
+      "date": "",
+      "time": ""
+    },
+    {
+      "id": 7,
+      "txtFirstName": "",
+      "txtLastName": "",
+      "txtEmail": "",
+      "txtPhone": "",
+      "selService": "",
+      "date": "",
+      "time": ""
+    }
+  ]
 }
