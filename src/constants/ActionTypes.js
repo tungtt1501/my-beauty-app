@@ -1,2 +1,3 @@
 export const FETCH_BLOGS = 'FETCH_BLOGS'
 export const FETCH_SERVICES = 'FETCH_SERVICES'
+export const ADD_SERVICE_BOOK = 'ADD_SERVICE_BOOK'

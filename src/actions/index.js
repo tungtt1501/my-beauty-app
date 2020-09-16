@@ -30,3 +30,18 @@ export const actFetchServices = (services) => {
         services
     }
 }
+
+export const actAddServiceBookRequest = (serviceBook) => {
+    return dispatch => {
+        return callApi('serviceBooks', 'POST', serviceBook).then(res => {
+            dispatch(actAddServiceBook(res.data));
+        });
+    }
+}
+
+export const actAddServiceBook = (serviceBook) => {
+    return {
+        type : Types.ADD_SERVICE_BOOK,
+        serviceBook
+    }
+}
