@@ -21,7 +21,7 @@ const routes = [
         main: () => <ServiceList />
     },
     {
-        path: '/blogs',
+        path: '/gallery',
         exact: false,
         main: () => <BlogList />
     }

@@ -1,1 +1,1 @@
-export const API_URL = 'http://localhost:8099'
+export const API_URL = 'https://5f5f7a44df620f00163e5c5e.mockapi.io/my-beauty-app/'

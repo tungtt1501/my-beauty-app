@@ -4,6 +4,7 @@ import ServiceList from './../../components/ServiceList/ServiceList'
 import BlogList from './../../components/BlogList/BlogList'
 import Header from './../../components/Header/Header'
 import Footer from './../../components/Footer/Footer'
+import Gallery from '../../components/Gallery/Gallery';
 
 class HomePage extends React.Component {
 
@@ -22,7 +23,7 @@ class HomePage extends React.Component {
         <Header />
         <About />
         <ServiceList />
-        <BlogList />
+        <Gallery />
         <Footer />
       </Fragment>
       );

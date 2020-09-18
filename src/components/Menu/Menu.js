@@ -19,8 +19,8 @@ const menus = [
         exact: false
     },
     {
-        name: 'Blogs',
-        to: 'blogs',
+        name: 'Gallery',
+        to: 'gallery',
         exact: false
     },
     {

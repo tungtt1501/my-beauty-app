@@ -3,13 +3,13 @@ import { Element } from 'react-scroll';
 import { connect } from 'react-redux';
 import { actFetchBlogsRequest } from './../../actions/index'
 import BlogItem from './BlogItem';
+import BlogDetail from './BlogDetail';
 
 class BlogList extends React.Component {
   render() {
     var { blogs } = this.props;
     return (
       <Element id="blogs" name="blogs">
-
         <section className="ftco-section bg-light">
           <div className="row justify-content-center mb-5 pb-3">
             <div className="col-md-12 heading-section ftco-animate text-center">
@@ -37,6 +37,7 @@ class BlogList extends React.Component {
             </div>
           </div>
         </section>
+        <BlogDetail />
       </Element>
     );
   }

@@ -21,10 +21,6 @@ class Header extends React.Component {
                     <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
                   </div>
                 </div>
-                <p>
-                  <a href="#" className="btn btn-primary p-3 px-5 py-4 mr-md-2">Get in Touch</a>
-                  <a href="#" className="btn btn-outline-primary p-3 px-5 py-4 ml-md-2">Contact</a>
-                </p>
               </div>
             </div>
           </div>

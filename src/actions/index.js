@@ -31,6 +31,21 @@ export const actFetchServices = (services) => {
     }
 }
 
+export const actFetchServiceItemsRequest = (categoryId) => {
+    return (dispatch) => {
+        return callApi(`serviceItems?categoryId=${categoryId}`, 'GET', null).then(res => {
+            dispatch(actFetchServiceItems(res.data));
+        });
+    }
+}
+
+export const actFetchServiceItems = (serviceItems) => {
+    return {
+        type: Types.FETCH_SERVICE_ITEMS,
+        serviceItems
+    }
+}
+
 export const actAddServiceBookRequest = (serviceBook) => {
     return dispatch => {
         return callApi('serviceBooks', 'POST', serviceBook).then(res => {
@@ -43,5 +58,11 @@ export const actAddServiceBook = (serviceBook) => {
     return {
         type : Types.ADD_SERVICE_BOOK,
         serviceBook
+    }
+}
+
+export const actResetServiceBook = () => {
+    return {
+        type : Types.RESET_SERVICE_BOOK
     }
 }

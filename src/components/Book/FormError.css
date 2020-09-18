@@ -1,0 +1,9 @@
+.error {
+    color: #f44336;
+    font-size: 12px;
+    font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
+}
+
+.error-input {
+    border-color: red;
+}

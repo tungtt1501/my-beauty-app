@@ -5,11 +5,26 @@ import intro from './../../images/intro.jpg';
 import offerdeal1 from './../../images/offer-deal-1.jpg'
 import Modal from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Slide from '@material-ui/core/Slide';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
 
 class About extends React.Component {
-    state = {
-      sign: false
-    }
+  state = {
+    sign: false,
+    open: false
+  }
 
   onOpenModal = () => {
     this.setState({ sign: true });
@@ -19,9 +34,34 @@ class About extends React.Component {
     this.setState({ sign: false });
   };
 
+  onAddSuccess = () => {
+    this.onCloseModal();
+    this.setState({ open: true });
+  }
+
+  handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
+
+  TransitionRight = (props) => {
+    return <Slide {...props} direction="right" />;
+  }
+
   render() {
+    const { classes } = this.props;
     return (
       <Fragment>
+        <div className={classes.root}>
+          <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose} TransitionComponent={this.TransitionRight} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+            <Alert onClose={this.handleClose} severity="success">
+              This is a success message!
+          </Alert>
+          </Snackbar>
+        </div>
         <Element id="about" name="about">
           <section className="ftco-section ftco-intro" style={{ backgroundImage: 'url(' + intro + ')' }}>
             <div className="container">
@@ -129,7 +169,7 @@ class About extends React.Component {
             </div>
           </section>
           <Modal open={this.state.sign} onClose={this.onCloseModal}>
-            <BookForm />
+            <BookForm onAddSuccess={this.onAddSuccess} />
           </Modal>
 
         </Element>
@@ -138,4 +178,8 @@ class About extends React.Component {
   }
 }
 
-export default About;
+About.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(useStyles)(About);
