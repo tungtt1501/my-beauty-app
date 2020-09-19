@@ -1,6 +1,7 @@
 import React from 'react';
 import './Menu.css'
 import { Link } from 'react-scroll';
+import icon from './../../images/icon.png'
 
 const menus = [
     {
@@ -45,8 +46,15 @@ class Menu extends React.Component {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div className="container">
-          <a className="navbar-brand" href="index.html"><span className="flaticon-lotus"></span>My Beauty</a>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <Link to="home"
+                spy={true} 
+                smooth={true} 
+                duration={1000} 
+                className={'navbar-brand nav-link display-cursor'}
+                activeClass={'active'}>
+                <img width={"170px"} src={icon}/>
+            </Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="oi oi-menu"></span> Menu
           </button>
           <div className="collapse navbar-collapse" id="ftco-nav">
