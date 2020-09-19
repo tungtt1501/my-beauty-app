@@ -1,7 +1,7 @@
 import React from 'react';
-import About from './components/About/About';
-import BlogList from './components/BlogList/BlogList';
-import ServiceList from './components/ServiceList/ServiceList';
+import Dashboard from './components/DashBoard/DashBoard';
+import Login from './components/Login/Login';
+import NotFound from './components/NotFound/NotFound';
 import HomePage from './pages/HomePage/HomePage';
 
 const routes = [
@@ -11,19 +11,20 @@ const routes = [
         main: () => <HomePage />
     },
     {
-        path: '/about',
+        path: '/signin',
         exact: false,
-        main: () => <About />
+        main: () => <Login />
+    },
+    ,
+    {
+        path: '/admin',
+        exact: false,
+        main: () => <Dashboard />
     },
     {
-        path: '/services',
+        path: '',
         exact: false,
-        main: () => <ServiceList />
-    },
-    {
-        path: '/gallery',
-        exact: false,
-        main: () => <BlogList />
+        main: () => <NotFound />
     }
 ];
 

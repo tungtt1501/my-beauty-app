@@ -1,0 +1,11 @@
+.MuiBadge-root span, .MuiIconButton-label span, .MuiChip-root span, .MuiChip-label span, .MuiButton-label span {
+    color: white;
+}
+
+.MuiDialogActions-root span {
+    color: black;
+}
+
+.MuiListItemText-root span {
+    color: black;
+}

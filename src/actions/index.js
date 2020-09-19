@@ -66,3 +66,48 @@ export const actResetServiceBook = () => {
         type : Types.RESET_SERVICE_BOOK
     }
 }
+
+export const actFetchAllServicesBookRequest = () => {
+    return (dispatch) => {
+        return callApi(`serviceBooks`, 'GET', null).then(res => {
+            dispatch(actFetchAllServicesBook(res.data));
+        });
+    }
+}
+
+export const actFetchAllServicesBook = (servicesBook) => {
+    return {
+        type: Types.FETCH_SERVICES_BOOK,
+        servicesBook
+    }
+}
+
+export const actUpdateServicesBookRequest = (serviceBook) => {
+    return (dispatch) => {
+        return callApi(`serviceBooks/${serviceBook.id}`, 'PUT', serviceBook).then(res => {
+            dispatch(actUpdateServicesBook(res.data));
+        });
+    }
+}
+
+export const actUpdateServicesBook = (serviceBook) => {
+    return {
+        type: Types.UPDATE_SERVICES_BOOK,
+        serviceBook
+    }
+}
+
+export const actGetItemServicesBookRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`serviceBooks/${id}`, 'GET', null).then(res => {
+            dispatch(actGetItemServicesBook(res.data));
+        });
+    }
+}
+
+export const actGetItemServicesBook = (serviceBook) => {
+    return {
+        type: Types.EDIT_SERVICES_BOOK,
+        serviceBook
+    }
+}

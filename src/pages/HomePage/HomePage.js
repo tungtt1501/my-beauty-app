@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import About from './../../components/About/About'
 import ServiceList from './../../components/ServiceList/ServiceList'
-import BlogList from './../../components/BlogList/BlogList'
+import Menu from './../../components/Menu/Menu'
 import Header from './../../components/Header/Header'
 import Footer from './../../components/Footer/Footer'
 import Gallery from '../../components/Gallery/Gallery';
@@ -20,6 +20,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <Fragment>
+        <Menu />
         <Header />
         <About />
         <ServiceList />

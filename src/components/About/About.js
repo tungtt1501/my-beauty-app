@@ -91,7 +91,7 @@ class About extends React.Component {
                     <div className="text mt-4">
                       <h3 className="mb-4">Book Your Treatment</h3>
                       <p className="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <p><a href="#" className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
+                      <p><a className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
                     </div>
                   </div>
                 </div>
@@ -101,7 +101,7 @@ class About extends React.Component {
                     <div className="text mt-4">
                       <h3 className="mb-4">Great Gift Packages</h3>
                       <p className="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <p><a href="#" className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
+                      <p><a className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
                     </div>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ class About extends React.Component {
                     <div className="text mt-4">
                       <h3 className="mb-4">Special Offer &amp; Deal</h3>
                       <p className="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <p><a href="#" className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
+                      <p><a className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
                     </div>
                   </div>
                 </div>

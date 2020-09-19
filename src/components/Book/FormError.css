@@ -4,6 +4,11 @@
     font-family: "Roboto", "Helvetica", "Arial", "sans-serif";
 }
 
+.form-group span,
+.MuiPickersBasePicker-container span {
+    color: #C0C0C0;
+}
+
 .error-input {
     border-color: red;
 }

@@ -22,11 +22,6 @@ const menus = [
         name: 'Gallery',
         to: 'gallery',
         exact: false
-    },
-    {
-        name: 'Contact',
-        to: '/contact',
-        exact: false
     }
 ];
 

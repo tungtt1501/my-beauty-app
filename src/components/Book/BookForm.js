@@ -143,7 +143,8 @@ class BookForm extends React.Component {
             phone: txtPhone.value,
             serviceType: selService.value,
             date: date.value,
-            time: time.value
+            time: time.value,
+            status: 0
         };
         this.props.onAddServiceBook(serviceBook);
     }

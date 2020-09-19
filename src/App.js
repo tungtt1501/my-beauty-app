@@ -1,5 +1,4 @@
 import React from 'react';
-import Menu from './components/Menu/Menu'
 import './App.css';
 import routes from './routes';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
@@ -8,7 +7,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <Menu />
+        
         {this.showContentMenus(routes)}
       </Router>
     );
