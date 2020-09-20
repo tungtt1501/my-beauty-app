@@ -264,7 +264,7 @@ class BookForm extends React.Component {
         if (services) {
             result = services.map((service, index) => {
                 return (
-                    <option key={index} value={service.categoryId}>{service.categoryName}</option>
+                    <option key={index} value={service.categoryName}>{service.categoryName}</option>
                 )
             })
         }

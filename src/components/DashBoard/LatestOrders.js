@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { actFetchAllServicesBookRequest, actUpdateServicesBookRequest, actGetItemServicesBookRequest } from './../../actions/index'
 import { connect } from 'react-redux'
 import OrderItem from './OrderItem'
+import TablePagination from '@material-ui/core/TablePagination';
 import {
     Box,
     Button,
@@ -16,7 +17,7 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    makeStyles
+    makeStyles, TableContainer
 } from '@material-ui/core';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
@@ -29,6 +30,18 @@ const useStyles = makeStyles(() => ({
 
 const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, getServicesBook, updateServicesBook, ...rest }) => {
     const classes = useStyles();
+
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(+event.target.value);
+        setPage(0);
+    };
 
     useEffect(() => {
         fetchAllServicesBook();
@@ -46,66 +59,62 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
     return (
         <Card
             className={clsx(classes.root, className)}
-            {...rest}
-        >
+            {...rest}>
             <CardHeader title="Latest Orders" />
             <Divider />
-            <PerfectScrollbar>
-                <Box minWidth={800}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell align="center">
-                                    Full Name
-                                </TableCell>
-                                <TableCell align="center">
-                                    Email
-                                </TableCell>
-                                <TableCell align="center">
-                                    Phone
-                                </TableCell>
-                                <TableCell align="center">
-                                    Service
-                                </TableCell>
-                                <TableCell align="center">
-                                    Date
-                                </TableCell>
-                                <TableCell align="center">
-                                    Time
-                                </TableCell>
-                                <TableCell align="center">
-                                    Status
-                                </TableCell>
-                                <TableCell align="center">
-                                    Action
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {orders.map((order, index) => (
-                                <OrderItem
-                                    key={index}
-                                    index={index}
-                                    order={order}
-                                    onEditItem={() => onEdit(order.id)}
-                                    onConfirmItem={() => onConfirm()} />
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Box>
-            </PerfectScrollbar>
-            <Box
-                display="flex"
-                justifyContent="flex-end"
-                p={2}>
-                <Button
-                    color="primary"
-                    endIcon={<ArrowRightIcon />}
-                    size="small"
-                    variant="text">
-                    View all
-                </Button>
-            </Box>
+            <Paper className={classes.root}></Paper>
+            <TableContainer className={classes.container}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell align="center">
+                                Full Name
+                                    </TableCell>
+                            <TableCell align="center">
+                                Email
+                                    </TableCell>
+                            <TableCell align="center">
+                                Phone
+                                    </TableCell>
+                            <TableCell align="center">
+                                Service
+                                    </TableCell>
+                            <TableCell align="center">
+                                Date
+                                    </TableCell>
+                            <TableCell align="center">
+                                Time
+                                    </TableCell>
+                            <TableCell align="center">
+                                Status
+                                    </TableCell>
+                            <TableCell align="center">
+                                Action
+                                    </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((order, index) => (
+                            <OrderItem
+                                key={index}
+                                index={index}
+                                order={order}
+                                onEditItem={() => onEdit(order.id)}
+                                onConfirmItem={() => onConfirm()} />
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <TablePagination
+                rowsPerPageOptions={[5, 10, 25]}
+                component="div"
+                count={orders.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                onChangePage={handleChangePage}
+                onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+            <Paper />
         </Card>
     );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -24,6 +24,10 @@ import Deposits from './Deposits';
 import LatestOrders from './LatestOrders';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './dashboard.css'
+import { ExitToApp } from '@material-ui/icons';
+import { useHistory } from "react-router-dom";
+import { connect } from 'react-redux';
+import { logout } from './../../actions/auth'
 
 function Copyright() {
   return (
@@ -119,7 +123,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+const Dashboard = ({ auth, logout }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -127,6 +131,19 @@ export default function Dashboard() {
   };
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!auth.isAuthUser) {
+      history.push("/signin");
+    }
+  });
+
+  const handleLogout = () => {
+    logout();
+    history.push("/signin");
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -151,6 +168,9 @@ export default function Dashboard() {
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
+          </IconButton>
+          <IconButton color="inherit">
+            <ExitToApp onClick={handleLogout} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -201,3 +221,20 @@ export default function Dashboard() {
     </div>
   );
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch, props) => {
+  return {
+    logout: () => {
+      dispatch(logout());
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+

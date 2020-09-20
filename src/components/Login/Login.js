@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,10 +9,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import MuiAlert from "@material-ui/lab/Alert";
+import Alert from "@material-ui/lab/Alert";
 import PropTypes from 'prop-types';
 import { loginRequest } from './../../actions/auth'
 import { connect } from 'react-redux'
+import './Login.css'
+import Slide from '@material-ui/core/Slide';
+import Snackbar from '@material-ui/core/Snackbar';
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
     return (
@@ -25,10 +29,6 @@ function Copyright() {
             {'.'}
         </Typography>
     );
-}
-
-function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -51,19 +51,37 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const SignIn = ({ className, user, login }) => {
+const TransitionRight = (props) => {
+    return <Slide {...props} direction="right" />;
+}
+
+const SignIn = ({ className, auth, login }) => {
     const classes = useStyles();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const submitForm = () => {
+    const submitForm = (e) => {
+        e.preventDefault();
+        setError(null);
         if (email === "" || password === "") {
             setError("Fields are required");
             return;
         }
-        login();
+        login({ email, password });
     };
+
+    const history = useHistory();
+
+    useEffect(() => {
+        if (auth.isAuthUser) {
+            history.push("/admin");
+        } else if (auth.error) {
+            setError(auth.error);
+            auth.error = null;
+        }
+    });
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -106,14 +124,16 @@ const SignIn = ({ className, user, login }) => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={submitForm}>
+                        onClick={e => submitForm(e)}>
                         Sign In
                     </Button>
-                    {error && (
-                        <Alert severity="error" onClick={() => setError(null)}>
-                            {this.props.error || error}
-                        </Alert>
-                    )}
+                    <div className={classes.root}>
+                        {error && (<Snackbar open={error !== null} autoHideDuration={6000} onClose={() => setError(null)} TransitionComponent={TransitionRight} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                            <Alert severity="error" onClose={() => setError(null)} variant="filled">
+                                {error}
+                            </Alert>
+                        </Snackbar>)}
+                    </div>
                 </form>
             </div>
             <Box mt={8}>
@@ -129,14 +149,14 @@ SignIn.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        auth: state.auth
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        login: () => {
-            dispatch(loginRequest());
+        login: (email, password) => {
+            dispatch(loginRequest(email, password));
         }
     }
 }
