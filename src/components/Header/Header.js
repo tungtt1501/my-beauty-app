@@ -17,7 +17,7 @@ class Header extends React.Component {
                 <img className="header-img" src={icon}/>
                 <div className="row justify-content-center">
                   <div className="col-md-7 mb-3">
-                    <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                    <p style={{color: 'green'}}>My Beauty Lausanne vous accueille dans son nouvel institut de beauté dans un cadre chaleureux au centre ville de Lausanne (Place Pépinet 2) et vous propose des soins ongulaires et corporels de qualité.</p>
                   </div>
                 </div>
               </div>

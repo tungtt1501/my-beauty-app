@@ -1,5 +1,4 @@
 import React from 'react';
-import { Element } from 'react-scroll';
 
 class Footer extends React.Component {
 
@@ -10,23 +9,12 @@ class Footer extends React.Component {
             <div className="row d-flex">
               <div className="col-md">
                 <div className="ftco-footer-widget mb-4">
-                  <h2 className="ftco-heading-2">Energen</h2>
-                  <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                  <h2 className="ftco-heading-2">My Beauty Lausanne</h2>
+                  <p>My Beauty Lausanne vous accueille dans son nouvel institut de beauté dans un cadre chaleureux au centre ville de Lausanne (Place Pépinet 2) et vous propose des soins ongulaires et corporels de qualité.</p>
                   <ul className="ftco-footer-social list-unstyled float-lft mt-3">
                     <li className="ftco-animate"><a href="https://twitter.com"><span className="icon-twitter" /></a></li>
                     <li className="ftco-animate"><a href="https://www.facebook.com/"><span className="icon-facebook" /></a></li>
                     <li className="ftco-animate"><a href="https://www.instagram.com/"><span className="icon-instagram" /></a></li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-md">
-                <div className="ftco-footer-widget mb-4 ml-md-4">
-                  <h2 className="ftco-heading-2">Popular Links</h2>
-                  <ul className="list-unstyled">
-                    <li><a href="#">Aromatheraphy</a></li>
-                    <li><a href="#">Skin Care</a></li>
-                    <li><a href="#">Herbal Spa</a></li>
-                    <li><a href="#">Body Massage</a></li>
                   </ul>
                 </div>
               </div>
@@ -37,7 +25,6 @@ class Footer extends React.Component {
                     <li><a href="#">About</a></li>
                     <li><a href="#">Our Spa</a></li>
                     <li><a href="#">Treatments</a></li>
-                    <li><a href="#">Specialists</a></li>
                     <li><a href="#">Contact</a></li>
                   </ul>
                 </div>
@@ -47,9 +34,9 @@ class Footer extends React.Component {
                   <h2 className="ftco-heading-2">Have a Questions?</h2>
                   <div className="block-23 mb-3">
                     <ul>
-                      <li><span className="icon icon-map-marker" /><span className="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                      <li><a href="#"><span className="icon icon-phone" /><span className="text">+2 392 3929 210</span></a></li>
-                      <li><a href="#"><span className="icon icon-envelope" /><span className="text">info@yourdomain.com</span></a></li>
+                      <li><span className="icon icon-map-marker" /><span className="text">Place Pépinet 2, 1003 Lausanne, Suisse</span></li>
+                      <li><a href="#"><span className="icon icon-phone" /><span className="text">+41 78 743 96 89</span></a></li>
+                      <li><a href="#"><span className="icon icon-envelope" /><span className="text">mybeautylausanne@gmail.com</span></a></li>
                     </ul>
                   </div>
                 </div>
@@ -58,9 +45,6 @@ class Footer extends React.Component {
             <div className="row">
               <div className="col-md-12 text-center">
                 <p className="mb-0">
-                  {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
-                Copyright © All rights reserved | This template is made with <i className="icon-heart" aria-hidden="true" /> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                  {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
                 </p>
               </div>
             </div>

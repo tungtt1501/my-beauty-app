@@ -92,7 +92,7 @@ class BookForm extends React.Component {
     }
 
     componentDidUpdate() {
-        var { serviceBook, serviceTypes } = this.props;
+        var { serviceBook } = this.props;
         if (Object.values(serviceBook).length > 0) {
             this.props.onAddSuccess();
         }
@@ -273,9 +273,83 @@ class BookForm extends React.Component {
 }
 
 const mapStateToProps = state => {
+    var serviceTypes = [
+        {
+            categoryId: 1,
+            categoryName: "Epilation à la cire Homme"
+        },
+        {
+            categoryId: 2,
+            categoryName: "Forfait épilation 3"
+        },
+        {
+            categoryId: 3,
+            categoryName: "Forfait épilation 2"
+        },
+        {
+            categoryId: 4,
+            categoryName: "Forfait épilation 1"
+        },
+        {
+            categoryId: 5,
+            categoryName: "Epilation à la cire Femme"
+        },
+        {
+            categoryId: 6,
+            categoryName: "Beauté des pieds"
+        },
+        {
+            categoryId: 7,
+            categoryName: "Pose vernis normal (pieds)"
+        },
+        {
+            categoryId: 8,
+            categoryName: "Pose vernis permanent (pieds)"
+        },
+        {
+            categoryId: 9,
+            categoryName: "Pédicure SPA avec vernis normal"
+        },
+        {
+            categoryId: 10,
+            categoryName: "Pédicure SPA avec vernis permanent"
+        },
+        {
+            categoryId: 11,
+            categoryName: "Strass, stickers & nail arts (par ongle)"
+        },
+        {
+            categoryId: 12,
+            categoryName: "Beauté des mains"
+        },
+        {
+            categoryId: 13,
+            categoryName: "Pose vernis normal"
+        },
+        {
+            categoryId: 14,
+            categoryName: "Manucure avec vernis"
+        },
+        {
+            categoryId: 15,
+            categoryName: "Manucure Vernis semi-permanent"
+        },
+        {
+            categoryId: 16,
+            categoryName: "Remplissage Gel"
+        },
+        {
+            categoryId: 17,
+            categoryName: "Pose Acrylique nouveaux ongles"
+        },
+        {
+            categoryId: 18,
+            categoryName: "Pose Gel nouveaux ongles"
+        },
+    ]
     return {
         serviceBook: state.addBookService,
-        serviceTypes: state.services
+        serviceTypes: serviceTypes
     }
 }
 

@@ -7,7 +7,7 @@ class ServiceItem extends React.Component {
       <li className="d-flex">
         <span>{serviceItem.serviceItemName}</span>
         <span>{serviceItem.serviceItemTime} min.</span>
-        <span>${serviceItem.serviceItemPrice}</span>
+        <span>{serviceItem.serviceItemPrice} Fr.</span>
       </li>
     );
   }

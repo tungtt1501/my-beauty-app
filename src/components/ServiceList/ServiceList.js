@@ -18,7 +18,8 @@ class ServiceList extends React.Component {
             </div>
           </div>
           <div className="row align-items-center">
-            <div className="col-lg-4">
+          <div className="col-lg-4"></div>
+            {/* <div className="col-lg-4">
               <div className="row no-gutters">
                 <div className="col-md-6 d-flex align-items-stretch">
                   <div className="treatment w-100 text-center ftco-animate border border-right-0 border-bottom-0 p-3 py-4">
@@ -65,7 +66,7 @@ class ServiceList extends React.Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="col-lg-4 d-flex align-items-stretch">
               <div id="accordion" className="myaccordion w-100 text-center py-5 px-1 px-md-4">
                 <div>
@@ -75,7 +76,7 @@ class ServiceList extends React.Component {
                 {this.showService(services)}
               </div>
             </div>
-            <div className="col-lg-4">
+            {/* <div className="col-lg-4">
               <div className="row no-gutters">
                 <div className="col-md-6 d-flex align-items-stretch">
                   <div className="treatment w-100 text-center ftco-animate border border-right-0 border-bottom-0 p-3 py-4">
@@ -122,7 +123,7 @@ class ServiceList extends React.Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

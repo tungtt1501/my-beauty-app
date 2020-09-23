@@ -68,15 +68,15 @@ class About extends React.Component {
               <div className="row justify-content-end">
                 <div className="col-md-6">
                   <div className="heading-section ftco-animate">
-                    <h2 className="mb-4">Benefits of Doing Spa &amp; Massage</h2>
+                    <h2 className="mb-4">My Beauty Lausanne</h2>
                   </div>
-                  <p className="ftco-animate">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+                  <p className="ftco-animate">My Beauty Lausanne vous accueille dans son nouvel institut de beauté dans un cadre chaleureux au centre ville de Lausanne (Place Pépinet 2) et vous propose des soins ongulaires et corporels de qualité. Bienvenue dans notre institut pour un moment de détente dans un cadre apaisant.</p>
                   <ul className="mt-5 do-list">
-                    <li className="ftco-animate"><a href="#"><span className="ion-ios-checkmark-circle mr-3" />Spa &amp; Massage boosts brain power</a></li>
-                    <li className="ftco-animate"><a href="#"><span className="ion-ios-checkmark-circle mr-3" />Spa &amp; Massage helps you to breathe better</a></li>
-                    <li className="ftco-animate"><a href="#"><span className="ion-ios-checkmark-circle mr-3" />Spa &amp; Massage improves your strength</a></li>
-                    <li className="ftco-animate"><a href="#"><span className="ion-ios-checkmark-circle mr-3" />Spa &amp; Massage helps you to focus</a></li>
-                    <li className="ftco-animate"><a href="#"><span className="ion-ios-checkmark-circle mr-3" />Spa &amp; Massage helps give meaning to your day</a></li>
+                    <li className="ftco-animate"><span className="ion-ios-checkmark-circle mr-3" /><span>Epilation à la cire</span></li>
+                    <li className="ftco-animate"><span className="ion-ios-checkmark-circle mr-3" /><span>Forfait épilation</span></li>
+                    <li className="ftco-animate"><span className="ion-ios-checkmark-circle mr-3" /><span>Pose vernis normal</span></li>
+                    <li className="ftco-animate"><span className="ion-ios-checkmark-circle mr-3" /><span>Beauté des pieds</span></li>
+                    <li className="ftco-animate"><span className="ion-ios-checkmark-circle mr-3" /><span>Pose nouveaux ongles</span></li>
                   </ul>
                 </div>
               </div>
@@ -87,21 +87,21 @@ class About extends React.Component {
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex align-items-stretch">
                   <div className="offer-deal text-center px-2 px-lg-5">
-                    <div className="img" style={{ backgroundImage: 'url(' + offerdeal1 + ')' }} />
+                    <div className="img" style={{ backgroundImage: 'url(images/offer-deal-1.jpg)' }} />
                     <div className="text mt-4">
-                      <h3 className="mb-4">Book Your Treatment</h3>
-                      <p className="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <p><a className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
+                      <h3 className="mb-4">Forfait épilation</h3>
+                      <p className="mb-5">Bienvenue dans notre institut pour un moment de détente dans un cadre apaisant.</p>
+                      <p><a className="btn px-4 py-3" style={{backgroundColor: '#6bac05', color: 'white'}} onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
                     </div>
                   </div>
                 </div>
                 <div className="col-md-4 d-flex align-items-stretch">
                   <div className="offer-deal active text-center px-2 px-lg-5">
-                    <div className="img" style={{ backgroundImage: 'url(images/offer-deal-2.jpg)' }} />
+                    <div className="img" style={{ backgroundImage: 'url(images/offer-deal-2.jpeg)' }} />
                     <div className="text mt-4">
-                      <h3 className="mb-4">Great Gift Packages</h3>
-                      <p className="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <p><a className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
+                      <h3 className="mb-4">Epilation à la cire</h3>
+                      <p className="mb-5">Bienvenue dans notre institut pour un moment de détente dans un cadre apaisant.</p>
+                      <p><a className="btn px-4 py-3" style={{backgroundColor: '#6bac05', color: 'white'}} onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
                     </div>
                   </div>
                 </div>
@@ -109,16 +109,16 @@ class About extends React.Component {
                   <div className="offer-deal text-center px-2 px-lg-5">
                     <div className="img" style={{ backgroundImage: 'url(images/offer-deal-3.jpg)' }} />
                     <div className="text mt-4">
-                      <h3 className="mb-4">Special Offer &amp; Deal</h3>
-                      <p className="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                      <p><a className="btn btn-white px-4 py-3" onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
+                      <h3 className="mb-4">Beauté des pieds</h3>
+                      <p className="mb-5">Bienvenue dans notre institut pour un moment de détente dans un cadre apaisant.</p>
+                      <p><a className="btn px-4 py-3" style={{backgroundColor: '#6bac05', color: 'white'}} onClick={this.onOpenModal}> Book A Treatment <span className="ion-ios-arrow-round-forward" /></a></p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-          <section className="ftco-section ftco-section-services bg-light">
+          {/* <section className="ftco-section ftco-section-services bg-light">
             <div className="container-fluid px-md-5">
               <div className="row">
                 <div className="col-md-6 col-lg-3">
@@ -167,7 +167,7 @@ class About extends React.Component {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
           <Modal open={this.state.sign} onClose={this.onCloseModal}>
             <BookForm onAddSuccess={this.onAddSuccess} />
           </Modal>
