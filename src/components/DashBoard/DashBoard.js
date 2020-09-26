@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,7 +9,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
+import { IconButton, Hidden, Avatar } from '@material-ui/core';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -28,13 +28,16 @@ import { ExitToApp } from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux';
 import { logout } from './../../actions/auth'
+import Budget from './Budget';
+import TotalCustomers from './TotalCustomer';
+import TotalProfit from './TotalProfit';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://localhost:3006/">
+        My Beauty Lausanne
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -42,95 +45,63 @@ function Copyright() {
   );
 }
 
-const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
   root: {
+  },
+  wrapper: {
     display: 'flex',
+    flex: '1 1 auto',
+    overflow: 'hidden',
+    paddingTop: 64,
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: 256
+    }
   },
-  toolbar: {
-    paddingRight: 24, // keep right padding when drawer closed
-  },
-  toolbarIcon: {
+  contentContainer: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
+    flex: '1 1 auto',
+    overflow: 'hidden'
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+  content: {
+    flex: '1 1 auto',
+    height: '100%',
+    overflow: 'hidden'
   },
   menuButton: {
-    marginRight: 36,
-  },
-  menuButtonHidden: {
-    display: 'none',
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
   },
-  drawerPaper: {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+  list: {
+    width: 250,
   },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
+  mobileDrawer: {
+    width: 256
   },
-  appBarSpacer: theme.mixins.toolbar,
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
+  desktopDrawer: {
+    width: 256,
+    top: 64,
+    height: 'calc(100% - 64px)'
   },
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  paper: {
-    padding: theme.spacing(2),
-    display: 'flex',
-    overflow: 'auto',
-    flexDirection: 'column',
-  },
-  fixedHeight: {
-    height: 240,
+  avatar: {
+    cursor: 'pointer',
+    width: 64,
+    height: 64
   },
 }));
 
-const Dashboard = ({ auth, logout }) => {
+const user = {
+  avatar: '/static/images/avatars/avatar_6.png',
+  jobTitle: 'Senior Developer',
+  name: 'Katarina Smith'
+};
+
+const Dashboard = ({ auth, logout, className, ...rest }) => {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(false);
   const handleDrawerOpen = () => {
     setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
   };
 
   const history = useHistory();
@@ -145,80 +116,154 @@ const Dashboard = ({ auth, logout }) => {
     logout();
     history.push("/signin");
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setOpen(open);
+  };
+
+  const content = (
+    <Box
+      height="100%"
+      display="flex"
+      flexDirection="column"
+    >
+      <Box
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        p={2}
+      >
+        <Avatar
+          className={classes.avatar}
+          src={user.avatar}
+        />
+        <Typography
+          className={classes.name}
+          color="textPrimary"
+          variant="h5"
+        >
+          {user.name}
+        </Typography>
+        <Typography
+          color="textSecondary"
+          variant="body2"
+        >
+          {user.jobTitle}
+        </Typography>
+      </Box>
+      <Divider />
+      <Box p={2}>
+        <List>{mainListItems}</List>
+      </Box>
+    </Box>
+  )
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            className={classes.menuButton}
           >
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
-            <ExitToApp onClick={handleLogout} />
-          </IconButton>
+          {auth && (
+            <IconButton color="inherit"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleLogout}>
+              <ExitToApp />
+            </IconButton>)
+          }
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
+      <Hidden lgUp>
+        <Drawer anchor={'left'}
+          open={open}
+          onClose={toggleDrawer(false)}
+          classes={{ paper: classes.mobileDrawer }}
+          variant="temporary">
+          {content}
+        </Drawer>
+      </Hidden>
+      <Hidden mdDown>
+        <Drawer anchor={'left'}
+          open
+          variant="persistent"
+          classes={{ paper: classes.desktopDrawer }}>
+          {content}
+        </Drawer>
+      </Hidden>
+      <div className={classes.wrapper}>
+        <div className={classes.contentContainer}>
+          <div className={classes.content}>
+            <Container maxWidth={false}>
+              <Grid
+                container
+                spacing={3}
+              >
+                <Grid
+                  item
+                  lg={4}
+                  md={6}
+                  xl={4}
+                  xs={12}
+                >
+                  <Budget />
+                </Grid>
+                <Grid
+                  item
+                  lg={4}
+                  md={6}
+                  xl={4}
+                  xs={12}
+                >
+                  <TotalCustomers />
+                </Grid>
+                <Grid
+                  item
+                  lg={4}
+                  md={6}
+                  xl={4}
+                  xs={12}
+                >
+                  <TotalProfit />
+                </Grid>
+                <Grid
+                  item
+                  lg={12}
+                  md={12}
+                  xl={12}
+                  xs={12}
+                >
+                  <LatestOrders />
+                </Grid>
+              </Grid>
+              <Box pt={2}>
+                <Copyright />
+              </Box>
+              <Box pt={2}>
+              </Box>
+            </Container>
+          </div>
         </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <LatestOrders />
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
-        </Container>
-      </main>
-    </div>
+      </div>
+    </div >
   );
 }
 

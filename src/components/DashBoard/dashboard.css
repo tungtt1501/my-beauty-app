@@ -1,9 +1,18 @@
-.MuiBadge-root span, .MuiIconButton-label span, .MuiChip-root span, .MuiChip-label span, .MuiButton-label span {
+span.MuiBadge-root, span.MuiIconButton-label, span.MuiChip-root, span.MuiChip-label, span.MuiButton-label {
     color: white;
 }
 
-.MuiDialogActions-root span {
+.MuiDialogActions-root span.MuiButton-label,
+.MuiDialogActions-spacing span.MuiButton-label,
+.MuiCardHeader-content span {
     color: black;
+}
+.MuiTablePagination-actions span.MuiIconButton-label {
+    color: black;
+}
+
+.MuiTablePagination-actions .MuiIconButton-root.Mui-disabled span.MuiIconButton-label {
+    color: rgba(0, 0, 0, 0.26);
 }
 
 .MuiListItemText-root span {

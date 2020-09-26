@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import { actAddServiceBookRequest, actResetServiceBook } from './../../actions/index'
+import { actAddServiceBookRequest, actResetServiceBook, actFetchAllServiceItemsRequest } from './../../actions/index'
 import "react-datepicker/dist/react-datepicker.css";
 import FormError from './FormError';
 import { MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker } from "@material-ui/pickers";
@@ -71,7 +71,7 @@ class BookForm extends React.Component {
                 errorMessage: ''
             },
             selService: {
-                value: 'volvo',
+                value: '',
                 isInputValid: true,
                 errorMessage: ''
             },
@@ -90,6 +90,7 @@ class BookForm extends React.Component {
 
     componentDidMount() {
         this.props.resetServiceBook();
+        this.props.fetchServiceItems();
     }
 
     componentDidUpdate() {
@@ -143,8 +144,8 @@ class BookForm extends React.Component {
             email: txtEmail.value,
             phone: txtPhone.value,
             serviceType: selService.value,
-            date: moment(date.value).format('DD/MM/YYYY HH:mm:ss'),
-            time: moment(time.value).format('DD/MM/YYYY HH:mm:ss'),
+            date: moment(date.value).format('YYYY-MM-DD HH:mm:ss'),
+            time: moment(time.value).format('YYYY-MM-DD HH:mm:ss'),
             status: 0
         };
         this.props.onAddServiceBook(serviceBook);
@@ -265,7 +266,7 @@ class BookForm extends React.Component {
         if (services) {
             result = services.map((service, index) => {
                 return (
-                    <option key={index} value={service.categoryName}>{service.categoryName}</option>
+                    <option key={index} value={service.serviceItemName}>{service.serviceItemName}</option>
                 )
             })
         }
@@ -274,83 +275,9 @@ class BookForm extends React.Component {
 }
 
 const mapStateToProps = state => {
-    var serviceTypes = [
-        {
-            categoryId: 1,
-            categoryName: "Epilation à la cire Homme"
-        },
-        {
-            categoryId: 2,
-            categoryName: "Forfait épilation 3"
-        },
-        {
-            categoryId: 3,
-            categoryName: "Forfait épilation 2"
-        },
-        {
-            categoryId: 4,
-            categoryName: "Forfait épilation 1"
-        },
-        {
-            categoryId: 5,
-            categoryName: "Epilation à la cire Femme"
-        },
-        {
-            categoryId: 6,
-            categoryName: "Beauté des pieds"
-        },
-        {
-            categoryId: 7,
-            categoryName: "Pose vernis normal (pieds)"
-        },
-        {
-            categoryId: 8,
-            categoryName: "Pose vernis permanent (pieds)"
-        },
-        {
-            categoryId: 9,
-            categoryName: "Pédicure SPA avec vernis normal"
-        },
-        {
-            categoryId: 10,
-            categoryName: "Pédicure SPA avec vernis permanent"
-        },
-        {
-            categoryId: 11,
-            categoryName: "Strass, stickers & nail arts (par ongle)"
-        },
-        {
-            categoryId: 12,
-            categoryName: "Beauté des mains"
-        },
-        {
-            categoryId: 13,
-            categoryName: "Pose vernis normal"
-        },
-        {
-            categoryId: 14,
-            categoryName: "Manucure avec vernis"
-        },
-        {
-            categoryId: 15,
-            categoryName: "Manucure Vernis semi-permanent"
-        },
-        {
-            categoryId: 16,
-            categoryName: "Remplissage Gel"
-        },
-        {
-            categoryId: 17,
-            categoryName: "Pose Acrylique nouveaux ongles"
-        },
-        {
-            categoryId: 18,
-            categoryName: "Pose Gel nouveaux ongles"
-        },
-    ]
     return {
         serviceBook: state.addBookService,
-        serviceTypes: serviceTypes
+        serviceTypes: state.serviceItems
     }
 }
 
@@ -358,6 +285,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         resetServiceBook: () => {
             dispatch(actResetServiceBook());
+        },
+        fetchServiceItems: () => {
+            dispatch(actFetchAllServiceItemsRequest());
         },
         onAddServiceBook: (serviceBook) => {
             dispatch(actAddServiceBookRequest(serviceBook));

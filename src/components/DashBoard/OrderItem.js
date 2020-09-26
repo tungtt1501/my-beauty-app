@@ -63,13 +63,13 @@ export default function OrderItem({ order, onEditItem, onConfirmItem }) {
                 </TableCell>
                 <TableCell align="center">
                     <Chip
-                        color={order.status === 0 ? 'secondary' : 'primary'}
-                        label={order.status === 0 ? 'Pending' : 'Confirmed'}
+                        color={order.status == 0 ? 'secondary' : 'primary'}
+                        label={order.status == 0 ? 'Pending' : 'Confirmed'}
                         size="small"
                     />
                 </TableCell>
                 <TableCell align="center">
-                    <Button variant="contained" color="primary" onClick={() => handleClickOpen()} className={order.status === 0 ? '' : 'Mui-disabled'}>
+                    <Button variant="contained" color="primary" onClick={() => handleClickOpen()} className={order.status == 0 ? '' : 'Mui-disabled'}>
                         Confirm
                 </Button>
                 </TableCell>

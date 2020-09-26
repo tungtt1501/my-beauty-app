@@ -33,7 +33,7 @@ export const actFetchServices = (services) => {
 
 export const actFetchServiceItemsRequest = (categoryId) => {
     return (dispatch) => {
-        return callApi(`service_item_by_category?categoryId=${categoryId}`, 'GET', null).then(res => {
+        return callApi(`serviceItems?categoryId=${categoryId}`, 'GET', null).then(res => {
             dispatch(actFetchServiceItems(res.data));
         });
     }
@@ -46,9 +46,24 @@ export const actFetchServiceItems = (serviceItems) => {
     }
 }
 
+export const actFetchAllServiceItemsRequest = () => {
+    return (dispatch) => {
+        return callApi(`serviceItems`, 'GET', null).then(res => {
+            dispatch(actFetchAllServiceItems(res.data));
+        });
+    }
+}
+
+export const actFetchAllServiceItems = (serviceItems) => {
+    return {
+        type: Types.FETCH_ALL_SERVICE_ITEMS,
+        serviceItems
+    }
+}
+
 export const actAddServiceBookRequest = (serviceBook) => {
     return dispatch => {
-        return callApi('order_services', 'POST', serviceBook).then(res => {
+        return callApi('serviceBooks', 'POST', serviceBook).then(res => {
             dispatch(actAddServiceBook(res.data));
         });
     }
@@ -69,7 +84,7 @@ export const actResetServiceBook = () => {
 
 export const actFetchAllServicesBookRequest = () => {
     return (dispatch) => {
-        return callApi(`order_services`, 'GET', null).then(res => {
+        return callApi(`serviceBooks`, 'GET', null).then(res => {
             dispatch(actFetchAllServicesBook(res.data));
         });
     }
@@ -84,7 +99,7 @@ export const actFetchAllServicesBook = (servicesBook) => {
 
 export const actUpdateServicesBookRequest = (serviceBook) => {
     return (dispatch) => {
-        return callApi(`order_services/${serviceBook.id}`, 'PUT', serviceBook).then(res => {
+        return callApi(`serviceBooks`, 'PUT', serviceBook).then(res => {
             dispatch(actUpdateServicesBook(res.data));
         });
     }
@@ -99,7 +114,7 @@ export const actUpdateServicesBook = (serviceBook) => {
 
 export const actGetItemServicesBookRequest = (id) => {
     return (dispatch) => {
-        return callApi(`order_services/${id}`, 'GET', null).then(res => {
+        return callApi(`serviceBooks?id=${id}`, 'GET', null).then(res => {
             dispatch(actGetItemServicesBook(res.data));
         });
     }

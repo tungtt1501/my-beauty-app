@@ -57,7 +57,7 @@ class About extends React.Component {
       <Fragment>
         <div className={classes.root}>
           <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose} TransitionComponent={this.TransitionRight} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-            <Alert onClose={this.handleClose} severity="success">
+            <Alert onClose={this.handleClose} severity="success" style={{color:'white', backgroundColor:'#6bac05'}}>
               This is a success message!
           </Alert>
           </Snackbar>

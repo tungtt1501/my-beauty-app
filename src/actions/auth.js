@@ -2,7 +2,7 @@ import * as Types from './../constants/ActionTypes'
 import callApi from './../utils/apiCaller'
 export const loginRequest = (user) => {
     return (dispatch) => {
-        return callApi(`user`, 'POST', user).then(res => {
+        return callApi(`users`, 'POST', user).then(res => {
             if (!res.data.error) {
                 dispatch(loginSuccess(res.data));
             } else {

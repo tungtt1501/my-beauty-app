@@ -7,8 +7,6 @@ import { connect } from 'react-redux'
 import OrderItem from './OrderItem'
 import TablePagination from '@material-ui/core/TablePagination';
 import {
-    Box,
-    Button,
     Card,
     CardHeader,
     Divider,
@@ -19,12 +17,11 @@ import {
     TableRow,
     makeStyles, TableContainer
 } from '@material-ui/core';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 const useStyles = makeStyles(() => ({
     root: {},
-    actions: {
-        justifyContent: 'flex-end'
+    tableHeight: {
+        flexFlow: 1
     }
 }));
 
@@ -32,7 +29,7 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(6);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -63,7 +60,7 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
             <CardHeader title="Latest Orders" />
             <Divider />
             <Paper className={classes.root}></Paper>
-            <TableContainer className={classes.container}>
+            <TableContainer className={classes.tableHeight}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -105,8 +102,8 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
+            <TablePagination 
+                rowsPerPageOptions={[6, 12, 25]}
                 component="div"
                 count={orders.length}
                 rowsPerPage={rowsPerPage}
@@ -114,7 +111,6 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
             />
-            <Paper />
         </Card>
     );
 };
