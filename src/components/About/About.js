@@ -83,7 +83,7 @@ class About extends React.Component {
             </div>
           </section>
           <section className="ftco-section ftco-no-pt ftco-no-pb">
-            <div className="container">
+            <div className="container-flux">
               <div className="row no-gutters">
                 <div className="col-md-4 d-flex align-items-stretch">
                   <div className="offer-deal text-center px-2 px-lg-5">

@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import FormError from './FormError';
 import { MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker } from "@material-ui/pickers";
 import DateFnsUtils from '@date-io/date-fns';
+import moment from 'moment';
 
 const validateInput = (type, checkingText) => {
     if (type === "txtFirstName" || type === "txtLastName" || type === "txtEmail" || type === "txtPhone" || type === "date" || type === "time") {
@@ -142,8 +143,8 @@ class BookForm extends React.Component {
             email: txtEmail.value,
             phone: txtPhone.value,
             serviceType: selService.value,
-            date: date.value,
-            time: time.value,
+            date: moment(date.value).format('DD/MM/YYYY HH:mm:ss'),
+            time: moment(time.value).format('DD/MM/YYYY HH:mm:ss'),
             status: 0
         };
         this.props.onAddServiceBook(serviceBook);

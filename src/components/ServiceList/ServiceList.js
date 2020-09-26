@@ -19,54 +19,6 @@ class ServiceList extends React.Component {
           </div>
           <div className="row align-items-center">
           <div className="col-lg-4"></div>
-            {/* <div className="col-lg-4">
-              <div className="row no-gutters">
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border border-right-0 border-bottom-0 p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-candle" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Salt &amp; Aroma</h3>
-                      <p>A small river named Duden flows by their place and supplies.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border border-bottom-0 p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-spa-1" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Hydro</h3>
-                      <p>A small river named Duden flows.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border border-right-0 p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-stone" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Hot Stone</h3>
-                      <p>A small river named Duden flows by their place and supplies.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-lotus" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Aroma</h3>
-                      <p>A small river named Duden flows.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
             <div className="col-lg-4 d-flex align-items-stretch">
               <div id="accordion" className="myaccordion w-100 text-center py-5 px-1 px-md-4">
                 <div>
@@ -76,54 +28,6 @@ class ServiceList extends React.Component {
                 {this.showService(services)}
               </div>
             </div>
-            {/* <div className="col-lg-4">
-              <div className="row no-gutters">
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border border-right-0 border-bottom-0 p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-beauty-treatment" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Relaxation</h3>
-                      <p>A small river named Duden flows by their place and supplies.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border border-bottom-0 p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-relax" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Athlete</h3>
-                      <p>A small river named Duden flows.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border border-right-0 p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-massage" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Thai</h3>
-                      <p>A small river named Duden flows by their place and supplies.</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 d-flex align-items-stretch">
-                  <div className="treatment w-100 text-center ftco-animate border p-3 py-4">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-rose" />
-                    </div>
-                    <div className="text mt-2">
-                      <h3>Rose</h3>
-                      <p>A small river named Duden flows.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
       </section>
