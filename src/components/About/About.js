@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import { Element } from 'react-scroll';
 import BookForm from '../Book/BookForm';
-import intro from './../../images/intro.jpg';
-import offerdeal1 from './../../images/offer-deal-1.jpg'
 import Modal from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import Snackbar from '@material-ui/core/Snackbar';
@@ -63,7 +61,7 @@ class About extends React.Component {
           </Snackbar>
         </div>
         <Element id="about" name="about">
-          <section className="ftco-section ftco-intro" style={{ backgroundImage: 'url(' + intro + ')' }}>
+          <section className="ftco-section ftco-intro" style={{ backgroundImage: 'url(images/intro.jpg)'}}>
             <div className="container">
               <div className="row justify-content-end">
                 <div className="col-md-6">
@@ -118,56 +116,6 @@ class About extends React.Component {
               </div>
             </div>
           </section>
-          {/* <section className="ftco-section ftco-section-services bg-light">
-            <div className="container-fluid px-md-5">
-              <div className="row">
-                <div className="col-md-6 col-lg-3">
-                  <div className="services text-center ftco-animate">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-candle" />
-                    </div>
-                    <div className="text mt-3">
-                      <h3>Aromatheraphy</h3>
-                      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 col-lg-3">
-                  <div className="services text-center ftco-animate">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-beauty-treatment" />
-                    </div>
-                    <div className="text mt-3">
-                      <h3>Skin Care</h3>
-                      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 col-lg-3">
-                  <div className="services text-center ftco-animate">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-stone" />
-                    </div>
-                    <div className="text mt-3">
-                      <h3>Herbal Spa</h3>
-                      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-6 col-lg-3">
-                  <div className="services text-center ftco-animate">
-                    <div className="icon d-flex justify-content-center align-items-center">
-                      <span className="flaticon-relax" />
-                    </div>
-                    <div className="text mt-3">
-                      <h3>Body Massage</h3>
-                      <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section> */}
           <Modal open={this.state.sign} onClose={this.onCloseModal}>
             <BookForm onAddSuccess={this.onAddSuccess} />
           </Modal>
