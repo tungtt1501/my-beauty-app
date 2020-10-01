@@ -18,3 +18,11 @@ span.MuiBadge-root, span.MuiIconButton-label, span.MuiChip-root, span.MuiChip-la
 .MuiListItemText-root span {
     color: black;
 }
+
+a.dashboard-link {
+    color: black !important;
+}
+
+a.dashboard-link-active {
+    color: goldenrod !important;
+}

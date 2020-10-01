@@ -11,39 +11,16 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import { IconButton, Hidden, Avatar } from '@material-ui/core';
 import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import LatestOrders from './LatestOrders';
+import { MainListItems } from './MainListItems';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './dashboard.css'
 import { ExitToApp } from '@material-ui/icons';
-import { useHistory } from "react-router-dom";
 import { connect } from 'react-redux';
 import { logout } from './../../actions/auth'
-import Budget from './Budget';
-import TotalCustomers from './TotalCustomer';
-import TotalProfit from './TotalProfit';
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://localhost:3006/">
-        My Beauty Lausanne
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { Route, BrowserRouter as Router, Switch, useHistory } from 'react-router-dom';
+import dashboardroutes from './dashboardroutes';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -125,6 +102,23 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
     setOpen(open);
   };
 
+  const showContent = (routes) => {
+    var result = null;
+    if(routes) {
+      result = routes.map((route, index) => {
+        return (
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.main}
+          />
+        )
+      })
+    }
+    return <Switch>{result}</Switch>
+  }
+
   const content = (
     <Box
       height="100%"
@@ -157,7 +151,7 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
       </Box>
       <Divider />
       <Box p={2}>
-        <List>{mainListItems}</List>
+        <List><MainListItems /></List>
       </Box>
     </Box>
   )
@@ -212,54 +206,8 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
-            <Container maxWidth={false}>
-              <Grid
-                container
-                spacing={3}
-              >
-                <Grid
-                  item
-                  lg={4}
-                  md={6}
-                  xl={4}
-                  xs={12}
-                >
-                  <Budget />
-                </Grid>
-                <Grid
-                  item
-                  lg={4}
-                  md={6}
-                  xl={4}
-                  xs={12}
-                >
-                  <TotalCustomers />
-                </Grid>
-                <Grid
-                  item
-                  lg={4}
-                  md={6}
-                  xl={4}
-                  xs={12}
-                >
-                  <TotalProfit />
-                </Grid>
-                <Grid
-                  item
-                  lg={12}
-                  md={12}
-                  xl={12}
-                  xs={12}
-                >
-                  <LatestOrders />
-                </Grid>
-              </Grid>
-              <Box pt={2}>
-                <Copyright />
-              </Box>
-              <Box pt={2}>
-              </Box>
-            </Container>
+            {showContent(dashboardroutes)}
+            
           </div>
         </div>
       </div>
