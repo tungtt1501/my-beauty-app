@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import { actFetchServicesRequest, actUpdateServicesBookRequest, actGetItemServicesBookRequest } from './../../../actions/index'
+import { actFetchAllServiceItemsRequest, actUpdateServicesBookRequest, actGetItemServicesBookRequest } from './../../../actions/index'
 import { connect } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,7 +18,7 @@ import {
     TableRow,
     makeStyles, TableContainer
 } from '@material-ui/core';
-import ServiceCategoryItem from './ServiceCategoryItem';
+import ServiceItemDetail from './ServiceItemDetail';
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCategory, getServicesBook, updateServicesBook, ...rest }) => {
+const ServiceItems = ({ className, serviceItems, itemEditing, fetchAllServicesItems, getServicesBook, updateServicesBook, ...rest }) => {
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
@@ -43,7 +43,7 @@ const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCat
     };
 
     useEffect(() => {
-        fetchAllServicesCategory();
+        fetchAllServicesItems();
     }, []);
 
     const onEdit = (id) => {
@@ -54,7 +54,7 @@ const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCat
         <Card
             className={clsx(classes.root, className)}
             {...rest}>
-            <CardHeader title="Services Category" />
+            <CardHeader title="Services Items" />
             <Button
                         variant="contained"
                         color="primary"
@@ -71,10 +71,19 @@ const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCat
                     <TableHead>
                         <TableRow>
                             <TableCell>
+                                Service Id
+                            </TableCell>
+                            <TableCell>
                                 Category Id
                             </TableCell>
                             <TableCell>
-                                Category Name
+                                Service Name
+                            </TableCell>
+                            <TableCell>
+                                Time
+                            </TableCell>
+                            <TableCell>
+                                Price
                             </TableCell>
                             <TableCell>
                                 Action
@@ -82,12 +91,12 @@ const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCat
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {services.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((service, index) => (
-                            <ServiceCategoryItem
+                        {serviceItems.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((serviceItem, index) => (
+                            <ServiceItemDetail
                                 key={index}
                                 index={index}
-                                service={service}
-                                onEditItem={() => onEdit(service.categoryId)} />
+                                serviceItem={serviceItem}
+                                onEditItem={() => onEdit(serviceItem.serviceItemId)} />
                         ))}
                     </TableBody>
                 </Table>
@@ -95,7 +104,7 @@ const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCat
             <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
-                count={services.length}
+                count={serviceItems.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
@@ -105,21 +114,21 @@ const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCat
     );
 };
 
-ServiceCategory.propTypes = {
+ServiceItems.propTypes = {
     className: PropTypes.string,
 };
 
 const mapStateToProps = state => {
     return {
-        services: state.services,
+        serviceItems: state.serviceItems,
         itemEditing: state.itemEditing
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchAllServicesCategory: () => {
-            dispatch(actFetchServicesRequest());
+        fetchAllServicesItems: () => {
+            dispatch(actFetchAllServiceItemsRequest());
         },
         getServicesBook: (id) => {
             dispatch(actGetItemServicesBookRequest(id));
@@ -130,4 +139,4 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceItems);

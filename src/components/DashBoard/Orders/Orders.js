@@ -14,19 +14,6 @@ Orders.propTypes = {
     
 };
 
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://localhost:3006/">
-          My Beauty Lausanne
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
-
 function Orders(props) {
     return (
             <Container maxWidth={false}>
@@ -71,11 +58,6 @@ function Orders(props) {
                   <LatestOrders />
                 </Grid>
               </Grid>
-              <Box pt={2}>
-                <Copyright />
-              </Box>
-              <Box pt={2}>
-              </Box>
             </Container>
     );
 }

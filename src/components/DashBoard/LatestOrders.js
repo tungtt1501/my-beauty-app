@@ -29,7 +29,7 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(6);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -103,7 +103,7 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
                 </Table>
             </TableContainer>
             <TablePagination 
-                rowsPerPageOptions={[6, 12, 25]}
+                rowsPerPageOptions={[5, 10, 25]}
                 component="div"
                 count={orders.length}
                 rowsPerPage={rowsPerPage}

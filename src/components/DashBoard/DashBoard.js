@@ -66,6 +66,9 @@ const useStyles = makeStyles((theme) => ({
     width: 64,
     height: 64
   },
+  appbar: {
+    position: 'fixed'
+  },
 }));
 
 const user = {
@@ -158,7 +161,7 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
