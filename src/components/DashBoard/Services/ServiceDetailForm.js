@@ -137,21 +137,17 @@ function ServiceDetailForm({ className, services, serviceDetailEditItem, fetchAl
     const submitForm = (e) => {
         e.preventDefault();
 
-        const newCategoryId = { ...categoryId };
-        newCategoryId.errorMessage = validateInput("selCategoryId", categoryId.value);
-        setCategoryId(newCategoryId);
+        const errCategoryId = validateInput("selCategoryId", categoryId.value);
+        setCategoryId({...categoryId, errorMessage: errCategoryId});
 
-        const newServiceItemName = { ...serviceItemName };
-        newServiceItemName.errorMessage = validateInput("txtItemName", serviceItemName.value);
-        setServiceItemName(newServiceItemName);
+        const errServiceItemName = validateInput("txtItemName", serviceItemName.value);
+        setServiceItemName({...serviceItemName, errorMessage:  errServiceItemName});
 
-        const newServiceItemTime = {...serviceItemTime};
-        newServiceItemTime.errorMessage = validateInput("txtItemTime", serviceItemTime.value);
-        setServiceItemTime(newServiceItemTime);
-
-        const newServiceItemPrice = {...serviceItemPrice};
-        newServiceItemPrice.errorMessage = validateInput("txtItemPrice", serviceItemPrice.value);
-        setServiceItemPrice(newServiceItemPrice);
+        const errServiceItemTime = validateInput("txtItemTime", serviceItemTime.value);
+        setServiceItemTime({...serviceItemTime, errorMessage: errServiceItemTime});
+        
+        const errServiceItemPrice = validateInput("txtItemPrice", serviceItemPrice.value);
+        setServiceItemPrice({...serviceItemPrice, errorMessage: errServiceItemPrice});
 
         var isAllValid = !categoryId.errorMessage &&
             !serviceItemName.errorMessage &&

@@ -106,25 +106,21 @@ function UserForm({ className, userEditItem, fetchEditItem, addItem, updateItem,
     const submitForm = (e) => {
         e.preventDefault();
 
-        const newEmail = { ...email };
-        newEmail.errorMessage = validateInput("txtEmail", email.value);
-        setEmail(newEmail);
+        const errEmail = validateInput("txtEmail", email.value);
+        setEmail({ ...email, errorMessage: errEmail } );
 
         if (!id) {
-            const newPassword = { ...password };
-            newPassword.errorMessage = validateInput("txtPassword", password.value);
-            setPassword(newPassword);
+            const errPassword = validateInput("txtPassword", password.value);
+            setPassword({ ...password, errorMessage: errPassword });
         } else {
             setPassword({ ...password, errorMessage: '' });
         }
 
-        const newFirstName = { ...firstName };
-        newFirstName.errorMessage = validateInput("txtFirstName", firstName.value)
-        setFirstName(newFirstName);
-
-        const newLastName = { ...lastName };
-        newLastName.errorMessage = validateInput("txtLastName", lastName.value);
-        setLastName(newLastName);
+        const errFirstName = validateInput("txtFirstName", firstName.value)
+        setFirstName({...firstName, errorMessage: errFirstName});
+        
+        const errLastName = validateInput("txtLastName", lastName.value);
+        setLastName({...lastName, errorMessage: errLastName});
 
         var isAllValid = !email.errorMessage &&
             !password.errorMessage &&

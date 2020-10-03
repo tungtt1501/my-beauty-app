@@ -129,10 +129,8 @@ Users.propTypes = {
 };
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
-        users: state.users,
-        //itemEditing: state.itemEditing
+        users: state.users
     }
 }
 
