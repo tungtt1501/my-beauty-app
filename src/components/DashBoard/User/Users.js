@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import { actResetServiceCategory, actFetchServicesRequest, actDeleteServicesCategoryRequest } from './../../../actions/index'
+import { actGetUsersRequest } from './../../../actions/index'
 import { connect } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
@@ -18,8 +18,8 @@ import {
     TableRow,
     makeStyles, TableContainer
 } from '@material-ui/core';
-import ServiceCategoryItem from './ServiceCategoryItem';
 import { Link } from 'react-router-dom';
+import User from './User';
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -31,7 +31,8 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const ServiceCategory = ({ className, services, itemEditing, resetForm, fetchAllServicesCategory, deleteServiceCataegory, ...rest }) => {
+function Users({ className, users, fetchAllUsers, ...rest }) {
+
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
@@ -47,21 +48,19 @@ const ServiceCategory = ({ className, services, itemEditing, resetForm, fetchAll
     };
 
     useEffect(() => {
-        resetForm();
-        fetchAllServicesCategory();
+        fetchAllUsers();
     }, []);
 
-    const onDeleteCategory = (id) => {
-        deleteServiceCataegory(id);
+    const onDeleteUser = (id) => {
+        //     deleteServiceCataegory(id);
     }
-
     return (
         <Fragment>
             <Card
                 className={clsx(classes.root, className)}
                 {...rest}>
-                <CardHeader title="Services Category" />
-                <Link to={`/admin/services/addCategory`}
+                <CardHeader title="Users" />
+                <Link to={`/admin/users/addUser`}
                     exact={'false'}>
                     <Button
                         variant="contained"
@@ -80,23 +79,29 @@ const ServiceCategory = ({ className, services, itemEditing, resetForm, fetchAll
                         <TableHead>
                             <TableRow>
                                 <TableCell>
-                                    Category Id
-                            </TableCell>
+                                    User id
+                                </TableCell>
                                 <TableCell>
-                                    Category Name
-                            </TableCell>
+                                    Email
+                                </TableCell>
+                                <TableCell>
+                                    First Name
+                                </TableCell>
+                                <TableCell>
+                                    Last Name
+                                </TableCell>
                                 <TableCell>
                                     Action
-                            </TableCell>
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {services.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((service, index) => (
-                                <ServiceCategoryItem
+                            {users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((user, index) => (
+                                <User
                                     key={index}
                                     index={index}
-                                    service={service}
-                                    onDeleteCategory={() => onDeleteCategory(service.categoryId)} />
+                                    user={user}
+                                    onDeleteUser={() => onDeleteUser(user.id)} />
                             ))}
                         </TableBody>
                     </Table>
@@ -104,7 +109,7 @@ const ServiceCategory = ({ className, services, itemEditing, resetForm, fetchAll
                 <TablePagination
                     rowsPerPageOptions={[5, 10, 25]}
                     component="div"
-                    count={services.length}
+                    count={users.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     onChangePage={handleChangePage}
@@ -113,31 +118,32 @@ const ServiceCategory = ({ className, services, itemEditing, resetForm, fetchAll
             </Card>
         </Fragment>
     );
-};
+}
 
-ServiceCategory.propTypes = {
+Users.propTypes = {
     className: PropTypes.string,
 };
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
-        services: state.services,
-        itemEditing: state.itemEditing
+        users: state.users,
+        //itemEditing: state.itemEditing
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        resetForm: () => {
+        fetchAllUsers: () => {
+            dispatch(actGetUsersRequest());
+        }
+        /*resetForm: () => {
             dispatch(actResetServiceCategory());
-        },
-        fetchAllServicesCategory: () => {
-            dispatch(actFetchServicesRequest());
         },
         deleteServiceCataegory: (id) => {
             dispatch(actDeleteServicesCategoryRequest(id));
-        }
+        }*/
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceCategory);
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

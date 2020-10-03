@@ -17,13 +17,23 @@ const services = (state = initialState, action) => {
         case Types.FETCH_SERVICES:
             state = action.services;
             return [...state]
+        case Types.ADD_SERVICES_CATEGORY:
+            state.push(action.serviceCategory);
+            return [...state];
+        case Types.DELETE_SERVICES_CATEGORY:
+            if (action.id) {
+                index = findIndex(state, action.id);
+                state.splice(index, 1);
+            }
+            
+            return [...state];
         case Types.FETCH_SERVICE_ITEMS:
             var serviceItems = action.serviceItems;
             if (serviceItems.length > 0) {
                 index = findIndex(state, serviceItems[0].categoryId);
                 state[index].serviceItems = serviceItems;
             }
-            
+
             return [...state]
         default: return [...state]
     }

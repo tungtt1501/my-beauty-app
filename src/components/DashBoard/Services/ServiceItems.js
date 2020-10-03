@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import { actFetchAllServiceItemsRequest, actUpdateServicesBookRequest, actGetItemServicesBookRequest } from './../../../actions/index'
+import { actResetServiceDetail, actFetchAllServiceItemsRequest, actDeleteServicesDetailRequest } from './../../../actions/index'
 import { connect } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
@@ -19,15 +19,19 @@ import {
     makeStyles, TableContainer
 } from '@material-ui/core';
 import ServiceItemDetail from './ServiceItemDetail';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     root: {},
     tableHeight: {
         flexFlow: 1
+    },
+    tableLayout: {
+        tableLayout: "fixed"
     }
 }));
 
-const ServiceItems = ({ className, serviceItems, itemEditing, fetchAllServicesItems, getServicesBook, updateServicesBook, ...rest }) => {
+const ServiceItems = ({ className, serviceItems, itemEditing, resetForm, fetchAllServicesItems, deleteServiceDetail, ...rest }) => {
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
@@ -43,11 +47,12 @@ const ServiceItems = ({ className, serviceItems, itemEditing, fetchAllServicesIt
     };
 
     useEffect(() => {
+        resetForm();
         fetchAllServicesItems();
     }, []);
 
-    const onEdit = (id) => {
-        //getServicesBook(id);
+    const onDeleteServiceDetail = (id) => {
+        deleteServiceDetail(id);
     }
 
     return (
@@ -55,19 +60,22 @@ const ServiceItems = ({ className, serviceItems, itemEditing, fetchAllServicesIt
             className={clsx(classes.root, className)}
             {...rest}>
             <CardHeader title="Services Items" />
-            <Button
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                        className={classes.button}
-                        startIcon={<AddIcon />}
-                    >
-                        Add
-            </Button>
+            <Link to={`/admin/services/addServiceDetail`}
+                exact={'false'}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    className={classes.button}
+                    startIcon={<AddIcon />}
+                >
+                    Add
+                </Button>
+            </Link>
             <Divider />
             <Paper className={classes.root}></Paper>
             <TableContainer className={classes.tableHeight}>
-                <Table>
+                <Table className={classes.tableLayout}>
                     <TableHead>
                         <TableRow>
                             <TableCell>
@@ -96,7 +104,7 @@ const ServiceItems = ({ className, serviceItems, itemEditing, fetchAllServicesIt
                                 key={index}
                                 index={index}
                                 serviceItem={serviceItem}
-                                onEditItem={() => onEdit(serviceItem.serviceItemId)} />
+                                onDeleteServiceDetail={() => onDeleteServiceDetail(serviceItem.serviceItemId)} />
                         ))}
                     </TableBody>
                 </Table>
@@ -127,14 +135,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        resetForm: () => {
+            dispatch(actResetServiceDetail());
+        },
         fetchAllServicesItems: () => {
             dispatch(actFetchAllServiceItemsRequest());
         },
-        getServicesBook: (id) => {
-            dispatch(actGetItemServicesBookRequest(id));
-        },
-        updateServicesBook: (serviceBook) => {
-            dispatch(actUpdateServicesBookRequest(serviceBook));
+        deleteServiceDetail: (id) => {
+            dispatch(actDeleteServicesDetailRequest(id));
         }
     }
 }

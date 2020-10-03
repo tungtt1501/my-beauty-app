@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import BackspaceIcon from '@material-ui/icons/Backspace';
-import { actResetServiceCategory, actFetchServiceByIdRequest, actAddServicesCategoryRequest, actUpdateServicesCategoryRequest } from './../../../actions/index'
+import { actFetchServiceByIdRequest, actAddServicesCategoryRequest, actUpdateServicesCategoryRequest } from './../../../actions/index'
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from 'react-redux'
 import {
@@ -31,26 +31,23 @@ ServiceCategoryForm.propTypes = {
     className: PropTypes.string,
 };
 
-function ServiceCategoryForm({ className, serviceEditItem, serviceAddItem, serviceUpdateItem, resetForm, addItem, updateItem, fetchEditItem, ...rest }) {
+function ServiceCategoryForm({ className, serviceEditItem, fetchEditItem, updateItem, addItem, ...rest }) {
     const [categoryName, setCategoryName] = useState('');
-    const [error, setError] = useState("");
+    const [error, setError] = useState('');
     const classes = useStyles();
     const { id } = useParams();
     const history = useHistory();
     useEffect(() => {
-        //resetForm();
         if (id) {
             fetchEditItem(id);
         }
-    });
+    }, []);
     useEffect(() => {
         if (serviceEditItem) {
             setCategoryName(serviceEditItem.categoryName);
         }
-        // if (serviceAddItem || serviceUpdateItem) {
-        //     history.goBack();
-        // }
-    }, [serviceEditItem, serviceAddItem, serviceUpdateItem]);
+    }, [serviceEditItem]);
+
     const submitForm = (e) => {
         e.preventDefault();
         setError(null);
@@ -64,14 +61,14 @@ function ServiceCategoryForm({ className, serviceEditItem, serviceAddItem, servi
         } else {
             addItem({ categoryName: categoryName });
         }
-
+        history.goBack();
     };
     return (
         <Fragment>
             <Card
                 className={clsx(classes.root, className)}
                 {...rest}>
-                <CardHeader title={`Edit Services Category`} />
+                <CardHeader title={id ? `Edit Services Category` : `Add Services Category`} />
                 <form className={classes.root} noValidate autoComplete="off">
                     <TextField id="filled-basic"
                         error={!!error}
@@ -111,17 +108,12 @@ function ServiceCategoryForm({ className, serviceEditItem, serviceAddItem, servi
 
 const mapStateToProps = state => {
     return {
-        serviceEditItem: state.serviceEditItem,
-        serviceAddItem: state.serviceAddItem,
-        serviceUpdateItem: state.serviceUpdateItem
+        serviceEditItem: state.serviceEditItem
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        resetForm: () => {
-            dispatch(actResetServiceCategory());
-        },
         fetchEditItem: (id) => {
             dispatch(actFetchServiceByIdRequest(id));
         },

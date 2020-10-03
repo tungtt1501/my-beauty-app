@@ -16,6 +16,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Draggable from 'react-draggable';
 import Paper from '@material-ui/core/Paper';
 
+User.propTypes = {
+    
+};
+
 const useStyles = makeStyles((theme) => ({
     button: {
         margin: theme.spacing(1),
@@ -30,7 +34,7 @@ function PaperComponent(props) {
     );
 }
 
-export default function ServiceItemDetail({ serviceItem, onDeleteServiceDetail}) {
+function User({ user, onDeleteUser }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
@@ -43,30 +47,27 @@ export default function ServiceItemDetail({ serviceItem, onDeleteServiceDetail})
     };
     const handleConfirmDel = () => {
         setOpen(false);
-        onDeleteServiceDetail();
+        onDeleteUser();
     };
     return (
         <Fragment>
             <TableRow
                 hover
-                key={serviceItem.serviceItemId}>
+                key={user.id}>
                 <TableCell>
-                    {serviceItem.serviceItemId}
+                    {user.id}
                 </TableCell>
                 <TableCell>
-                    {serviceItem.categoryId}
+                    {user.email}
                 </TableCell>
                 <TableCell>
-                    {serviceItem.serviceItemName}
+                    {user.firstName}
                 </TableCell>
                 <TableCell>
-                    {serviceItem.serviceItemTime}
+                    {user.lastName}
                 </TableCell>
                 <TableCell>
-                    {serviceItem.serviceItemPrice}
-                </TableCell>
-                <TableCell>
-                    <Link to={`/admin/services/${serviceItem.serviceItemId}/editServiceDetail`}
+                    <Link to={`/admin/users/${user.id}/editUser`}
                         exact={'false'}>
                         <Button
                             variant="contained"
@@ -79,15 +80,15 @@ export default function ServiceItemDetail({ serviceItem, onDeleteServiceDetail})
                     </Link>
                     &nbsp;&nbsp;
                     <Button
-                        variant="contained"
-                        color="secondary"
-                        size="small"
-                        className={classes.button}
-                        onClick={() => handleClickOpen()}
-                        startIcon={<DeleteIcon />}
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    onClick={() => handleClickOpen()}
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
                     >
-                        Delete
-                </Button>
+                    Delete
+                    </Button>
                 </TableCell>
             </TableRow>
             <Dialog
@@ -100,7 +101,7 @@ export default function ServiceItemDetail({ serviceItem, onDeleteServiceDetail})
             </DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Are you sure delete this service item?
+                        Are you sure delete this user?
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -112,6 +113,8 @@ export default function ServiceItemDetail({ serviceItem, onDeleteServiceDetail})
                     </Button>
                 </DialogActions>
             </Dialog>
-        </Fragment>
+        </Fragment >
     );
 }
+
+export default User;

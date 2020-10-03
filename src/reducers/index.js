@@ -7,6 +7,8 @@ import itemEditing from './itemEditing'
 import auth from './auth'
 import serviceItems from './serviceItems'
 import serviceEditItem from './serviceEditItem'
+import serviceDetailEditItem from './serviceDetailEditItem'
+import users from './users'
 const appReducers = combineReducers({
     blogs,
     services,
@@ -15,7 +17,9 @@ const appReducers = combineReducers({
     itemEditing,
     auth,
     serviceItems,
-    serviceEditItem
+    serviceEditItem,
+    serviceDetailEditItem,
+    users
 });
 
 export default appReducers;

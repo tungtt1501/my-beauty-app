@@ -82,11 +82,92 @@ export const actUpdateServicesCategory = (serviceCategory) => {
     }
 }
 
+export const actDeleteServicesCategoryRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`service_category/${id}`, 'DELETE', null).then(res => {
+            dispatch(actDeleteServicesCategory(id));
+        });
+    }
+}
+
+export const actDeleteServicesCategory = (id) => {
+    return {
+        type: Types.DELETE_SERVICES_CATEGORY,
+        id
+    }
+}
+
+export const actResetServiceDetail = () => {
+    return {
+        type : Types.RESET_SERVICES_DETAIL
+    }
+}
+
+export const actFetchServiceDetailByIdRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`serviceItems?serviceItemId=${id}`, 'GET', null).then(res => {
+            dispatch(actFetchServiceDetailById(res.data));
+        });
+    }
+}
+
+export const actFetchServiceDetailById = (serviceDetail) => {
+    return {
+        type: Types.FETCH_SERVICE_DETAIL_BY_ID,
+        serviceDetail
+    }
+}
+
 export const actFetchServiceItemsRequest = (categoryId) => {
     return (dispatch) => {
         return callApi(`serviceItems?categoryId=${categoryId}`, 'GET', null).then(res => {
             dispatch(actFetchServiceItems(res.data));
         });
+    }
+}
+
+export const actAddServicesDetailRequest = (serviceDetail) => {
+    return (dispatch) => {
+        return callApi(`serviceItems`, 'POST', serviceDetail).then(res => {
+            dispatch(actAddServicesDetail(res.data));
+        });
+    }
+}
+
+export const actAddServicesDetail = (serviceDetail) => {
+    return {
+        type: Types.ADD_SERVICE_DETAIL,
+        serviceDetail
+    }
+}
+
+export const actUpdateServicesDetailRequest = (serviceDetail) => {
+    return (dispatch) => {
+        return callApi(`serviceItems`, 'PUT', serviceDetail).then(res => {
+            dispatch(actUpdateServicesDetail(res.data));
+        });
+    }
+}
+
+export const actUpdateServicesDetail = (serviceDetail) => {
+    return {
+        type: Types.UPDATE_SERVICE_DETAIL,
+        serviceDetail
+    }
+}
+
+export const actDeleteServicesDetailRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`serviceItems/${id}`, 'DELETE', null).then(res => {
+            dispatch(actDeleteServicesDetail(id));
+        });
+    }
+}
+
+export const actDeleteServicesDetail = (id) => {
+    return {
+        type: Types.DELETE_SERVICE_DETAIL,
+        id
     }
 }
 
@@ -175,5 +256,20 @@ export const actGetItemServicesBook = (serviceBook) => {
     return {
         type: Types.EDIT_SERVICES_BOOK,
         serviceBook
+    }
+}
+
+export const actGetUsersRequest = () => {
+    return (dispatch) => {
+        return callApi(`users`, 'GET', null).then(res => {
+            dispatch(actGetUsers(res.data));
+        });
+    }
+}
+
+export const actGetUsers = (users) => {
+    return {
+        type: Types.FETCH_USERS,
+        users
     }
 }

@@ -15,6 +15,11 @@ const dashboardMenus = [
     name: 'Services',
     to: '/admin/services',
     exact: false
+  },
+  {
+    name: 'Users',
+    to: '/admin/users',
+    exact: false
   }
 ];
 
