@@ -98,6 +98,14 @@ class BookForm extends React.Component {
         if (Object.values(serviceBook).length > 0) {
             this.props.onAddSuccess();
         }
+        if (this.props.serviceTypes.length > 0 && !this.state.selService.value) {
+            this.setState(prevState => ({
+                selService: {                   // object that we want to update
+                    ...prevState.selService,    // keep all other key-value pairs
+                    value: this.props.serviceTypes[0].serviceItemName      // update the value of specific key
+                }
+            }))
+        }
     }
 
     onChange = (e) => {

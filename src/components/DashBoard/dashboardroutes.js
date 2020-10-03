@@ -4,6 +4,7 @@ import ServiceCategoryForm from './Services/ServiceCategoryForm';
 import ServiceDashBoard from './Services/ServiceDashBoard';
 import ServiceDetailForm from './Services/ServiceDetailForm';
 import UserDashboard from './User/UserDashBoard';
+import UserForm from './User/UserForm';
 
 const dashboardroutes = [
     {
@@ -40,6 +41,16 @@ const dashboardroutes = [
         path: '/admin/users',
         exact: true,
         main: () => <UserDashboard />
+    },
+    {
+        path: '/admin/users/addUser',
+        exact: true,
+        main: () => <UserForm />
+    },
+    {
+        path: '/admin/users/:id/editUser',
+        exact: true,
+        main: () => <UserForm />
     }
 ];
 

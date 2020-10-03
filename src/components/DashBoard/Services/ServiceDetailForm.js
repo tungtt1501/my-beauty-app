@@ -14,7 +14,7 @@ import {
     Select,
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import { actFetchServiceDetailByIdRequest, actFetchServicesRequest , actAddServicesDetailRequest, actUpdateServicesDetailRequest } from './../../../actions/index'
+import { actFetchServiceDetailByIdRequest, actFetchServicesRequest, actAddServicesDetailRequest, actUpdateServicesDetailRequest } from './../../../actions/index'
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from 'react-redux'
 
@@ -37,10 +37,7 @@ const useStyles = makeStyles((theme) => ({
 const validateInput = (type, checkingText) => {
     if (type === "selCategoryId" || type === "txtItemName" || type === "txtItemTime" || type === "txtItemPrice") {
         if (!checkingText) {
-            return {
-                isInputValid: false,
-                errorMessage: 'This field is required.',
-            }
+            return 'This field is required.';
         }
     }
 
@@ -48,44 +45,33 @@ const validateInput = (type, checkingText) => {
         const regexp = /^[0-9\b]+$/;
         const checkingResult = regexp.exec(checkingText);
         if (checkingResult === null) {
-            return {
-                isInputValid: false,
-                errorMessage: 'Number is not correct.'
-            }
+            return 'Number is not correct.';
         }
     }
 
-    return {
-        isInputValid: true,
-        errorMessage: ''
-    };
+    return '';
 }
 
 function ServiceDetailForm({ className, services, serviceDetailEditItem, fetchAllServicesCategory, fetchEditItem, addItem, updateItem, ...rest }) {
     const classes = useStyles();
     const [categoryId, setCategoryId] = useState({
         value: '',
-        isInputValid: false,
         errorMessage: ''
     });
     const [serviceItemId, setServiceItemId] = useState({
         value: '',
-        isInputValid: false,
         errorMessage: ''
     });
     const [serviceItemName, setServiceItemName] = useState({
         value: '',
-        isInputValid: false,
         errorMessage: ''
     });
     const [serviceItemTime, setServiceItemTime] = useState({
         value: '',
-        isInputValid: false,
         errorMessage: ''
     });
     const [serviceItemPrice, setServiceItemPrice] = useState({
         value: '',
-        isInputValid: false,
         errorMessage: ''
     });
     const [serviceCategoryList, serServiceCategoryList] = useState([]);
@@ -129,41 +115,48 @@ function ServiceDetailForm({ className, services, serviceDetailEditItem, fetchAl
 
     const onChange = (e) => {
         const { name, value } = e.target;
-        const { isInputValid, errorMessage } = validateInput(name, value);
+        const errorMessage = validateInput(name, value);
 
         if (name === 'selCategoryId') {
-            setCategoryId({ ...categoryId, value: value, isInputValid: isInputValid, errorMessage: errorMessage });
+            setCategoryId({ ...categoryId, value: value, errorMessage: errorMessage });
         }
 
         if (name === 'txtItemName') {
-            setServiceItemName({ ...serviceItemName, value: value, isInputValid: isInputValid, errorMessage: errorMessage });
+            setServiceItemName({ ...serviceItemName, value: value, errorMessage: errorMessage });
 
         }
         if (name === 'txtItemTime') {
-            setServiceItemTime({ ...serviceItemTime, value: value, isInputValid: isInputValid, errorMessage: errorMessage });
+            setServiceItemTime({ ...serviceItemTime, value: value, errorMessage: errorMessage });
 
         }
         if (name === 'txtItemPrice') {
-            setServiceItemPrice({ ...serviceItemPrice, value: value, isInputValid: isInputValid, errorMessage: errorMessage });
+            setServiceItemPrice({ ...serviceItemPrice, value: value, errorMessage: errorMessage });
         }
     }
 
     const submitForm = (e) => {
         e.preventDefault();
 
-        var { isInputValid, errorMessage } = validateInput("selCategoryId", categoryId.value);
-        setCategoryId({ ...categoryId, isInputValid: isInputValid, errorMessage: errorMessage });
-        var { isInputValid, errorMessage } = validateInput("txtItemName", serviceItemName.value);
-        setServiceItemName({ ...serviceItemName, isInputValid: isInputValid, errorMessage: errorMessage });
-        var { isInputValid, errorMessage } = validateInput("txtItemTime", serviceItemTime.value);
-        setServiceItemTime({ ...serviceItemTime, isInputValid: isInputValid, errorMessage: errorMessage });
-        var { isInputValid, errorMessage } = validateInput("txtItemPrice", serviceItemPrice.value);
-        setServiceItemPrice({ ...serviceItemPrice, isInputValid: isInputValid, errorMessage: errorMessage });
+        const newCategoryId = { ...categoryId };
+        newCategoryId.errorMessage = validateInput("selCategoryId", categoryId.value);
+        setCategoryId(newCategoryId);
 
-        var isAllValid = categoryId.isInputValid &&
-            serviceItemName.isInputValid &&
-            serviceItemTime.isInputValid &&
-            serviceItemPrice.isInputValid;
+        const newServiceItemName = { ...serviceItemName };
+        newServiceItemName.errorMessage = validateInput("txtItemName", serviceItemName.value);
+        setServiceItemName(newServiceItemName);
+
+        const newServiceItemTime = {...serviceItemTime};
+        newServiceItemTime.errorMessage = validateInput("txtItemTime", serviceItemTime.value);
+        setServiceItemTime(newServiceItemTime);
+
+        const newServiceItemPrice = {...serviceItemPrice};
+        newServiceItemPrice.errorMessage = validateInput("txtItemPrice", serviceItemPrice.value);
+        setServiceItemPrice(newServiceItemPrice);
+
+        var isAllValid = !categoryId.errorMessage &&
+            !serviceItemName.errorMessage &&
+            !serviceItemTime.errorMessage &&
+            !serviceItemPrice.errorMessage;
 
         if (!isAllValid) {
             return;
@@ -209,7 +202,6 @@ function ServiceDetailForm({ className, services, serviceDetailEditItem, fetchAl
                         error={!!serviceItemName.errorMessage}
                         required
                         label="Service Item Name"
-                        variant="filled"
                         value={serviceItemName.value}
                         placeholder="Service Item Name"
                         name="txtItemName"
@@ -219,7 +211,6 @@ function ServiceDetailForm({ className, services, serviceDetailEditItem, fetchAl
                         error={!!serviceItemTime.errorMessage}
                         required
                         label="Service Item Time"
-                        variant="filled"
                         value={serviceItemTime.value}
                         name="txtItemTime"
                         placeholder="30"
@@ -229,7 +220,6 @@ function ServiceDetailForm({ className, services, serviceDetailEditItem, fetchAl
                         error={!!serviceItemPrice.errorMessage}
                         required
                         label="Service Item Price"
-                        variant="filled"
                         value={serviceItemPrice.value}
                         name="txtItemPrice"
                         placeholder="60"

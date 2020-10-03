@@ -22,6 +22,9 @@ const useStyles = makeStyles(() => ({
     root: {},
     tableHeight: {
         flexFlow: 1
+    },
+    tableLayout: {
+        tableLayout: "fixed"
     }
 }));
 
@@ -61,31 +64,31 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
             <Divider />
             <Paper className={classes.root}></Paper>
             <TableContainer className={classes.tableHeight}>
-                <Table>
+                <Table className={classes.tableLayout}>
                     <TableHead>
                         <TableRow>
-                            <TableCell align="center">
+                            <TableCell>
                                 Full Name
                                     </TableCell>
-                            <TableCell align="center">
+                            <TableCell>
                                 Email
                                     </TableCell>
-                            <TableCell align="center">
+                            <TableCell>
                                 Phone
                                     </TableCell>
-                            <TableCell align="center">
+                            <TableCell>
                                 Service
                                     </TableCell>
-                            <TableCell align="center">
+                            <TableCell>
                                 Date
                                     </TableCell>
-                            <TableCell align="center">
+                            <TableCell>
                                 Time
                                     </TableCell>
-                            <TableCell align="center">
+                            <TableCell>
                                 Status
                                     </TableCell>
-                            <TableCell align="center">
+                            <TableCell>
                                 Action
                                     </TableCell>
                         </TableRow>

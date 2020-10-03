@@ -1,13 +1,13 @@
 import * as Types from './../constants/ActionTypes'
 var initialState = {};
 
-const serviceEditItem = (state = initialState, action) => {
+const userEditItem = (state = initialState, action) => {
     switch (action.type) {
-        case Types.FETCH_SERVICES_BY_ID:
-            state = action.service;
+        case Types.FETCH_USER_BY_ID:
+            state = action.user;
             return { ...state }
 
-        case Types.RESET_SERVICES_CATEGORY:
+        case Types.RESET_USERS:
             state = null;
             return { ...state }
 
@@ -15,4 +15,4 @@ const serviceEditItem = (state = initialState, action) => {
     }
 }
 
-export default serviceEditItem;
+export default userEditItem;

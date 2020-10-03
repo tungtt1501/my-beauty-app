@@ -74,7 +74,6 @@ function ServiceCategoryForm({ className, serviceEditItem, fetchEditItem, update
                         error={!!error}
                         required
                         label="Category Name"
-                        variant="filled"
                         value={categoryName}
                         placeholder="Category Name"
                         onChange={e => setCategoryName(e.target.value)}

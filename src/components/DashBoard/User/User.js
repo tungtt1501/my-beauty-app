@@ -53,9 +53,9 @@ function User({ user, onDeleteUser }) {
         <Fragment>
             <TableRow
                 hover
-                key={user.id}>
+                key={user.userId}>
                 <TableCell>
-                    {user.id}
+                    {user.userId}
                 </TableCell>
                 <TableCell>
                     {user.email}
@@ -67,7 +67,7 @@ function User({ user, onDeleteUser }) {
                     {user.lastName}
                 </TableCell>
                 <TableCell>
-                    <Link to={`/admin/users/${user.id}/editUser`}
+                    <Link to={`/admin/users/${user.userId}/editUser`}
                         exact={'false'}>
                         <Button
                             variant="contained"
@@ -78,7 +78,7 @@ function User({ user, onDeleteUser }) {
                         >Edit
                         </Button>
                     </Link>
-                    &nbsp;&nbsp;
+                    &nbsp;
                     <Button
                     variant="contained"
                     color="secondary"

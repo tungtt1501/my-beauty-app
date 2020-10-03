@@ -28,6 +28,9 @@ const useStyles = makeStyles(() => ({
     },
     tableLayout: {
         tableLayout: "fixed"
+    },
+    button: {
+        margin: "10px"
     }
 }));
 

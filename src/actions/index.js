@@ -39,7 +39,7 @@ export const actResetServiceCategory = () => {
 
 export const actFetchServiceByIdRequest = (categoryId) => {
     return (dispatch) => {
-        return callApi(`service_category?categoryId=${categoryId}`, 'GET', null).then(res => {
+        return callApi(`service_category_by_id?id=${categoryId}`, 'GET', null).then(res => {
             dispatch(actFetchServiceById(res.data));
         });
     }
@@ -84,8 +84,9 @@ export const actUpdateServicesCategory = (serviceCategory) => {
 
 export const actDeleteServicesCategoryRequest = (id) => {
     return (dispatch) => {
-        return callApi(`service_category/${id}`, 'DELETE', null).then(res => {
+        return callApi(`service_category?id=${id}`, 'DELETE', null).then(res => {
             dispatch(actDeleteServicesCategory(id));
+            dispatch(actFetchAllServiceItemsRequest());
         });
     }
 }
@@ -105,7 +106,7 @@ export const actResetServiceDetail = () => {
 
 export const actFetchServiceDetailByIdRequest = (id) => {
     return (dispatch) => {
-        return callApi(`serviceItems?serviceItemId=${id}`, 'GET', null).then(res => {
+        return callApi(`service_item_by_id?id=${id}`, 'GET', null).then(res => {
             dispatch(actFetchServiceDetailById(res.data));
         });
     }
@@ -120,15 +121,22 @@ export const actFetchServiceDetailById = (serviceDetail) => {
 
 export const actFetchServiceItemsRequest = (categoryId) => {
     return (dispatch) => {
-        return callApi(`serviceItems?categoryId=${categoryId}`, 'GET', null).then(res => {
+        return callApi(`service_item_by_category?categoryId=${categoryId}`, 'GET', null).then(res => {
             dispatch(actFetchServiceItems(res.data));
         });
     }
 }
 
+export const actFetchServiceItems = (serviceItems) => {
+    return {
+        type: Types.FETCH_SERVICE_ITEMS,
+        serviceItems
+    }
+}
+
 export const actAddServicesDetailRequest = (serviceDetail) => {
     return (dispatch) => {
-        return callApi(`serviceItems`, 'POST', serviceDetail).then(res => {
+        return callApi(`service_items`, 'POST', serviceDetail).then(res => {
             dispatch(actAddServicesDetail(res.data));
         });
     }
@@ -143,7 +151,7 @@ export const actAddServicesDetail = (serviceDetail) => {
 
 export const actUpdateServicesDetailRequest = (serviceDetail) => {
     return (dispatch) => {
-        return callApi(`serviceItems`, 'PUT', serviceDetail).then(res => {
+        return callApi(`service_items`, 'PUT', serviceDetail).then(res => {
             dispatch(actUpdateServicesDetail(res.data));
         });
     }
@@ -158,7 +166,7 @@ export const actUpdateServicesDetail = (serviceDetail) => {
 
 export const actDeleteServicesDetailRequest = (id) => {
     return (dispatch) => {
-        return callApi(`serviceItems/${id}`, 'DELETE', null).then(res => {
+        return callApi(`service_items?id=${id}`, 'DELETE', null).then(res => {
             dispatch(actDeleteServicesDetail(id));
         });
     }
@@ -171,16 +179,9 @@ export const actDeleteServicesDetail = (id) => {
     }
 }
 
-export const actFetchServiceItems = (serviceItems) => {
-    return {
-        type: Types.FETCH_SERVICE_ITEMS,
-        serviceItems
-    }
-}
-
 export const actFetchAllServiceItemsRequest = () => {
     return (dispatch) => {
-        return callApi(`serviceItems`, 'GET', null).then(res => {
+        return callApi(`service_items`, 'GET', null).then(res => {
             dispatch(actFetchAllServiceItems(res.data));
         });
     }
@@ -195,7 +196,7 @@ export const actFetchAllServiceItems = (serviceItems) => {
 
 export const actAddServiceBookRequest = (serviceBook) => {
     return dispatch => {
-        return callApi('serviceBooks', 'POST', serviceBook).then(res => {
+        return callApi('order_services', 'POST', serviceBook).then(res => {
             dispatch(actAddServiceBook(res.data));
         });
     }
@@ -216,7 +217,7 @@ export const actResetServiceBook = () => {
 
 export const actFetchAllServicesBookRequest = () => {
     return (dispatch) => {
-        return callApi(`serviceBooks`, 'GET', null).then(res => {
+        return callApi(`order_services`, 'GET', null).then(res => {
             dispatch(actFetchAllServicesBook(res.data));
         });
     }
@@ -231,7 +232,7 @@ export const actFetchAllServicesBook = (servicesBook) => {
 
 export const actUpdateServicesBookRequest = (serviceBook) => {
     return (dispatch) => {
-        return callApi(`serviceBooks`, 'PUT', serviceBook).then(res => {
+        return callApi(`order_services`, 'PUT', serviceBook).then(res => {
             dispatch(actUpdateServicesBook(res.data));
         });
     }
@@ -246,7 +247,7 @@ export const actUpdateServicesBook = (serviceBook) => {
 
 export const actGetItemServicesBookRequest = (id) => {
     return (dispatch) => {
-        return callApi(`serviceBooks?id=${id}`, 'GET', null).then(res => {
+        return callApi(`order_service?id=${id}`, 'GET', null).then(res => {
             dispatch(actGetItemServicesBook(res.data));
         });
     }
@@ -256,6 +257,12 @@ export const actGetItemServicesBook = (serviceBook) => {
     return {
         type: Types.EDIT_SERVICES_BOOK,
         serviceBook
+    }
+}
+
+export const actResetUsers = () => {
+    return {
+        type : Types.RESET_USERS
     }
 }
 
@@ -271,5 +278,65 @@ export const actGetUsers = (users) => {
     return {
         type: Types.FETCH_USERS,
         users
+    }
+}
+
+export const actFetchUserByIdRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`user?id=${id}`, 'GET', null).then(res => {
+            dispatch(actFetchUserById(res.data));
+        });
+    }
+}
+
+export const actFetchUserById = (user) => {
+    return {
+        type: Types.FETCH_USER_BY_ID,
+        user
+    }
+}
+
+export const actAddUserRequest = (user) => {
+    return (dispatch) => {
+        return callApi(`user`, 'POST', user).then(res => {
+            dispatch(actAddUser(res.data));
+        });
+    }
+}
+
+export const actAddUser = (user) => {
+    return {
+        type: Types.ADD_USER,
+        user
+    }
+}
+
+export const actUpdateUserRequest = (user) => {
+    return (dispatch) => {
+        return callApi(`user`, 'PUT', user).then(res => {
+            dispatch(actUpdateUser(res.data));
+        });
+    }
+}
+
+export const actUpdateUser = (user) => {
+    return {
+        type: Types.UPDATE_USER,
+        user
+    }
+}
+
+export const actDeleteUserRequest = (id) => {
+    return (dispatch) => {
+        return callApi(`user?id=${id}`, 'DELETE', null).then(res => {
+            dispatch(actDeleteUser(id));
+        });
+    }
+}
+
+export const actDeleteUser = (id) => {
+    return {
+        type: Types.DELETE_USER,
+        id
     }
 }

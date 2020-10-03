@@ -22,6 +22,11 @@ const services = (state = initialState, action) => {
             state.push(action.serviceDetail);
             return [...state];
 
+        case Types.UPDATE_SERVICE_DETAIL:
+            index = findIndex(state, action.serviceDetail.serviceItemId);
+            state[index] = action.serviceDetail;
+            return [...state];
+
         case Types.DELETE_SERVICE_DETAIL:
             if (action.id) {
                 index = findIndex(state, action.id);

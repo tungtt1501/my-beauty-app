@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
   desktopDrawer: {
     width: 256,
     top: 64,
+    backgroundColor: 'gainsboro',
     height: 'calc(100% - 64px)'
   },
   avatar: {
@@ -71,10 +72,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const userDetail = JSON.parse(localStorage.getItem("user"));
+
 const user = {
   avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
+  jobTitle: 'Admin',
+  name: userDetail ? (userDetail.firstName + userDetail.lastName) : 'Guest'
 };
 
 const Dashboard = ({ auth, logout, className, ...rest }) => {
@@ -174,11 +177,6 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           {auth && (
             <IconButton color="inherit"
               aria-controls="menu-appbar"

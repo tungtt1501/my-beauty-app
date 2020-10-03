@@ -2,6 +2,8 @@ import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import StyleIcon from '@material-ui/icons/Style';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import './dashboard.css'
 import { NavLink } from 'react-router-dom';
 
@@ -9,25 +11,28 @@ const dashboardMenus = [
   {
     name: 'Dashboard',
     to: '/admin',
-    exact: true
+    exact: true,
+    icon: <DashboardIcon />
   },
   {
     name: 'Services',
     to: '/admin/services',
-    exact: false
+    exact: false,
+    icon: <StyleIcon />
   },
   {
     name: 'Users',
     to: '/admin/users',
-    exact: false
+    exact: false,
+    icon: <SupervisorAccountIcon />
   }
 ];
 
-const DashboardLink = ({ label, to, activeOnlyWhenExact }) => {
+const DashboardLink = ({ label, icon, to, activeOnlyWhenExact }) => {
   return (
     <ListItem button>
       <ListItemIcon>
-        <DashboardIcon />
+        {icon}
       </ListItemIcon>
       <NavLink to={to}
         exact={activeOnlyWhenExact}
@@ -47,6 +52,7 @@ const showDashboardMenu = (menus) => {
               <DashboardLink
                   key={index}
                   label={menu.name}
+                  icon={menu.icon}
                   to={menu.to}
                   activeOnlyWhenExact={menu.exact}
               />

@@ -9,6 +9,7 @@ import serviceItems from './serviceItems'
 import serviceEditItem from './serviceEditItem'
 import serviceDetailEditItem from './serviceDetailEditItem'
 import users from './users'
+import userEditItem from './userEditItem'
 const appReducers = combineReducers({
     blogs,
     services,
@@ -19,7 +20,8 @@ const appReducers = combineReducers({
     serviceItems,
     serviceEditItem,
     serviceDetailEditItem,
-    users
+    users,
+    userEditItem
 });
 
 export default appReducers;

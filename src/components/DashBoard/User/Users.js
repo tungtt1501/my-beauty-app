@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import { actGetUsersRequest } from './../../../actions/index'
+import { actResetUsers, actGetUsersRequest, actDeleteUserRequest } from './../../../actions/index'
 import { connect } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
@@ -28,10 +28,13 @@ const useStyles = makeStyles(() => ({
     },
     tableLayout: {
         tableLayout: "fixed"
+    },
+    button: {
+        margin: "10px"
     }
 }));
 
-function Users({ className, users, fetchAllUsers, ...rest }) {
+function Users({ className, users, resetForm, fetchAllUsers, deleteUser, ...rest }) {
 
     const classes = useStyles();
 
@@ -48,11 +51,12 @@ function Users({ className, users, fetchAllUsers, ...rest }) {
     };
 
     useEffect(() => {
+        resetForm();
         fetchAllUsers();
     }, []);
 
     const onDeleteUser = (id) => {
-        //     deleteServiceCataegory(id);
+        deleteUser(id);
     }
     return (
         <Fragment>
@@ -101,7 +105,7 @@ function Users({ className, users, fetchAllUsers, ...rest }) {
                                     key={index}
                                     index={index}
                                     user={user}
-                                    onDeleteUser={() => onDeleteUser(user.id)} />
+                                    onDeleteUser={() => onDeleteUser(user.userId)} />
                             ))}
                         </TableBody>
                     </Table>
@@ -134,15 +138,15 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
+        resetForm: () => {
+            dispatch(actResetUsers());
+        },
         fetchAllUsers: () => {
             dispatch(actGetUsersRequest());
-        }
-        /*resetForm: () => {
-            dispatch(actResetServiceCategory());
         },
-        deleteServiceCataegory: (id) => {
-            dispatch(actDeleteServicesCategoryRequest(id));
-        }*/
+        deleteUser: (id) => {
+            dispatch(actDeleteUserRequest(id));
+        }
     }
 }
 

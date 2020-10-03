@@ -43,33 +43,33 @@ export default function OrderItem({ order, onEditItem, onConfirmItem }) {
             <TableRow
                 hover
                 key={order.id}>
-                <TableCell align="center">
+                <TableCell>
                     {order.firstName + ' ' + order.lastName}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell>
                     {order.email}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell>
                     {order.phone}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell>
                     {order.serviceType}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell>
                     {moment(order.date).format('DD/MM/YYYY')}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell>
                     {moment(order.time).format('HH:mm')}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell>
                     <Chip
                         color={order.status == 0 ? 'secondary' : 'primary'}
                         label={order.status == 0 ? 'Pending' : 'Confirmed'}
                         size="small"
                     />
                 </TableCell>
-                <TableCell align="center">
-                    <Button variant="contained" color="primary" onClick={() => handleClickOpen()} className={order.status == 0 ? '' : 'Mui-disabled'}>
+                <TableCell>
+                    <Button variant="contained" size="small" color="primary" onClick={() => handleClickOpen()} className={order.status == 0 ? '' : 'Mui-disabled'}>
                         Confirm
                 </Button>
                 </TableCell>
