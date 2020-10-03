@@ -1,5 +1,6 @@
 import React from 'react';
 import Orders from './Orders/Orders';
+import ServiceCategoryForm from './Services/ServiceCategoryForm';
 import ServiceDashBoard from './Services/ServiceDashBoard';
 
 const dashboardroutes = [
@@ -10,8 +11,18 @@ const dashboardroutes = [
     },
     {
         path: '/admin/services',
-        exact: false,
+        exact: true,
         main: () => <ServiceDashBoard />
+    },
+    {
+        path: '/admin/services/:id/editCate',
+        exact: true,
+        main: () => <ServiceCategoryForm />
+    },
+    {
+        path: '/admin/services/addCategory',
+        exact: true,
+        main: () => <ServiceCategoryForm />
     }
 ];
 

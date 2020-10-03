@@ -19,7 +19,7 @@ class HomePage extends React.Component {
   
   render() {
     return (
-      <div style={{backgroundColor: '#e2e8d9'}}>
+      <div>
         <Menu />
         <Header />
         <About />

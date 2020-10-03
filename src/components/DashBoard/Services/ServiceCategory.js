@@ -19,6 +19,7 @@ import {
     makeStyles, TableContainer
 } from '@material-ui/core';
 import ServiceCategoryItem from './ServiceCategoryItem';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -55,15 +56,18 @@ const ServiceCategory = ({ className, services, itemEditing, fetchAllServicesCat
             className={clsx(classes.root, className)}
             {...rest}>
             <CardHeader title="Services Category" />
-            <Button
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                        className={classes.button}
-                        startIcon={<AddIcon />}
-                    >
-                        Add
-            </Button>
+            <Link to={`/admin/services/addCategory`}
+                exact={'false'}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    className={classes.button}
+                    startIcon={<AddIcon />}
+                >
+                    Add
+                </Button>
+            </Link>
             <Divider />
             <Paper className={classes.root}></Paper>
             <TableContainer className={classes.tableHeight}>

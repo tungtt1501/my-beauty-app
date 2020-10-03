@@ -19,7 +19,7 @@ const services = (state = initialState, action) => {
             return [...state]
         case Types.FETCH_SERVICE_ITEMS:
             var serviceItems = action.serviceItems;
-            if (serviceItems) {
+            if (serviceItems.length > 0) {
                 index = findIndex(state, serviceItems[0].categoryId);
                 state[index].serviceItems = serviceItems;
             }

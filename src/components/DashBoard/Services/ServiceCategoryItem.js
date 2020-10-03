@@ -7,6 +7,7 @@ import {
     TableCell,
     TableRow,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -29,27 +30,29 @@ export default function ServiceCategoryItem({ service, onEditItem }) {
                     {service.categoryName}
                 </TableCell>
                 <TableCell>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        size="small"
-                        className={classes.button}
-                        startIcon={<EditIcon />}
-                    >
-                        Edit
-                    </Button>
+                    <Link to={`/admin/services/${service.categoryId}/editCate`}
+                        exact={'false'}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            size="small"
+                            className={classes.button}
+                            startIcon={<EditIcon />}
+                        >Edit
+                        </Button>
+                    </Link>
                     &nbsp;&nbsp;
                     <Button
-                        variant="contained"
-                        color="secondary"
-                        size="small"
-                        className={classes.button}
-                        startIcon={<DeleteIcon />}
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
                     >
-                        Delete
-                </Button>
+                    Delete
+                    </Button>
                 </TableCell>
             </TableRow>
-        </Fragment>
+        </Fragment >
     );
 }

@@ -31,6 +31,57 @@ export const actFetchServices = (services) => {
     }
 }
 
+export const actResetServiceCategory = () => {
+    return {
+        type : Types.RESET_SERVICES_CATEGORY
+    }
+}
+
+export const actFetchServiceByIdRequest = (categoryId) => {
+    return (dispatch) => {
+        return callApi(`service_category?categoryId=${categoryId}`, 'GET', null).then(res => {
+            dispatch(actFetchServiceById(res.data));
+        });
+    }
+}
+
+export const actFetchServiceById = (service) => {
+    return {
+        type: Types.FETCH_SERVICES_BY_ID,
+        service
+    }
+}
+
+export const actAddServicesCategoryRequest = (serviceCategory) => {
+    return (dispatch) => {
+        return callApi(`service_category`, 'POST', serviceCategory).then(res => {
+            dispatch(actAddServicesCategory(res.data));
+        });
+    }
+}
+
+export const actAddServicesCategory = (serviceCategory) => {
+    return {
+        type: Types.ADD_SERVICES_CATEGORY,
+        serviceCategory
+    }
+}
+
+export const actUpdateServicesCategoryRequest = (serviceCategory) => {
+    return (dispatch) => {
+        return callApi(`service_category`, 'PUT', serviceCategory).then(res => {
+            dispatch(actUpdateServicesCategory(res.data));
+        });
+    }
+}
+
+export const actUpdateServicesCategory = (serviceCategory) => {
+    return {
+        type: Types.UPDATE_SERVICES_CATEGORY,
+        serviceCategory
+    }
+}
+
 export const actFetchServiceItemsRequest = (categoryId) => {
     return (dispatch) => {
         return callApi(`serviceItems?categoryId=${categoryId}`, 'GET', null).then(res => {

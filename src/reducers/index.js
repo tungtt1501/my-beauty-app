@@ -6,6 +6,7 @@ import servicesBook from './servicesBook'
 import itemEditing from './itemEditing'
 import auth from './auth'
 import serviceItems from './serviceItems'
+import serviceEditItem from './serviceEditItem'
 const appReducers = combineReducers({
     blogs,
     services,
@@ -13,7 +14,8 @@ const appReducers = combineReducers({
     servicesBook,
     itemEditing,
     auth,
-    serviceItems
+    serviceItems,
+    serviceEditItem
 });
 
 export default appReducers;
