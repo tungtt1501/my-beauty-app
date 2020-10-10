@@ -169,14 +169,14 @@ class BookForm extends React.Component {
         return (
             <Fragment>
                 <div className="modal-body">
-                    <h2>Book your treatment</h2>
+                    <h2>Réserver un soin</h2>
 
                     <form className="contact-form form-validate3" noValidate="novalidate" onSubmit={this.onSave}>
                         <div className="form-group">
                             <input className="form-control"
                                 type="text"
                                 id="firstname"
-                                placeholder="First Name"
+                                placeholder="Prénom"
                                 required={true}
                                 autoComplete="off"
                                 aria-required="true"
@@ -191,7 +191,7 @@ class BookForm extends React.Component {
                             <input className="form-control"
                                 type="text"
                                 id="lastname"
-                                placeholder="Last Name"
+                                placeholder="Nom de famille"
                                 required=""
                                 autoComplete="off"
                                 aria-required="true"
@@ -221,7 +221,7 @@ class BookForm extends React.Component {
                             <input className="form-control"
                                 type="phone"
                                 id="phone"
-                                placeholder="Phone Number"
+                                placeholder="Numéro de téléphone"
                                 required=""
                                 autoComplete="off"
                                 aria-required="true"
@@ -245,7 +245,7 @@ class BookForm extends React.Component {
                                 <KeyboardDatePicker variant="inline"
                                     disableToolbar
                                     margin="normal"
-                                    format="MM/dd/yyyy"
+                                    format="dd/MM/yyyy"
                                     name="date"
                                     value={this.state.date.value}
                                     onChange={date => this.onChange(this.convertToDefEventPara("date", date))}
@@ -262,7 +262,7 @@ class BookForm extends React.Component {
                                 />
                             </MuiPickersUtilsProvider>
                         </div>
-                        <button type="submit" className="btn btn-md btn-primary btn-center">Book now</button>
+                        <button type="submit" className="btn btn-md btn-primary btn-center">Réserve maintenant</button>
                     </form>
                 </div>
             </Fragment>

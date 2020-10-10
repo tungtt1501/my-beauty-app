@@ -1379,15 +1379,14 @@ textarea.form-control {
 			
 			&, > a {
 				display: table;
-				line-height: 1.5;
-				margin-bottom: 15px;
+				line-height: 2;
 			}
 			span{
 				// color: $;
 			}
 			.icon, .text {
 				display: table-cell;
-				vertical-align: top;
+				vertical-align: middle;
 			}
 			.icon {
 				width: 40px;

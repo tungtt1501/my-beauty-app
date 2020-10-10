@@ -9,8 +9,8 @@ class Gallery extends React.Component {
                     <div className="container">
                         <div className="row justify-content-center mb-5 pb-3">
                             <div className="col-md-7 heading-section ftco-animate text-center">
-                                <h3 className="subheading">Gallery</h3>
-                                <h2 className="mb-1">See the latest photos</h2>
+                                <h3 className="subheading">Galerie</h3>
+                                <h2 className="mb-1">Voir les dernières photos</h2>
                             </div>
                         </div>
                         <div className="row">

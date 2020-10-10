@@ -4,22 +4,22 @@ import { Link } from 'react-scroll';
 
 const menus = [
     {
-        name: 'Home',
+        name: 'Accueil',
         to: 'home',
         exact: true
     },
     {
-        name: 'About',
+        name: 'A propos',
         to: 'about',
         exact: false
     },
     {
-        name: 'Services',
+        name: 'Soins',
         to: 'services',
         exact: false
     },
     {
-        name: 'Gallery',
+        name: 'Galerie',
         to: 'gallery',
         exact: false
     }
