@@ -7,17 +7,18 @@ import {applyMiddleware, createStore} from 'redux';
 import appReducers from './reducers/index';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
+import store from './app/store'
 
-const store = createStore(
-  appReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
-);
+// const store = createStore(
+//   appReducers,
+//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+//   applyMiddleware(thunk)
+// );
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-    <App />
+      <App />
     </Provider>
     
   </React.StrictMode>,

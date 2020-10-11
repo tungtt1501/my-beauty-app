@@ -22,7 +22,7 @@ function UserDashboard(props) {
                     xl={9}
                     xs={12}
                 >
-                    <Users />
+                    
                 </Grid>
             </Grid>
         </Container>

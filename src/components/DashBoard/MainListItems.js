@@ -4,6 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import StyleIcon from '@material-ui/icons/Style';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import PictureInPictureAltIcon from '@material-ui/icons/PictureInPictureAlt';
 import './dashboard.css'
 import { NavLink } from 'react-router-dom';
 
@@ -25,6 +26,12 @@ const dashboardMenus = [
     to: '/admin/users',
     exact: false,
     icon: <SupervisorAccountIcon />
+  },
+  {
+    name: 'Gallery',
+    to: '/admin/gallery',
+    exact: false,
+    icon: <PictureInPictureAltIcon />
   }
 ];
 

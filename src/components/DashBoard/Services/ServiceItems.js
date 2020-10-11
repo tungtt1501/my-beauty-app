@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { actResetServiceDetail, actFetchAllServiceItemsRequest, actDeleteServicesDetailRequest } from './../../../actions/index'
-import { connect } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
 import {
@@ -34,11 +34,15 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const ServiceItems = ({ className, serviceItems, itemEditing, resetForm, fetchAllServicesItems, deleteServiceDetail, ...rest }) => {
+const ServiceItems = (props) => {
+    const {className, ...rest } = props;
     const classes = useStyles();
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const dispatch = useDispatch();
+    const serviceItems = useSelector(state => state.serviceItem);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -50,12 +54,12 @@ const ServiceItems = ({ className, serviceItems, itemEditing, resetForm, fetchAl
     };
 
     useEffect(() => {
-        resetForm();
-        fetchAllServicesItems();
+        //resetForm();
+        //fetchAllServicesItems();
     }, []);
 
     const onDeleteServiceDetail = (id) => {
-        deleteServiceDetail(id);
+        //deleteServiceDetail(id);
     }
 
     return (
@@ -129,25 +133,4 @@ ServiceItems.propTypes = {
     className: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-    return {
-        serviceItems: state.serviceItems,
-        itemEditing: state.itemEditing
-    }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        resetForm: () => {
-            dispatch(actResetServiceDetail());
-        },
-        fetchAllServicesItems: () => {
-            dispatch(actFetchAllServiceItemsRequest());
-        },
-        deleteServiceDetail: (id) => {
-            dispatch(actDeleteServicesDetailRequest(id));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceItems);
+export default ServiceItems;

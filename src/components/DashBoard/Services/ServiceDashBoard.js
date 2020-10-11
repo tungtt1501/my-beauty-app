@@ -22,7 +22,7 @@ function ServiceDashBoard(props) {
           xl={6}
           xs={12}
         >
-          <ServiceCategory />
+          <ServiceCategory/>
         </Grid>
         <Grid
           item

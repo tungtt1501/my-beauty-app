@@ -55,7 +55,7 @@ function Orders(props) {
                   xl={12}
                   xs={12}
                 >
-                  <LatestOrders />
+                  
                 </Grid>
               </Grid>
             </Container>

@@ -2,8 +2,8 @@ import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import { actResetServiceCategory, actFetchServicesRequest, actDeleteServicesCategoryRequest } from './../../../actions/index'
-import { connect } from 'react-redux'
+import ServiceCategoryApi from './../../../api/ServiceCategoryApi'
+import { useDispatch, useSelector } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
 import {
@@ -34,11 +34,16 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const ServiceCategory = ({ className, services, itemEditing, resetForm, fetchAllServicesCategory, deleteServiceCataegory, ...rest }) => {
+const ServiceCategory = (props) => {
+    const { className, ...rest } = props;
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const services = useSelector(state => state.serviceCategory);
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const [serviceCategory, setServiceCategory] = useState([]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -50,12 +55,23 @@ const ServiceCategory = ({ className, services, itemEditing, resetForm, fetchAll
     };
 
     useEffect(() => {
-        resetForm();
+        const fetchAllServicesCategory = async () => {
+            try {
+                const params = {
+                };
+                const response = await ServiceCategoryApi.getAll(params);
+                setServiceCategory(response);
+            } catch (error) {
+                console.log('Failed to fetch product list: ', error);
+            }
+        }
+
         fetchAllServicesCategory();
     }, []);
+    
 
     const onDeleteCategory = (id) => {
-        deleteServiceCataegory(id);
+        //deleteServiceCataegory(id);
     }
 
     return (
@@ -122,25 +138,4 @@ ServiceCategory.propTypes = {
     className: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-    return {
-        services: state.services,
-        itemEditing: state.itemEditing
-    }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        resetForm: () => {
-            dispatch(actResetServiceCategory());
-        },
-        fetchAllServicesCategory: () => {
-            dispatch(actFetchServicesRequest());
-        },
-        deleteServiceCataegory: (id) => {
-            dispatch(actDeleteServicesCategoryRequest(id));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ServiceCategory);
+export default ServiceCategory;

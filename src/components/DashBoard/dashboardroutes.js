@@ -1,4 +1,6 @@
 import React from 'react';
+import GalleryDashBoard from './Gallery/GalleryDashBoard';
+import GalleryAddEditPage from './Gallery/GalleryAddEditPage';
 import Orders from './Orders/Orders';
 import ServiceCategoryForm from './Services/ServiceCategoryForm';
 import ServiceDashBoard from './Services/ServiceDashBoard';
@@ -51,6 +53,21 @@ const dashboardroutes = [
         path: '/admin/users/:id/editUser',
         exact: true,
         main: () => <UserForm />
+    },
+    {
+        path: '/admin/gallery',
+        exact: true,
+        main: () => <GalleryDashBoard />
+    },
+    {
+        path: '/admin/gallery/add',
+        exact: true,
+        main: () => <GalleryAddEditPage />
+    },
+    {
+        path: '/admin/gallery/:photoId',
+        exact: true,
+        main: () => <GalleryAddEditPage />
     }
 ];
 

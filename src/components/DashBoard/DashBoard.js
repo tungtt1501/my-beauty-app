@@ -90,9 +90,9 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (!auth.isAuthUser) {
-      history.push("/signin");
-    }
+    // if (!auth.isAuthUser) {
+    //   history.push("/signin");
+    // }
   });
 
   const handleLogout = () => {
