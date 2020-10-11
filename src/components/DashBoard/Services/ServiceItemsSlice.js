@@ -1,35 +1,16 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import ServiceItemApi from '../../../api/ServiceItemApi';
 
-const initialServiceItem = [
-    {
-        "serviceItemId": 1,
-        "categoryId": 1,
-        "serviceItemName": "Pose gel nouveaux ongles",
-        "serviceItemTime": 40,
-        "serviceItemPrice": 90
-    },
-    {
-        "serviceItemId": 2,
-        "categoryId": 1,
-        "serviceItemName": "Pose acrylique nouveaux ongles ",
-        "serviceItemTime": 30,
-        "serviceItemPrice": 90
-    },
-    {
-        "serviceItemId": 3,
-        "categoryId": 1,
-        "serviceItemName": "Remplissage gel",
-        "serviceItemTime": 60,
-        "serviceItemPrice": 70
-    },
-    {
-        "serviceItemId": 4,
-        "categoryId": 1,
-        "serviceItemName": "Remplissage acrylique",
-        "serviceItemTime": 30,
-        "serviceItemPrice": 65
-    },
-];
+export const getAll = createAsyncThunk('serviceItem/getAll', async (params) => {
+    const categoryList = await ServiceItemApi.getAll(params);
+    return categoryList;
+  })
+
+const initialServiceItem = {
+    list: [],
+    status: 'idle',
+    error: null
+};
 
 const serviceItem = createSlice({
     name: 'serviceItem',
@@ -51,6 +32,19 @@ const serviceItem = createSlice({
                 state[serviceItemIndex] = newServiceItem;
             }
         }
+    },
+    extraReducers: {
+      [getAll.pending] : (state) => {
+        state.status = 'loading'
+      },
+      [getAll.rejected] : (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+      },
+      [getAll.fulfilled] : (state, action) => {
+        state.status = 'succeeded'
+        state.list = action.payload
+      },
     }
 });
 

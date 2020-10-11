@@ -2,7 +2,7 @@ import React from 'react';
 import GalleryDashBoard from './Gallery/GalleryDashBoard';
 import GalleryAddEditPage from './Gallery/GalleryAddEditPage';
 import Orders from './Orders/Orders';
-import ServiceCategoryForm from './Services/ServiceCategoryForm';
+import ServiceCategoryEditPage from './Services/ServiceCategoryEditPage';
 import ServiceDashBoard from './Services/ServiceDashBoard';
 import ServiceDetailForm from './Services/ServiceDetailForm';
 import UserDashboard from './User/UserDashBoard';
@@ -22,12 +22,12 @@ const dashboardroutes = [
     {
         path: '/admin/services/:id/editCate',
         exact: true,
-        main: () => <ServiceCategoryForm />
+        main: () => <ServiceCategoryEditPage />
     },
     {
         path: '/admin/services/addCategory',
         exact: true,
-        main: () => <ServiceCategoryForm />
+        main: () => <ServiceCategoryEditPage />
     },
     {
         path: '/admin/services/addServiceDetail',

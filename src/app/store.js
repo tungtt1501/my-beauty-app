@@ -9,6 +9,8 @@ const rootReducer = {
   serviceItem: serviceItemReducer
 }
 
+console.log(serviceCategoryReducer);
+
 const store = configureStore({
   reducer: rootReducer,
 });

@@ -2,10 +2,10 @@ import React, { Fragment, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import ServiceCategoryApi from './../../../api/ServiceCategoryApi'
 import { useDispatch, useSelector } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
+import {getAll} from './ServiceCategorySlice'
 import {
     Button,
     Card,
@@ -38,12 +38,11 @@ const ServiceCategory = (props) => {
     const { className, ...rest } = props;
     const classes = useStyles();
     const dispatch = useDispatch();
-    const services = useSelector(state => state.serviceCategory);
+    const services = useSelector(state => state.serviceCategory.list);
+    const loadingStatus = useSelector(state => state.serviceCategory.status);
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-
-    const [serviceCategory, setServiceCategory] = useState([]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -55,19 +54,19 @@ const ServiceCategory = (props) => {
     };
 
     useEffect(() => {
-        const fetchAllServicesCategory = async () => {
-            try {
-                const params = {
-                };
-                const response = await ServiceCategoryApi.getAll(params);
-                setServiceCategory(response);
-            } catch (error) {
-                console.log('Failed to fetch product list: ', error);
+        if (loadingStatus == 'idle') {
+            const fetchAllServicesCategory = async () => {
+                try {
+                    const params = {};
+                    await dispatch(getAll(params));
+                } catch (error) {
+                    console.log('Failed to fetch product list: ', error);
+                }
             }
+    
+            fetchAllServicesCategory();
         }
-
-        fetchAllServicesCategory();
-    }, []);
+    }, [loadingStatus, dispatch]);
     
 
     const onDeleteCategory = (id) => {
