@@ -1,18 +1,20 @@
 import axiosClient from './axiosClient'
 
+const URL = '/service_category';
+
 const ServiceCategoryApi = {
   getAll: (params) => {
-    const url = '/service_category';
-    return axiosClient.get(url, { params });
+    return axiosClient.get(URL, { params });
   },
   add: (data) => {
-    const url = '/service_category';
-    return axiosClient.post(url, data);
+    return axiosClient.post(URL, data);
   },
   update: (data) => {
-    const url = '/service_category';
-    return axiosClient.put(url, data);
+    return axiosClient.put(URL, data);
   },
+  delete: (id) => {
+    return axiosClient.delete(URL + `?id=${id}`);
+  }
 }
 
 export default ServiceCategoryApi;

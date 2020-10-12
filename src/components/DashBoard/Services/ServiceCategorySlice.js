@@ -16,6 +16,11 @@ export const update = createAsyncThunk('serviceCategory/update', async (data) =>
   return category;
 })
 
+export const deleteEntity = createAsyncThunk('serviceCategory/delete', async (id) => {
+  await ServiceCategoryApi.delete(id);
+  return id;
+})
+
 const initialServiceCategory = {
   list: [],
   status: 'idle',
@@ -26,22 +31,6 @@ const serviceCategorySlice = createSlice({
   name: 'serviceCategory',
   initialState: initialServiceCategory,
   reducers: {
-    addServiceCategory: (state, action) => {
-      state.push(action.payload);
-    },
-    removeServiceCategory: (state, action) => {
-      console.log(action.payload);
-      const removeServiceCategoryId = action.payload;
-      return state.filter(category => category.categoryId !== removeServiceCategoryId);
-    },
-    updateServiceCategory: (state, action) => {
-      const newServiceCategory = action.payload;
-      const serviceCategoryIndex = state.findIndex(category => category.categoryId === newServiceCategory.categoryId);
-
-      if (serviceCategoryIndex >= 0) {
-        state[serviceCategoryIndex] = newServiceCategory;
-      }
-    }
   },
   extraReducers: {
     // Get all
@@ -85,9 +74,21 @@ const serviceCategorySlice = createSlice({
         state.list[serviceCategoryIndex] = newServiceCategory;
       }
     },
+    // Delete entity
+    [deleteEntity.pending] : (state) => {
+      state.status = 'loading'
+    },
+    [deleteEntity.rejected] : (state, action) => {
+      state.status = 'failed'
+      state.error = action.error.message
+    },
+    [deleteEntity.fulfilled] : (state, action) => {
+      state.status = 'succeeded';
+      const removeId = action.payload;
+      return state.filter(category => category.categoryId != removeId);
+    },
   }
 });
 
 const { reducer, actions } = serviceCategorySlice;
-export const { addServiceCategory, removeServiceCategory, updateServiceCategory } = actions;
 export default reducer;

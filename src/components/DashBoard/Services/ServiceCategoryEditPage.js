@@ -37,7 +37,7 @@ function ServiceCategoryEditPage(props) {
     const initialValues = isAddMode ? { categoryName: '' } : editedItem;
 
     const handleSubmit = (values) => {
-        const addCategory = async () => {
+        const editCategory = async () => {
             if (isAddMode) {
                 const category = {...values}
                 await dispatch(add(category));
@@ -50,7 +50,7 @@ function ServiceCategoryEditPage(props) {
             history.goBack();
         }
 
-        addCategory();
+        editCategory();
     }
 
     return (

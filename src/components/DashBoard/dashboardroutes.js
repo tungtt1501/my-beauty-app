@@ -4,9 +4,9 @@ import GalleryAddEditPage from './Gallery/GalleryAddEditPage';
 import Orders from './Orders/Orders';
 import ServiceCategoryEditPage from './Services/ServiceCategoryEditPage';
 import ServiceDashBoard from './Services/ServiceDashBoard';
-import ServiceDetailForm from './Services/ServiceDetailForm';
+import ServiceItemEditPage from './Services/ServiceItemEditPage';
 import UserDashboard from './User/UserDashBoard';
-import UserForm from './User/UserForm';
+import UserEditPage from './User/UserEditPage';
 
 const dashboardroutes = [
     {
@@ -32,12 +32,12 @@ const dashboardroutes = [
     {
         path: '/admin/services/addServiceDetail',
         exact: true,
-        main: () => <ServiceDetailForm />
+        main: () => <ServiceItemEditPage />
     },
     {
         path: '/admin/services/:id/editServiceDetail',
         exact: true,
-        main: () => <ServiceDetailForm />
+        main: () => <ServiceItemEditPage />
     },
     {
         path: '/admin/users',
@@ -47,12 +47,12 @@ const dashboardroutes = [
     {
         path: '/admin/users/addUser',
         exact: true,
-        main: () => <UserForm />
+        main: () => <UserEditPage />
     },
     {
         path: '/admin/users/:id/editUser',
         exact: true,
-        main: () => <UserForm />
+        main: () => <UserEditPage />
     },
     {
         path: '/admin/gallery',

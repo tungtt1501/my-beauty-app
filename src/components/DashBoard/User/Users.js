@@ -1,9 +1,7 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
-import PropTypes from 'prop-types';
-import { actResetUsers, actGetUsersRequest, actDeleteUserRequest } from './../../../actions/index'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
 import {
@@ -20,6 +18,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import User from './User';
+import { getAll, deleteEntity } from './UserSlice'
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -34,9 +33,13 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Users({ className, users, resetForm, fetchAllUsers, deleteUser, ...rest }) {
-
+function Users(props) {
+    const { className, ...rest } = props;
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+    const users = useSelector(state => state.users.list);
+    const loadingStatus = useSelector(state => state.users.status);
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -51,12 +54,29 @@ function Users({ className, users, resetForm, fetchAllUsers, deleteUser, ...rest
     };
 
     useEffect(() => {
-        resetForm();
-        fetchAllUsers();
-    }, []);
+        if (loadingStatus == 'idle') {
+            const fetchAllUser = async () => {
+                try {
+                    const params = {};
+                    await dispatch(getAll(params));
+                } catch (error) {
+                    console.log('Failed to fetch category list: ', error);
+                }
+            }
+
+            fetchAllUser();
+        }
+    }, [loadingStatus, dispatch]);
 
     const onDeleteUser = (id) => {
-        deleteUser(id);
+        const deleteUser = async () => {
+            try {
+                await dispatch(deleteEntity(id));
+            } catch (error) {
+                console.log('Failed to delete: ', error);
+            }
+        }
+        deleteUser();
     }
     return (
         <Fragment>
@@ -124,28 +144,4 @@ function Users({ className, users, resetForm, fetchAllUsers, deleteUser, ...rest
     );
 }
 
-Users.propTypes = {
-    className: PropTypes.string,
-};
-
-const mapStateToProps = state => {
-    return {
-        users: state.users
-    }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        resetForm: () => {
-            dispatch(actResetUsers());
-        },
-        fetchAllUsers: () => {
-            dispatch(actGetUsersRequest());
-        },
-        deleteUser: (id) => {
-            dispatch(actDeleteUserRequest(id));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default Users;

@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import { actFetchAllServicesBookRequest, actUpdateServicesBookRequest, actGetItemServicesBookRequest } from './../../actions/index'
-import { connect } from 'react-redux'
-import OrderItem from './OrderItem'
+import { useDispatch, useSelector } from 'react-redux'
+import OrderItem from '../OrderItem'
 import TablePagination from '@material-ui/core/TablePagination';
 import {
     Card,
@@ -17,6 +16,7 @@ import {
     TableRow,
     makeStyles, TableContainer
 } from '@material-ui/core';
+import { getAll, update } from './OrderSlice';
 
 const useStyles = makeStyles(() => ({
     root: {},
@@ -28,11 +28,28 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, getServicesBook, updateServicesBook, ...rest }) => {
+const LatestOrders = (props) => {
+    const { className, ...rest } = props;
     const classes = useStyles();
+
+    const dispatch = useDispatch();
+    const orders = useSelector(state => state.orders.list);
+    const loadingStatus = useSelector(state => state.orders.status);
 
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const [itemEditing, setItemEditing] = useState({
+        id: null,
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        serviceType: '',
+        date: '',
+        time: '',
+        status: null
+    });
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -44,16 +61,35 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
     };
 
     useEffect(() => {
-        fetchAllServicesBook();
-    }, []);
+        if (loadingStatus == 'idle') {
+            const fetchAllOrder = async () => {
+                try {
+                    const params = {};
+                    await dispatch(getAll(params));
+                } catch (error) {
+                    console.log('Failed to fetch category list: ', error);
+                }
+            }
+
+            fetchAllOrder();
+        }
+    }, [loadingStatus, dispatch]);
 
     const onEdit = (id) => {
-        getServicesBook(id);
+        const foundItem = orders.find(x => x.id === id);
+        setItemEditing({ ...foundItem, status: 1 });
     }
 
     const onConfirm = () => {
-        itemEditing.status = 1;
-        updateServicesBook(itemEditing);
+        const updateOrder = async () => {
+            try {
+                await dispatch(update(itemEditing));
+            } catch (error) {
+                console.log('Failed to delete: ', error);
+            }
+        }
+
+        updateOrder();
     }
 
     return (
@@ -94,7 +130,7 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((order, index) => (
+                        {orders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((order, index) => (
                             <OrderItem
                                 key={index}
                                 index={index}
@@ -105,7 +141,7 @@ const LatestOrders = ({ className, orders, itemEditing, fetchAllServicesBook, ge
                     </TableBody>
                 </Table>
             </TableContainer>
-            <TablePagination 
+            <TablePagination
                 rowsPerPageOptions={[5, 10, 25]}
                 component="div"
                 count={orders.length}
@@ -122,25 +158,4 @@ LatestOrders.propTypes = {
     className: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-    return {
-        orders: state.servicesBook,
-        itemEditing: state.itemEditing
-    }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        fetchAllServicesBook: () => {
-            dispatch(actFetchAllServicesBookRequest());
-        },
-        getServicesBook: (id) => {
-            dispatch(actGetItemServicesBookRequest(id));
-        },
-        updateServicesBook: (serviceBook) => {
-            dispatch(actUpdateServicesBookRequest(serviceBook));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LatestOrders);
+export default LatestOrders;

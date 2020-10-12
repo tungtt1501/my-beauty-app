@@ -1,14 +1,12 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Card, CardHeader, Input, makeStyles } from '@material-ui/core';
-import { TextField } from 'formik-material-ui';
+import { Button, Card, CardHeader, makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import SaveIcon from '@material-ui/icons/Save';
-import { FormFeedback } from 'reactstrap';
 import InputFile from '../../../custom-field/InputFile';
 
 GalleryForm.propTypes = {

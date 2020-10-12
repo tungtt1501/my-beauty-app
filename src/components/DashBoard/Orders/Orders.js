@@ -1,18 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Budget from './../Budget';
 import TotalCustomers from './../TotalCustomer';
 import TotalProfit from './../TotalProfit';
-import LatestOrders from './../LatestOrders';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
+import LatestOrders from './LatestOrders';
 
-Orders.propTypes = {
-    
-};
+Orders.propTypes = {};
 
 function Orders(props) {
     return (
@@ -55,7 +49,7 @@ function Orders(props) {
                   xl={12}
                   xs={12}
                 >
-                  
+                  <LatestOrders />
                 </Grid>
               </Grid>
             </Container>

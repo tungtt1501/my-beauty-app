@@ -1,11 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
-import {getAll} from './ServiceCategorySlice'
+import { deleteEntity, getAll } from './ServiceCategorySlice'
 import {
     Button,
     Card,
@@ -60,17 +60,25 @@ const ServiceCategory = (props) => {
                     const params = {};
                     await dispatch(getAll(params));
                 } catch (error) {
-                    console.log('Failed to fetch product list: ', error);
+                    console.log('Failed to fetch category list: ', error);
                 }
             }
-    
+
             fetchAllServicesCategory();
         }
     }, [loadingStatus, dispatch]);
-    
+
 
     const onDeleteCategory = (id) => {
-        //deleteServiceCataegory(id);
+        const deleteCategory = async () => {
+            try {
+                const params = { id: id };
+                await dispatch(deleteEntity(params));
+            } catch (error) {
+                console.log('Failed to delete: ', error);
+            }
+        }
+        deleteCategory();
     }
 
     return (

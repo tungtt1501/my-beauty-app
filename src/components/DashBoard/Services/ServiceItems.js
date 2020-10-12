@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
-import {getAll} from './ServiceItemsSlice'
+import {deleteEntity, getAll} from './ServiceItemsSlice'
 import {
     Button,
     Card,
@@ -55,13 +55,13 @@ const ServiceItems = (props) => {
     };
 
     useEffect(() => {
-        if (loadingStatus == 'idle') {
+        if (loadingStatus === 'idle') {
             const fetchAllServicesItem = async () => {
                 try {
                     const params = {};
                     await dispatch(getAll(params));
                 } catch (error) {
-                    console.log('Failed to fetch product list: ', error);
+                    console.log('Failed to fetch service item list: ', error);
                 }
             }
     
@@ -70,7 +70,15 @@ const ServiceItems = (props) => {
     }, [loadingStatus, dispatch]);
 
     const onDeleteServiceDetail = (id) => {
-        //deleteServiceDetail(id);
+        const deleteServiceItem = async () => {
+            try {
+                const params = { id: id };
+                await dispatch(deleteEntity(params));
+            } catch (error) {
+                console.log('Failed to delete: ', error);
+            }
+        }
+        deleteServiceItem();
     }
 
     return (

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import * as Yup from 'yup';
@@ -40,9 +40,6 @@ function ServiceCategoryForm(props) {
         categoryName: Yup.string().required('This field is required.')
     });
 
-    const submitForm = (e) => {
-        e.preventDefault();
-    };
     return (
         <Formik
             initialValues={initialValues}
@@ -71,7 +68,6 @@ function ServiceCategoryForm(props) {
                         </Button>
                     </Link>
                     <Button
-                        type="submit"
                         variant="contained"
                         color="primary"
                         size="small"
@@ -86,44 +82,6 @@ function ServiceCategoryForm(props) {
             )
             }
         </Formik>
-        // <Fragment>
-        //     <Card
-        //         className={clsx(classes.root, className)}
-        //         {...rest}>
-        //         <CardHeader title={id ? `Edit Services Category` : `Add Services Category`} />
-        //         <form className={classes.root} noValidate autoComplete="off">
-        //             <TextField id="filled-basic"
-        //                 error={!!error}
-        //                 required
-        //                 label="Category Name"
-        //                 value={categoryName}
-        //                 placeholder="Category Name"
-        //                 onChange={e => setCategoryName(e.target.value)}
-        //                 helperText={error} />
-        //             <Link to={`/admin/services`}
-        //                 exact={'true'}>
-        //                 <Button
-        //                     variant="contained"
-        //                     color="secondary"
-        //                     size="small"
-        //                     className={classes.button}
-        //                     startIcon={<BackspaceIcon />}
-        //                 >Back
-        //                 </Button>
-        //             </Link>
-        //             <Button
-        //                 variant="contained"
-        //                 color="primary"
-        //                 size="small"
-        //                 onClick={e => submitForm(e)}
-        //                 className={classes.button}
-        //                 startIcon={<SaveIcon />}
-        //             >
-        //                 Save
-        //             </Button>
-        //         </form>
-        //     </Card>
-        // </Fragment>
     );
 }
 
