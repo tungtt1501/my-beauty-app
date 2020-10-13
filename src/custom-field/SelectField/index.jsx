@@ -1,7 +1,7 @@
+import { Select } from '@material-ui/core';
 import { ErrorMessage } from 'formik';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Select from 'react-select';
 import { FormFeedback, FormGroup, Label } from 'reactstrap';
 
 SelectField.propTypes = {
@@ -22,24 +22,22 @@ SelectField.defaultProps = {
 }
 
 function SelectField(props) {
-  const { field, form, options, label, placeholder, disabled } = props;
+  const { field, form, label, placeholder, disabled } = props;
   const { name, value } = field;
   const { errors, touched } = form;
   const showError = errors[name] && touched[name];
 
-  const selectedOption = options.find(option => option.value === value);
+  // const handleSelectedOptionChange = (selectedOption) => {
+  //   const selectedValue = selectedOption ? selectedOption.value : selectedOption;
 
-  const handleSelectedOptionChange = (selectedOption) => {
-    const selectedValue = selectedOption ? selectedOption.value : selectedOption;
-
-    const changeEvent = {
-      target: {
-        name: name,
-        value: selectedValue
-      }
-    };
-    field.onChange(changeEvent);
-  }
+  //   const changeEvent = {
+  //     target: {
+  //       name: name,
+  //       value: selectedValue
+  //     }
+  //   };
+  //   field.onChange(changeEvent);
+  // }
 
   return (
     <FormGroup>
@@ -48,12 +46,9 @@ function SelectField(props) {
       <Select
         id={name}
         {...field}
-        value={selectedOption}
-        onChange={handleSelectedOptionChange}
 
         placeholder={placeholder}
         isDisabled={disabled}
-        options={options}
 
         className={showError ? 'is-invalid' : ''}
       />

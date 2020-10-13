@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import ServiceItemApi from '../../../api/ServiceItemApi';
 
-export const getAll = createAsyncThunk('serviceItem/getAll', async (params) => {
+export const getAllItem = createAsyncThunk('serviceItem/getAll', async (params) => {
   const categoryList = await ServiceItemApi.getAll(params);
   return categoryList;
 })
@@ -32,14 +32,14 @@ const serviceItem = createSlice({
   initialState: initialServiceItem,
   reducers: {},
   extraReducers: {
-    [getAll.pending]: (state) => {
+    [getAllItem.pending]: (state) => {
       state.status = 'loading'
     },
-    [getAll.rejected]: (state, action) => {
+    [getAllItem.rejected]: (state, action) => {
       state.status = 'failed'
       state.error = action.error.message
     },
-    [getAll.fulfilled]: (state, action) => {
+    [getAllItem.fulfilled]: (state, action) => {
       state.status = 'succeeded'
       state.list = action.payload
     },

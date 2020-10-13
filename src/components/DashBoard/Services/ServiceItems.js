@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux'
 import TablePagination from '@material-ui/core/TablePagination';
 import AddIcon from '@material-ui/icons/Add';
-import {deleteEntity, getAll} from './ServiceItemsSlice'
+import {deleteEntity, getAllItem} from './ServiceItemsSlice'
 import {
     Button,
     Card,
@@ -59,7 +59,7 @@ const ServiceItems = (props) => {
             const fetchAllServicesItem = async () => {
                 try {
                     const params = {};
-                    await dispatch(getAll(params));
+                    await dispatch(getAllItem(params));
                 } catch (error) {
                     console.log('Failed to fetch service item list: ', error);
                 }

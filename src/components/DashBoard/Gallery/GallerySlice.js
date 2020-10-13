@@ -1,7 +1,27 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import GalleryApi from '../../../api/GalleryApi';
 
-const initialPhotos = [
-  {
+export const getAll = createAsyncThunk('gallery/getAll', async (params) => {
+  const galleryList = await GalleryApi.getAll(params);
+  return galleryList;
+})
+export const add = createAsyncThunk('gallery/add', async (data) => {
+  const gallery = await GalleryApi.add(data);
+  return gallery;
+})
+
+export const update = createAsyncThunk('gallery/update', async (data) => {
+  const gallery = await GalleryApi.update(data);
+  return gallery;
+})
+
+export const deleteEntity = createAsyncThunk('gallery/delete', async (id) => {
+  await GalleryApi.delete(id);
+  return id;
+})
+
+const initialPhotos = {
+  list: [{
     id: 91176,
     categoryId: 5,
     photo: 'https://picsum.photos/id/532/300/300',
@@ -72,8 +92,10 @@ const initialPhotos = [
     categoryId: 5,
     photo: 'https://picsum.photos/id/649/300/300',
     title: 'Id ex enim non dolore reprehenderit eu ullamco.'
-  },
-];
+  },],
+    status: 'idle',
+    error: null,
+};
 
 const gallery = createSlice({
   name: 'galleries',

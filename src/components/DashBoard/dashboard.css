@@ -1,8 +1,8 @@
-span.MuiBadge-root, span.MuiIconButton-label, span.MuiChip-root, span.MuiChip-label, span.MuiButton-label {
+/* span.MuiBadge-root, span.MuiIconButton-label, span.MuiChip-root, span.MuiChip-label, span.MuiButton-label {
     color: white;
-}
+} */
 
-.MuiDialogActions-root span.MuiButton-label,
+/* .MuiDialogActions-root span.MuiButton-label,
 .MuiDialogActions-spacing span.MuiButton-label,
 .MuiCardHeader-content span {
     color: black;
@@ -17,7 +17,7 @@ span.MuiBadge-root, span.MuiIconButton-label, span.MuiChip-root, span.MuiChip-la
 
 .MuiListItemText-root span {
     color: black;
-}
+} */
 
 a.dashboard-link {
     color: black !important;

@@ -26,7 +26,7 @@ function ServiceItemEditPage(props) {
     const isAddMode = !id;
 
     const editedItem = useSelector(state => {
-        const foundItem = state.serviceItem.list.find(x => x.serviceItemId === id);
+        const foundItem = state.serviceItem.list.find(x => x.serviceItemId == id);
         return foundItem;
     });
 

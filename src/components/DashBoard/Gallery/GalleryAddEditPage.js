@@ -28,8 +28,7 @@ function GalleryAddEditPage(props) {
 
     const handleSubmit = (values) => {
         return new Promise(resolve => {
-            console.log('Form submit: ', values);
-
+            console.log(values);
             /*setTimeout(() => {
                 if (isAddMode) {
                     const newPhoto = {

@@ -6,6 +6,11 @@ export const getAll = createAsyncThunk('orders/getAll', async (params) => {
     return orderList;
 })
 
+export const add = createAsyncThunk('serviceItem/add', async (data) => {
+    const serviceItem = await OrderApi.add(data);
+    return serviceItem;
+})
+
 export const update = createAsyncThunk('orders/update', async (data) => {
     const order = await OrderApi.update(data);
     return order;
@@ -32,6 +37,18 @@ const order = createSlice({
         [getAll.fulfilled]: (state, action) => {
             state.status = 'succeeded'
             state.list = action.payload
+        },
+        // Add
+        [add.pending]: (state) => {
+            state.status = 'loading'
+        },
+        [add.rejected]: (state, action) => {
+            state.status = 'failed'
+            state.error = action.error.message
+        },
+        [add.fulfilled]: (state, action) => {
+            state.status = 'succeeded'
+            state.list.push(action.payload);
         },
         // Update
         [update.pending]: (state) => {

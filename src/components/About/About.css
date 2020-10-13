@@ -16,3 +16,7 @@
 .bg-gray-100 {
     background-color: #f6f9f9;
 }
+
+.react-responsive-modal-modal {
+    max-width: 500px !important;
+}

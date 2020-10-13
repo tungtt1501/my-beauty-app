@@ -26,7 +26,7 @@ function UserEditPage(props) {
     const isAddMode = !id;
 
     const editedItem = useSelector(state => {
-        const foundItem = state.users.list.find(x => x.userId === id);
+        const foundItem = state.users.list.find(x => x.userId == id);
         return foundItem;
     });
 

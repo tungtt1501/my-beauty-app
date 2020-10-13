@@ -4,7 +4,6 @@ import './Header.css'
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import RoomIcon from '@material-ui/icons/Room';
 import LanguageIcon from '@material-ui/icons/Language';
-import FacebookIcon from '@material-ui/icons/Facebook';
 import PhoneIcon from '@material-ui/icons/Phone';
 
 class Header extends React.Component {
@@ -28,13 +27,13 @@ class Header extends React.Component {
                         <li className="li-header">
                           <RoomIcon className="icon-header" />
                           <div className="info-header">
-                            <span class="text header-text">Place Pépinet 2, 1003 Lausanne</span>
+                            <span className="text header-text">Place Pépinet 2, 1003 Lausanne</span>
                           </div>
                         </li>
                         <li className="li-header">
                           <AccessTimeIcon className="icon-header" />
                           <div className="info-header">
-                            <span class="text header-text">Lu - ve: 9h à 19h<br/>Sa: 10h à 18h
+                            <span className="text header-text">Lu - ve: 9h à 19h<br/>Sa: 10h à 18h
                             </span>
                           </div>
                         </li>
@@ -45,20 +44,20 @@ class Header extends React.Component {
                         <li className="li-header">
                           <LanguageIcon className="icon-header" />
                           <div className="info-header">
-                            <span class="text header-text">my-beauty-lausanne.ch</span>
+                            <span className="text header-text">my-beauty-lausanne.ch</span>
                           </div>
                         </li>
                         <li className="li-header">
-                          <span class="icon-facebook span-icon-header"></span>
+                          <span className="icon-facebook span-icon-header"></span>
                           <div className="info-header">
-                            <span class="text header-text">My Beauty Lausanne
+                            <span className="text header-text">My Beauty Lausanne
                             </span>
                           </div>
                         </li>
                         <li className="li-header">
                           <PhoneIcon className="icon-header" />
                           <div className="info-header">
-                            <span class="text header-text">078 743 96 89
+                            <span className="text header-text">078 743 96 89
                             </span>
                           </div>
                         </li>

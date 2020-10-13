@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Button, Card, CardHeader, makeStyles } from '@material-ui/core';
+import { Button, Card, CardHeader, LinearProgress, makeStyles } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import SaveIcon from '@material-ui/icons/Save';
-import InputFile from '../../../custom-field/InputFile';
+import { SimpleFileUpload } from 'formik-material-ui';
 
 GalleryForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -33,7 +33,7 @@ function GalleryForm(props) {
     const classes = useStyles();
     const { initialValues, isAddMode, className, ...rest } = props;
 
-    const FILE_SIZE = 160 * 1024;
+    const FILE_SIZE = 2048 * 1024;
     const SUPPORTED_FORMATS = [
         "image/jpg",
         "image/jpeg",
@@ -57,6 +57,10 @@ function GalleryForm(props) {
             )
     });
 
+    const submitFile = (e) => {
+        console.log(e);
+    }
+
     return (
         <Fragment>
             <Card
@@ -68,17 +72,10 @@ function GalleryForm(props) {
                     validationSchema={validationSchema}
                     onSubmit={props.onSubmit}
                 >
-                    {(formikProps => {
-                        const { values, errors, touched } = formikProps;
-                        console.log({ values, errors, touched });
-                        return (
+                    {({ submitForm, isSubmitting }) => (
                             <Form className={classes.root}>
-                                <Field
-                                    name="file"
-                                    type="file"
-                                    label="File"
-                                    component={InputFile}
-                                />
+                                <Field component={SimpleFileUpload} name="file" label="File to upload" />
+                                {isSubmitting && <LinearProgress />}
                                 <Link to={`/admin/gallery`}
                                     exact={'true'}>
                                     <Button
@@ -102,8 +99,8 @@ function GalleryForm(props) {
                                     Save
                                 </Button>
                             </Form>
-                        );
-                    })}
+                        )
+                    }
                 </Formik>
             </Card>
         </Fragment>

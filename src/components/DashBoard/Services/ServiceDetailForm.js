@@ -5,6 +5,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import BackspaceIcon from '@material-ui/icons/Backspace';
 import {
     Button,
+    FormControl,
     InputLabel,
     LinearProgress,
     MenuItem,
@@ -66,17 +67,19 @@ function ServiceDetailForm(props) {
         >
             {({ submitForm, isSubmitting }) => (
                 <Form className={classes.root}>
-                    <InputLabel required htmlFor="categoryId">Category Id</InputLabel>
-                    <Field
-                        required
-                        component={Select}
-                        name="categoryId"
-                        inputProps={{
-                            id: 'categoryId',
-                        }}
-                    >
-                        {showService(serviceCategoryList)}
-                    </Field>
+                    <FormControl>
+                        <InputLabel required htmlFor="categoryId">Category Id</InputLabel>
+                        <Field
+                            required
+                            component={Select}
+                            name="categoryId"
+                            inputProps={{
+                                id: 'categoryId',
+                            }}
+                        >
+                            {showService(serviceCategoryList)}
+                        </Field>
+                    </FormControl>
                     <Field
                         required
                         component={TextField}

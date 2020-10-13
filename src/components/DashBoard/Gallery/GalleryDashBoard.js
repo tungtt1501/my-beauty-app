@@ -15,7 +15,7 @@ GalleryDashBoard.propTypes = {
 
 function GalleryDashBoard(props) {
     const dispatch = useDispatch();
-    const photos = useSelector(state => state.photos);
+    const photos = useSelector(state => state.photos.list);
     const history = useHistory();
 
     const handlePhotoEditClick = (photo) => {

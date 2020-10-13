@@ -135,7 +135,7 @@ class About extends React.Component {
               </div>
             </div>
           </section>
-          <Modal open={this.state.sign} onClose={this.onCloseModal}>
+          <Modal styles={{maxWidth: '500px'}} open={this.state.sign} onClose={this.onCloseModal}>
             <BookForm onAddSuccess={this.onAddSuccess} />
           </Modal>
 
