@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function GalleryForm(props) {
     const classes = useStyles();
-    const { initialValues, isAddMode, className, ...rest } = props;
+    const { initialValues, className, ...rest } = props;
 
     const FILE_SIZE = 2048 * 1024;
     const SUPPORTED_FORMATS = [
@@ -66,7 +66,7 @@ function GalleryForm(props) {
             <Card
                 className={clsx(classes.root, className)}
                 {...rest}>
-                <CardHeader title={isAddMode ? `Edit Services Category` : `Add Services Category`} />
+                <CardHeader title={`Add Services Category`} />
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -89,9 +89,9 @@ function GalleryForm(props) {
                                 </Link>
                                 <Button
                                     variant="contained"
-                                    color={isAddMode ? 'primary' : 'success'}
+                                    color={'primary'}
                                     size="small"
-                                    type="submit"
+                                    onClick={submitForm}
                                     className={classes.button}
                                     startIcon={<SaveIcon />}
                                 >

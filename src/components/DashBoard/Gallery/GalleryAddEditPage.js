@@ -1,63 +1,66 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import GalleryForm from './GalleryForm';
+import { clearErr, uploadAct } from './UploadSlice';
+import { Slide, Snackbar } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import { add } from './GallerySlice';
 
 GalleryAddEditPage.propTypes = {
 
 };
 
+const TransitionRight = (props) => {
+    return <Slide {...props} direction="right" />;
+}
+
 function GalleryAddEditPage(props) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const { photoId } = useParams();
-    const isAddMode = !photoId;
 
-    const editedPhoto = useSelector(state => {
-        const foundPhoto = state.photos.find(x => x.id === +photoId);
-        console.log({ photos: state.photos, photoId, foundPhoto });
-        return foundPhoto;
-    });
+    const initialValues = { file: "" };
+    const name = useSelector(state => state.upload.url);
+    const error = useSelector(state => state.upload.error);
 
-    const initialValues = isAddMode
-        ? {
-            file: ""
-        }
-        : editedPhoto;
-
-    const handleSubmit = (values) => {
-        return new Promise(resolve => {
-            console.log(values);
-            /*setTimeout(() => {
-                if (isAddMode) {
-                    const newPhoto = {
-                        ...values,
-                        id: randomNumber(10000, 99999),
-                    }
-                    const action = addPhoto(newPhoto);
-                    console.log({ action });
-                    dispatch(action);
-                } else {
-                    // Do something here
-                    const action = updatePhoto(values);
-                    dispatch(action);
+    const handleSubmit = (values, { setSubmitting }) => {
+        const uploadFile = async () => {
+            try {
+                const data = { ...values };
+                await dispatch(uploadAct({file: data}));
+                setSubmitting(false);
+                if (!error && !name) {
+                    const gallery = {url: name};
+                    await dispatch(add(gallery));
                 }
+            } catch (error) {
+                console.log('Failed to fetch category list: ', error);
+            }
+        }
 
-                history.push('/photos');
-                resolve(true);
-            }, 2000);*/
-        });
+        uploadFile();
+    }
+
+    const handleClose = () => {
+        const actCloseErr = clearErr();
+        dispatch(actCloseErr);
     }
 
     return (
         <div className="photo-edit">
             <div className="photo-edit__form">
                 <GalleryForm
-                    isAddMode={isAddMode}
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
                 />
+            </div>
+            <div>
+                {error && (<Snackbar open={error !== null} autoHideDuration={6000} onClose={handleClose} TransitionComponent={TransitionRight} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                    <Alert severity="error" onClose={handleClose} variant="filled">
+                        {error}
+                    </Alert>
+                </Snackbar>)}
             </div>
         </div>
     );

@@ -2,7 +2,7 @@ import axiosClient from './axiosClient'
 
 const URL = '/order_services';
 
-const ServiceCategoryApi = {
+const OrderApi = {
   getAll: (params) => {
     return axiosClient.get(URL, { params });
   },
@@ -17,4 +17,4 @@ const ServiceCategoryApi = {
   }
 }
 
-export default ServiceCategoryApi;
+export default OrderApi;

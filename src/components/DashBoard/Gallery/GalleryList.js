@@ -5,18 +5,16 @@ import PhotoCard from './PhotoCard';
 
 GalleryList.propTypes = {
   photoList: PropTypes.array,
-  onPhotoEditClick: PropTypes.func,
   onPhotoRemoveClick: PropTypes.func,
 };
 
 GalleryList.defaultProps = {
   photoList: [],
-  onPhotoEditClick: null,
   onPhotoRemoveClick: null,
 };
 
 function GalleryList(props) {
-  const { photoList, onPhotoEditClick, onPhotoRemoveClick } = props;
+  const { photoList, onPhotoRemoveClick } = props;
 
   return (
     <Row>
@@ -24,7 +22,6 @@ function GalleryList(props) {
         <Col key={photo.title} xs="12" md="6" lg="3">
           <PhotoCard
             photo={photo}
-            onEditClick={onPhotoEditClick}
             onRemoveClick={onPhotoRemoveClick}
           />
         </Col>

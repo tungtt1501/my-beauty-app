@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -11,12 +10,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from "@material-ui/lab/Alert";
 import PropTypes from 'prop-types';
-import { loginRequest } from './../../actions/auth'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import './Login.css'
 import Slide from '@material-ui/core/Slide';
 import Snackbar from '@material-ui/core/Snackbar';
 import { useHistory } from "react-router-dom";
+import { login, logout } from './AuthSlice';
+import * as Yup from 'yup';
+import { Field, Form, Formik } from 'formik';
+import { TextField } from 'formik-material-ui';
+import { LinearProgress } from '@material-ui/core';
 
 function Copyright() {
     return (
@@ -55,31 +58,47 @@ const TransitionRight = (props) => {
     return <Slide {...props} direction="right" />;
 }
 
-const SignIn = ({ className, auth, login }) => {
+const SignIn = (props) => {
     const classes = useStyles();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
 
-    const submitForm = (e) => {
-        e.preventDefault();
-        setError(null);
-        if (email === "" || password === "") {
-            setError("Fields are required");
-            return;
+    const loginHandler = (values, {setSubmitting}) => {
+
+        const actLogin = async () => {
+            try {
+                const data = { ...values };
+                await dispatch(login(data));
+                setSubmitting(false);
+            } catch (error) {
+                console.log('Failed to fetch category list: ', error);
+            }
         }
-        login({ email, password });
+
+        actLogin();
     };
 
+    const closeHandler = () => {
+        const actLogout = logout();
+        dispatch(actLogout);
+    }
+
     const history = useHistory();
+    const isAuth = useSelector(state => state.auth.isAuthUser);
+    const error = useSelector(state => state.auth.error);
+    const loginStatus = useSelector(state => state.auth.status);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        if (auth.isAuthUser) {
-            history.push("/admin");
-        } else if (auth.error) {
-            setError(auth.error);
-            auth.error = null;
+        if (loginStatus == 'succeeded') {
+            if (isAuth) {
+                history.push("/admin");
+            }
         }
+    }, [loginStatus, dispatch]);
+
+    const initialValues = { email: '', password: '' };
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().required('This field is required.'),
+        password: Yup.string().required('This field is required.'),
     });
 
 
@@ -93,48 +112,52 @@ const SignIn = ({ className, auth, login }) => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <form className={classes.form} noValidate>
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={e => submitForm(e)}>
-                        Sign In
-                    </Button>
-                    <div className={classes.root}>
-                        {error && (<Snackbar open={error !== null} autoHideDuration={6000} onClose={() => setError(null)} TransitionComponent={TransitionRight} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
-                            <Alert severity="error" onClose={() => setError(null)} variant="filled">
-                                {error}
-                            </Alert>
-                        </Snackbar>)}
-                    </div>
-                </form>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={loginHandler}
+                >
+                    {({ submitForm, isSubmitting }) => (
+                        <Form className={classes.form}>
+                            <Field
+                                required
+                                component={TextField}
+                                name="email"
+                                type="text"
+                                label="Email"
+                                variant="outlined"
+                                autoFocus
+                                className={classes.form}
+                            />
+                            <Field
+                                required
+                                component={TextField}
+                                name="password"
+                                type="password"
+                                label="Password"
+                                variant="outlined"
+                                className={classes.form}
+                            />
+                            {isSubmitting && !error && <LinearProgress />}
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                                disabled={isSubmitting && !error}
+                                onClick={submitForm}>
+                                Sign In
+                            </Button>
+                            <div className={classes.root}>
+                                {error && (<Snackbar open={error !== null} autoHideDuration={6000} onClose={closeHandler} TransitionComponent={TransitionRight} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                                    <Alert severity="error" onClose={closeHandler} variant="filled">
+                                        {error}
+                                    </Alert>
+                                </Snackbar>)}
+                            </div>
+                        </Form>)
+                    }
+                </Formik>
             </div>
             <Box mt={8}>
                 <Copyright />
@@ -147,18 +170,4 @@ SignIn.propTypes = {
     className: PropTypes.string,
 };
 
-const mapStateToProps = state => {
-    return {
-        auth: state.auth
-    }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        login: (user) => {
-            dispatch(loginRequest(user));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default SignIn;

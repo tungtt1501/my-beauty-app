@@ -51,6 +51,7 @@ function UserForm(props) {
                         name="email"
                         type="text"
                         label="Email"
+                        variant="outlined"
                     />
                     {isAddMode && <Field
                         required
@@ -58,6 +59,7 @@ function UserForm(props) {
                         name="password"
                         type="password"
                         label="Password"
+                        variant="outlined"
                     />}
                     <Field
                         required
@@ -65,6 +67,7 @@ function UserForm(props) {
                         name="firstName"
                         type="text"
                         label="First Name"
+                        variant="outlined"
                     />
                     <Field
                         required
@@ -72,6 +75,7 @@ function UserForm(props) {
                         name="lastName"
                         type="text"
                         label="Last Name"
+                        variant="outlined"
                     />
                     {isSubmitting && <LinearProgress />}
                     <Link to={`/admin/users`}

@@ -32,12 +32,12 @@ function ServiceItemEditPage(props) {
 
     const serviceCategoryList = useSelector(state => state.serviceCategory.list);
 
-    const initialValues = isAddMode ? { categoryId: '', serviceItemName: '', serviceItemPrice: '' } : editedItem;
+    const initialValues = isAddMode ? { categoryId: null, serviceItemName: '', serviceItemPrice: '' } : editedItem;
 
     const handleSubmit = (values) => {
         const editServiceItem = async () => {
             if (isAddMode) {
-                const serviceItem = {...values}
+                const serviceItem = {...values, categoryId: values.categoryId.categoryId}
                 await dispatch(add(serviceItem));
             } else {
                 // Do something here

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import BackspaceIcon from '@material-ui/icons/Backspace';
+import TextField1 from '@material-ui/core/TextField'
 import {
     Button,
     FormControl,
@@ -14,6 +15,7 @@ import { Field, Form, Formik } from 'formik';
 import { Select, TextField } from 'formik-material-ui';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import { Autocomplete } from 'formik-material-ui-lab';
 
 ServiceDetailForm.propTypes = {
     onSubmit: PropTypes.func,
@@ -36,28 +38,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ServiceDetailForm(props) {
-    const { initialValues, serviceCategoryList, isAddMode } = props;
+    const { initialValues, serviceCategoryList } = props;
     const classes = useStyles();
 
     const regexp = /^[0-9\b]+$/;
     const validationSchema = Yup.object().shape({
-        categoryId: Yup.string().required('This field is required.'),
+        categoryId: Yup.string().required('This field is required.').nullable(),
         serviceItemName: Yup.string().required('This field is required.'),
         serviceItemPrice: Yup.string().matches(regexp, 'Please fill a number.')
             .required("This field is required.")
     });
 
-    const showService = (services) => {
-        var result = null;
-        if (services) {
-            result = services.map((service, index) => {
-                return (
-                    <MenuItem key={index} value={service.categoryId}>{service.categoryName}</MenuItem>
-                )
-            })
-        }
-        return result;
-    }
+    const options = serviceCategoryList;
 
     return (
         <Formik
@@ -65,27 +57,29 @@ function ServiceDetailForm(props) {
             validationSchema={validationSchema}
             onSubmit={props.onSubmit}
         >
-            {({ submitForm, isSubmitting }) => (
+            {({ submitForm, isSubmitting, errors }) => (
                 <Form className={classes.root}>
-                    <FormControl>
-                        <InputLabel required htmlFor="categoryId">Category Id</InputLabel>
-                        <Field
-                            required
-                            component={Select}
-                            name="categoryId"
-                            inputProps={{
-                                id: 'categoryId',
-                            }}
-                        >
-                            {showService(serviceCategoryList)}
-                        </Field>
-                    </FormControl>
+                    <Field
+                        name="categoryId"
+                        component={Autocomplete}
+                        options={options}
+                        getOptionLabel={(option) => option.categoryName}
+                        renderInput={(params) => (
+                            <TextField1 {...params}
+                                label="Service Category"
+                                variant="outlined"
+                                required
+                                error={errors.categoryId ? true : false}
+                                helperText={errors.categoryId} />
+                        )}
+                    />
                     <Field
                         required
                         component={TextField}
                         name="serviceItemName"
                         type="text"
                         label="Service Item Name"
+                        variant="outlined"
                     />
                     <Field
                         required
@@ -93,6 +87,7 @@ function ServiceDetailForm(props) {
                         name="serviceItemPrice"
                         type="text"
                         label="Service Item Price"
+                        variant="outlined"
                     />
                     {isSubmitting && <LinearProgress />}
                     <Link to={`/admin/services`}

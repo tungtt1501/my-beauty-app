@@ -2,14 +2,16 @@ import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { Select, TextField } from 'formik-material-ui';
+import { TextField } from 'formik-material-ui';
 import { DatePicker, TimePicker } from 'formik-material-ui-pickers';
-import { Button, InputLabel, LinearProgress, makeStyles, MenuItem } from '@material-ui/core';
+import { Button, LinearProgress, makeStyles } from '@material-ui/core';
+import TextField1 from '@material-ui/core/TextField'
 import { getAllItem } from '../DashBoard/Services/ServiceItemsSlice';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
 import { add } from '../DashBoard/Orders/OrderSlice';
+import { Autocomplete } from 'formik-material-ui-lab';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +31,9 @@ function BookForm(props) {
         const addOrder = async () => {
             const order = {
                 ...values, date: moment(values.date).format('YYYY-MM-DD HH:mm:ss'),
-                time: moment(values.time).format('YYYY-MM-DD HH:mm:ss')
+                time: moment(values.time).format('YYYY-MM-DD HH:mm:ss'),
+                service: values.service.serviceItemName,
+                status: 0
             }
             await dispatch(add(order));
             props.onAddSuccess();
@@ -57,24 +61,14 @@ function BookForm(props) {
         }
     }, [loadingStatus, dispatch]);
 
-    const showService = (services) => {
-        var result = null;
-        if (services) {
-            result = services.map((service, index) => {
-                return (
-                    <MenuItem key={index} value={service.serviceItemName}>{service.serviceItemName}</MenuItem>
-                )
-            })
-        }
-        return result;
-    }
+    const options = services;
 
     const initialValues = {
         firstName: '',
         lastName: '',
         email: '',
         phone: '',
-        service: '',
+        service: null,
         date: new Date(),
         time: new Date()
     }
@@ -88,7 +82,9 @@ function BookForm(props) {
             .required("This field is required."),
         phone: Yup.string().matches(regexpPhone, 'Phone Number is not correct.')
             .required("This field is required."),
+        service: Yup.string().required("This field is required.").nullable(),
         date: Yup.string().required("This field is required."),
+        time: Yup.string().required("This field is required."),
     });
     return (
         <Fragment>
@@ -99,7 +95,7 @@ function BookForm(props) {
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={onSave}>
-                    {({ submitForm, isSubmitting }) => (
+                    {({ submitForm, isSubmitting, errors, touched }) => (
                         <Form className={classes.root}>
                             <Field
                                 required
@@ -107,6 +103,7 @@ function BookForm(props) {
                                 name="firstName"
                                 type="text"
                                 label="First Name"
+                                variant="outlined"
                             />
                             <Field
                                 required
@@ -114,6 +111,7 @@ function BookForm(props) {
                                 name="lastName"
                                 type="text"
                                 label="Last Name"
+                                variant="outlined"
                             />
                             <Field
                                 required
@@ -121,6 +119,7 @@ function BookForm(props) {
                                 name="email"
                                 type="text"
                                 label="Email"
+                                variant="outlined"
                             />
                             <Field
                                 required
@@ -128,27 +127,36 @@ function BookForm(props) {
                                 name="phone"
                                 type="text"
                                 label="Phone Number"
+                                variant="outlined"
                             />
-                            <InputLabel required htmlFor="service">Category Id</InputLabel>
                             <Field
-                                required
-                                component={Select}
                                 name="service"
-                                inputProps={{
-                                    id: 'service',
-                                }}
-                            >
-                                {showService(services)}
-                            </Field>
+                                component={Autocomplete}
+                                options={options}
+                                getOptionLabel={(option) => option.serviceItemName}
+                                renderInput={(params) => (
+                                    <TextField1 {...params}
+                                    label="Service"
+                                    variant="outlined"
+                                    required
+                                    error={errors.service ? true : false}
+                                    helperText={errors.service} />
+                                )}
+                            />
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                                 <Field
                                     component={DatePicker}
                                     label="Date"
-                                    name="date" />
+                                    name="date"
+                                    inputVariant="outlined" />
                             </MuiPickersUtilsProvider>
 
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <Field component={TimePicker} label="Time" name="time" />
+                                <Field component={TimePicker}
+                                    label="Time"
+                                    name="time"
+                                    inputVariant="outlined"
+                                />
                             </MuiPickersUtilsProvider>
                             {isSubmitting && <LinearProgress />}
                             <Button

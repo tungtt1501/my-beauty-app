@@ -54,6 +54,7 @@ function ServiceCategoryForm(props) {
                         name="categoryName"
                         type="text"
                         label="Category Name"
+                        variant="outlined"
                     />
                     {isSubmitting && <LinearProgress />}
                     <Link to={`/admin/services`}

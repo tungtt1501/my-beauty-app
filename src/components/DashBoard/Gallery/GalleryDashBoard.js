@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import GalleryList from './GalleryList';
-import { removePhoto } from './GallerySlice';
+import { getAll, removePhoto } from './GallerySlice';
 import {
     Button
 } from '@material-ui/core';
@@ -16,20 +16,30 @@ GalleryDashBoard.propTypes = {
 function GalleryDashBoard(props) {
     const dispatch = useDispatch();
     const photos = useSelector(state => state.photos.list);
+    const loadingStatus = useSelector(state => state.photos.status);
     const history = useHistory();
-
-    const handlePhotoEditClick = (photo) => {
-        console.log('Edit: ', photo);
-        const editPhotoUrl = `/admin/gallery/${photo.id}`;
-        history.push(editPhotoUrl);
-    }
 
     const handlePhotoRemoveClick = (photo) => {
         console.log('Remove: ', photo);
         const removePhotoId = photo.id;
-        const action = removePhoto(removePhotoId);
-        dispatch(action);
+        // const action = removePhoto(removePhotoId);
+        // dispatch(action);
     }
+
+    useEffect(() => {
+        if (loadingStatus == 'idle') {
+            const fetchAllGalley = async () => {
+                try {
+                    const params = {};
+                    await dispatch(getAll(params));
+                } catch (error) {
+                    console.log('Failed to fetch category list: ', error);
+                }
+            }
+
+            fetchAllGalley();
+        }
+    }, [loadingStatus, dispatch]);
     return (
         <Container maxWidth={false}>
             <div className="photo-main">
@@ -49,7 +59,6 @@ function GalleryDashBoard(props) {
 
                 <GalleryList
                     photoList={photos}
-                    onPhotoEditClick={handlePhotoEditClick}
                     onPhotoRemoveClick={handlePhotoRemoveClick}
                 />
             </div>

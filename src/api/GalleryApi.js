@@ -1,6 +1,15 @@
 import axiosClient from './axiosClient'
+import * as Config from './../constants/Config'
+import axios from 'axios';
 
 const URL = '/gallery';
+
+const axiosUploadClient = axios.create({
+  baseURL: Config.UPLOAD_URL,
+  headers: {
+    'content-type': 'application/json',
+  },
+});
 
 const GalleryApi = {
   getAll: (params) => {
@@ -14,6 +23,9 @@ const GalleryApi = {
   },
   delete: (id) => {
     return axiosClient.delete(URL + `?id=${id}`);
+  },
+  upload: (file) => {
+    return axiosUploadClient.post('', file);
   }
 }
 
