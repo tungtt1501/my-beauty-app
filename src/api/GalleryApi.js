@@ -6,9 +6,6 @@ const URL = '/gallery';
 
 const axiosUploadClient = axios.create({
   baseURL: Config.UPLOAD_URL,
-  headers: {
-    'content-type': 'application/json',
-  },
 });
 
 const GalleryApi = {
@@ -25,7 +22,14 @@ const GalleryApi = {
     return axiosClient.delete(URL + `?id=${id}`);
   },
   upload: (file) => {
-    return axiosUploadClient.post('', file);
+    var formData = new FormData();
+    formData.append('file', file.file);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    }
+    return axios.post(Config.UPLOAD_URL, formData, config);
   }
 }
 

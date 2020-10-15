@@ -33,10 +33,10 @@ const upload = createSlice({
             state.status = 'succeeded'
             if (!action.payload.data.error) {
                 state.url = action.payload.data.url;
-                state.error = null
+                state.error = null;
             } else {
                 state.url = null;
-                state.error = action.payload.data.error
+                state.error = action.payload.data.error;
             }
         },
     }

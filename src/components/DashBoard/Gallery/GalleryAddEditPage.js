@@ -21,6 +21,7 @@ function GalleryAddEditPage(props) {
     const history = useHistory();
 
     const initialValues = { file: "" };
+    const uploadStatus = useSelector(state => state.status);
     const name = useSelector(state => state.upload.url);
     const error = useSelector(state => state.upload.error);
 
@@ -28,12 +29,8 @@ function GalleryAddEditPage(props) {
         const uploadFile = async () => {
             try {
                 const data = { ...values };
-                await dispatch(uploadAct({file: data}));
+                await dispatch(uploadAct(data));
                 setSubmitting(false);
-                if (!error && !name) {
-                    const gallery = {url: name};
-                    await dispatch(add(gallery));
-                }
             } catch (error) {
                 console.log('Failed to fetch category list: ', error);
             }
@@ -41,6 +38,24 @@ function GalleryAddEditPage(props) {
 
         uploadFile();
     }
+
+    useEffect(() => {
+        if (uploadStatus === 'success') {
+            const addFile = async () => {
+                if (!error && !name) {
+                    try {
+                        const gallery = { url: name };
+                        console.log(gallery);
+                        await dispatch(add(gallery));
+                    } catch (error) {
+                        console.log('Failed to fetch category list: ', error);
+                    }
+                }
+            }
+
+            addFile();
+        }
+    }, [uploadStatus, name, error])
 
     const handleClose = () => {
         const actCloseErr = clearErr();
