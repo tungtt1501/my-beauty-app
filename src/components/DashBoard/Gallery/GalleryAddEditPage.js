@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import GalleryForm from './GalleryForm';
-import { clearErr, uploadAct } from './UploadSlice';
+import { resetUploadFile, uploadAct } from './UploadSlice';
 import { Slide, Snackbar } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { add } from './GallerySlice';
+import { add, resetState } from './GallerySlice';
 
 GalleryAddEditPage.propTypes = {
 
@@ -21,7 +20,7 @@ function GalleryAddEditPage(props) {
     const history = useHistory();
 
     const initialValues = { file: "" };
-    const uploadStatus = useSelector(state => state.status);
+    const uploadStatus = useSelector(state => state.upload.status);
     const name = useSelector(state => state.upload.url);
     const error = useSelector(state => state.upload.error);
 
@@ -31,6 +30,7 @@ function GalleryAddEditPage(props) {
                 const data = { ...values };
                 await dispatch(uploadAct(data));
                 setSubmitting(false);
+                dispatch(resetUploadFile());
             } catch (error) {
                 console.log('Failed to fetch category list: ', error);
             }
@@ -40,13 +40,17 @@ function GalleryAddEditPage(props) {
     }
 
     useEffect(() => {
-        if (uploadStatus === 'success') {
+        dispatch(resetState());
+    }, []);
+
+    useEffect(() => {
+        if (uploadStatus === 'succeeded') {
             const addFile = async () => {
-                if (!error && !name) {
+                if (!error && name) {
                     try {
                         const gallery = { url: name };
-                        console.log(gallery);
                         await dispatch(add(gallery));
+                        history.goBack();
                     } catch (error) {
                         console.log('Failed to fetch category list: ', error);
                     }
@@ -55,10 +59,10 @@ function GalleryAddEditPage(props) {
 
             addFile();
         }
-    }, [uploadStatus, name, error])
+    }, [uploadStatus, name, error]);
 
     const handleClose = () => {
-        const actCloseErr = clearErr();
+        const actCloseErr = resetUploadFile();
         dispatch(actCloseErr);
     }
 

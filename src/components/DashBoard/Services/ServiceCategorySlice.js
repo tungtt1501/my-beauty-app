@@ -84,8 +84,8 @@ const serviceCategorySlice = createSlice({
     },
     [deleteEntity.fulfilled] : (state, action) => {
       state.status = 'succeeded';
-      const removeId = action.payload;
-      return state.filter(category => category.categoryId != removeId);
+      const index = state.list.findIndex(x => x.categoryId === action.payload);
+      state.list.splice(index, 1);
     },
   }
 });

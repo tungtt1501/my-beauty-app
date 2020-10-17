@@ -57,7 +57,7 @@ class About extends React.Component {
         <div className={classes.root}>
           <Snackbar open={this.state.open} autoHideDuration={6000} onClose={this.handleClose} TransitionComponent={this.TransitionRight} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
             <Alert onClose={this.handleClose} severity="success" style={{ color: 'white', backgroundColor: '#6bac05' }}>
-              This is a success message!
+              Registre réussi!
           </Alert>
           </Snackbar>
         </div>
@@ -67,7 +67,7 @@ class About extends React.Component {
               <div className="row row-50 align-items-lg-center justify-content-xl-between">
                 <div className="col-md-6" style={{ marginTop: "-90px", marginBottom: "30px" }}>
                   <div style={{ width: "90%", height: "100%", margin: "auto" }}>
-                    <img src={'images/gallery-1.jpg'} className="img-about" />
+                    <img src={'images/about.png'} className="img-about" />
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -135,7 +135,7 @@ class About extends React.Component {
               </div>
             </div>
           </section>
-          <Modal styles={{maxWidth: '500px'}} open={this.state.sign} onClose={this.onCloseModal}>
+          <Modal styles={{ maxWidth: '500px' }} open={this.state.sign} onClose={this.onCloseModal}>
             <BookForm onAddSuccess={this.onAddSuccess} />
           </Modal>
 

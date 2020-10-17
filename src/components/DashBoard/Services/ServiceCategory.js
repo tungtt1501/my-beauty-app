@@ -72,8 +72,7 @@ const ServiceCategory = (props) => {
     const onDeleteCategory = (id) => {
         const deleteCategory = async () => {
             try {
-                const params = { id: id };
-                await dispatch(deleteEntity(params));
+                await dispatch(deleteEntity(id));
             } catch (error) {
                 console.log('Failed to delete: ', error);
             }

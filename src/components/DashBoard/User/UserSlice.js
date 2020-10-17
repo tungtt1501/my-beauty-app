@@ -81,8 +81,8 @@ const user = createSlice({
         },
         [deleteEntity.fulfilled]: (state, action) => {
             state.status = 'succeeded';
-            const removeId = action.payload;
-            return state.filter(entity => entity.userId != removeId);
+            const index = state.list.findIndex(x => x.userId === action.payload);
+            state.list.splice(index, 1);
         },
     }
 });

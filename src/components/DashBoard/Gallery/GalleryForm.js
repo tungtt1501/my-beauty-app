@@ -57,10 +57,6 @@ function GalleryForm(props) {
             )
     });
 
-    const submitFile = (e) => {
-        console.log(e);
-    }
-
     return (
         <Fragment>
             <Card

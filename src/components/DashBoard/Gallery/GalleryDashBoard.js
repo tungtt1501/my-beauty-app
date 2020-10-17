@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import GalleryList from './GalleryList';
-import { getAll, removePhoto } from './GallerySlice';
+import { deleteEntity, getAll, removePhoto } from './GallerySlice';
 import {
     Button
 } from '@material-ui/core';
@@ -20,10 +20,14 @@ function GalleryDashBoard(props) {
     const history = useHistory();
 
     const handlePhotoRemoveClick = (photo) => {
-        console.log('Remove: ', photo);
-        const removePhotoId = photo.id;
-        // const action = removePhoto(removePhotoId);
-        // dispatch(action);
+        const removePhoto = async () => {
+            try {
+                await dispatch(deleteEntity(photo.id));
+            } catch (error) {
+                console.log('Failed to delete: ', error);
+            }
+        }
+        removePhoto();
     }
 
     useEffect(() => {

@@ -16,9 +16,10 @@ const upload = createSlice({
     name: 'upload',
     initialState: initialPhotos,
     reducers: {
-        clearErr: (state) => {
+        resetUploadFile: (state) => {
             state.error = null;
-            state.url = null
+            state.url = null;
+            state.status= 'idle';
         }
     },
     extraReducers: {
@@ -43,5 +44,5 @@ const upload = createSlice({
 });
 
 const { reducer, actions } = upload;
-export const { clearErr } = actions;
+export const { resetUploadFile } = actions;
 export default reducer;

@@ -13,10 +13,10 @@ import { MainListItems } from './MainListItems';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import './dashboard.css'
 import { ExitToApp } from '@material-ui/icons';
-import { connect } from 'react-redux';
-import { logout } from './../../actions/auth'
-import { Route, BrowserRouter as Router, Switch, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch, useHistory } from 'react-router-dom';
 import dashboardroutes from './dashboardroutes';
+import { logout } from '../Login/AuthSlice';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -68,31 +68,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const userDetail = JSON.parse(localStorage.getItem("user"));
-
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Admin',
-  name: userDetail ? (userDetail.firstName + userDetail.lastName) : 'Guest'
-};
-
-const Dashboard = ({ auth, logout, className, ...rest }) => {
+const Dashboard = (props) => {
+  const {className, ...rest} = props;
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [name, setName] = useState('Guest');
+
+  const avatar = '/static/images/avatars/avatar_6.png';
+  const jobTitle = 'Admin';
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
 
   const history = useHistory();
+  const auth = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    // if (!auth.isAuthUser) {
-    //   history.push("/signin");
-    // }
-  });
+    if (!auth.isAuthUser) {
+      history.push("/signin");
+    } else {
+      const userDetail = JSON.parse(localStorage.getItem("user"));
+      setName(userDetail.firstName + userDetail.lastName);
+    }
+  }, [auth, dispatch]);
 
   const handleLogout = () => {
-    logout();
+    dispatch(logout());
     history.push("/signin");
   };
 
@@ -135,20 +138,20 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
       >
         <Avatar
           className={classes.avatar}
-          src={user.avatar}
+          src={avatar}
         />
         <Typography
           className={classes.name}
           color="textPrimary"
           variant="h5"
         >
-          {user.name}
+          {name}
         </Typography>
         <Typography
           color="textSecondary"
           variant="body2"
         >
-          {user.jobTitle}
+          {jobTitle}
         </Typography>
       </Box>
       <Divider />
@@ -212,19 +215,5 @@ const Dashboard = ({ auth, logout, className, ...rest }) => {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth
-  }
-}
-
-const mapDispatchToProps = (dispatch, props) => {
-  return {
-    logout: () => {
-      dispatch(logout());
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;
 

@@ -29,7 +29,7 @@ function PhotoCard(props) {
 
   return (
     <div className="photo">
-      <img src={photo.photo} alt={photo.title} />
+      <img src={photo.photo} alt={photo.title} height={'270px'}/>
 
       <div className="photo__overlay">
 

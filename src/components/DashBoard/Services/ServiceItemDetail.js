@@ -60,9 +60,6 @@ export default function ServiceItemDetail({ serviceItem, onDeleteServiceDetail})
                     {serviceItem.serviceItemName}
                 </TableCell>
                 <TableCell>
-                    {serviceItem.serviceItemTime}
-                </TableCell>
-                <TableCell>
                     {serviceItem.serviceItemPrice}
                 </TableCell>
                 <TableCell>

@@ -30,7 +30,12 @@ const initialServiceItem = {
 const serviceItem = createSlice({
   name: 'serviceItem',
   initialState: initialServiceItem,
-  reducers: {},
+  reducers: {
+    resetState: (state) => {
+      state.status = 'idle';
+      state.error = null;
+    }
+  },
   extraReducers: {
     [getAllItem.pending]: (state) => {
       state.status = 'loading'
@@ -82,11 +87,12 @@ const serviceItem = createSlice({
     },
     [deleteEntity.fulfilled]: (state, action) => {
       state.status = 'succeeded';
-      const removeId = action.payload;
-      return state.filter(entity => entity.serviceItemId != removeId);
+      const index = state.list.findIndex(x => x.serviceItemId === action.payload);
+      state.list.splice(index, 1);
     },
   }
 });
 
 const { reducer, actions } = serviceItem;
+export const { resetState } = actions;
 export default reducer;

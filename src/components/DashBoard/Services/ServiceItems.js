@@ -72,8 +72,7 @@ const ServiceItems = (props) => {
     const onDeleteServiceDetail = (id) => {
         const deleteServiceItem = async () => {
             try {
-                const params = { id: id };
-                await dispatch(deleteEntity(params));
+                await dispatch(deleteEntity(id));
             } catch (error) {
                 console.log('Failed to delete: ', error);
             }
@@ -112,9 +111,6 @@ const ServiceItems = (props) => {
                             </TableCell>
                             <TableCell>
                                 Service Name
-                            </TableCell>
-                            <TableCell>
-                                Time
                             </TableCell>
                             <TableCell>
                                 Price

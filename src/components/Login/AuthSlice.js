@@ -35,14 +35,14 @@ const auth = createSlice({
         },
         [login.fulfilled]: (state, action) => {
             state.status = 'succeeded'
-            if (action.payload.user) {
-                localStorage.setItem("user", JSON.stringify(action.payload.data.user));
+            if (!action.payload.error) {
+                localStorage.setItem("user", JSON.stringify(action.payload.user));
                 state.isAuthUser = true;
-                state.user = action.payload.data.user;
+                state.user = action.payload.user;
             } else {
                 state.isAuthUser = false;
                 state.user = null;
-                state.error = action.payload.data.error;
+                state.error = action.payload.error;
             }
         },
     }

@@ -27,7 +27,7 @@ function UserEditPage(props) {
 
     const editedItem = useSelector(state => {
         const foundItem = state.users.list.find(x => x.userId == id);
-        return foundItem;
+        return {...foundItem, password: 'EditPage'};
     });
 
     const initialValues = isAddMode ? { password: '', firstName: '', lastName: '', email: '' } : editedItem;

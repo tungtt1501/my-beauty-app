@@ -30,9 +30,9 @@ const gallery = createSlice({
   name: 'galleries',
   initialState: initialPhotos,
   reducers: {
-    clearErr: (state) => {
+    resetState: (state) => {
       state.error = null;
-      state.url = null
+      state.status = 'idle';
     }
   },
   extraReducers: {
@@ -47,9 +47,34 @@ const gallery = createSlice({
       state.status = 'succeeded'
       state.list = action.payload
     },
+    // Add
+    [add.pending]: (state) => {
+        state.status = 'loading'
+    },
+    [add.rejected]: (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+    },
+    [add.fulfilled]: (state, action) => {
+        state.status = 'succeeded'
+        state.list.push(action.payload);
+    },
+    // Delete entity
+    [deleteEntity.pending]: (state) => {
+        state.status = 'loading'
+    },
+    [deleteEntity.rejected]: (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message
+    },
+    [deleteEntity.fulfilled]: (state, action) => {
+        state.status = 'succeeded';
+        const index = state.list.findIndex(x => x.id === action.payload);
+        state.list.splice(index, 1);
+    },
   }
 });
 
 const { reducer, actions } = gallery;
-export const { clearErr } = actions;
+export const { resetState } = actions;
 export default reducer;
