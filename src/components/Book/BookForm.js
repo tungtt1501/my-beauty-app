@@ -6,7 +6,7 @@ import { TextField } from 'formik-material-ui';
 import { DatePicker, TimePicker } from 'formik-material-ui-pickers';
 import { Button, LinearProgress, makeStyles } from '@material-ui/core';
 import TextField1 from '@material-ui/core/TextField'
-import { getAllItem } from '../DashBoard/Services/ServiceItemsSlice';
+import { getAllItem, resetState } from '../DashBoard/Services/ServiceItemsSlice';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
@@ -36,6 +36,7 @@ function BookForm(props) {
                 status: 0
             }
             await dispatch(add(order));
+            dispatch(resetState());
             props.onAddSuccess();
         }
 
@@ -136,11 +137,11 @@ function BookForm(props) {
                                 getOptionLabel={(option) => option.serviceItemName}
                                 renderInput={(params) => (
                                     <TextField1 {...params}
-                                    label="Service"
-                                    variant="outlined"
-                                    required
-                                    error={errors.service ? true : false}
-                                    helperText={errors.service} />
+                                        label="Service"
+                                        variant="outlined"
+                                        required
+                                        error={errors.service ? true : false}
+                                        helperText={errors.service} />
                                 )}
                             />
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
