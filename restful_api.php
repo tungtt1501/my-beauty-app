@@ -42,16 +42,18 @@ class restful_api {
      * Allow CORS
      * Thực hiện lấy các thông tin của request: endpoint, params và method
      */
-    private function _input(){
-        header("Access-Control-Allow-Orgin: *");
-        header("Access-Control-Allow-Methods: *");
-
+    private function _input() {
+	    header('Access-Control-Allow-Origin: https://www.my-beauty-lausanne.ch');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+        header('Access-Control-Allow-Headers: Content-Type');
+	    header('Access-Control-Allow-Credentials: true');
+	  
         $this->params   = explode('/', trim($_SERVER['PATH_INFO'],'/'));
         $this->endpoint = array_shift($this->params);
 
         // Lấy method của request
         $method         = $_SERVER['REQUEST_METHOD'];
-        $allow_method   = array('GET', 'POST', 'PUT', 'DELETE');
+        $allow_method   = array('GET', 'POST', 'PUT', 'DELETE', 'OPTIONS');
 
         if (in_array($method, $allow_method)){
             $this->method = $method;
@@ -59,6 +61,10 @@ class restful_api {
 
         // Nhân thêm dữ liệu tương ứng theo từng loại method
         switch ($this->method) {
+		    case 'OPTIONS':
+		        $this->response(200);
+		    break;
+		  
             case 'POST':
                 $this->file = file_get_contents("php://input");
             break;
@@ -74,7 +80,7 @@ class restful_api {
             case 'DELETE':
                 // Không cần nhận, bởi params đã được lấy từ url
             break;
-
+		  
             default:
                 $this->response(500, "Invalid Method");
             break;

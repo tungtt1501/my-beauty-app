@@ -338,8 +338,8 @@ class api extends restful_api {
 	    switch ($this->method) {
             case 'POST':
 				$arr = json_decode($this->file, true);
-                $email = $arr['email'];
-    		    $password = $arr['password'];
+                $email = $arr['data']['email'];
+    		    $password = $arr['data']['password'];
     			$result = $this -> dbConnect -> query("SELECT * FROM users where email = '$email' and password = '$password'");
     			$user = array();
     			if($result){
@@ -435,25 +435,25 @@ class api extends restful_api {
                 break;
 
             case 'GET':
-		  		$id = $_GET['id'];
-		  		$result = $this -> dbConnect -> query("SELECT * FROM users where user_id = '$id'");
+				$result = $this -> dbConnect -> query("SELECT * FROM users");
 			
-				$user;
+				$resultSet = array();
 				if($result){
 					// Cycle through results
 					while ($row = $result -> fetch_assoc()){
 						extract($row);
-						$user = array (
+						$user_item = array (
 							'userId' =>  $user_id,
 							'firstName' => $first_name,
 							'lastName'=> $last_name,
 							'email' => $email
 						);
+						array_push($resultSet, $user_item);
 					}
 					// Free result set
 					$result->close();
 				}
-				$this->response(200, $user);
+				$this->response(200, $resultSet);
 				break;
 
             case 'PUT':
@@ -668,6 +668,86 @@ class api extends restful_api {
                 break;
 
             case 'DELETE':
+				break;
+
+            default:
+                $this->response(500, "Invalid Method");
+				break;
+        }
+	}
+
+	function gallery(){
+	    switch ($this->method) {
+            case 'POST':
+				$arr = json_decode($this->file, true);
+                $photo = $arr['url'];
+    			$result = $this -> dbConnect -> query("INSERT INTO gallery(photo) VALUES ('$photo')");
+    			
+    			$gallery = array();
+    			if($result) {
+    				// Cycle through results
+    				$id = $this -> dbConnect -> insert_id;
+    				$result = $this -> dbConnect -> query("SELECT * from gallery where id = '$id'");
+    				if ($result) {
+        				while ($row = $result -> fetch_assoc()){
+        					extract($row);
+        					$gallery = array (
+                                "id" => $id,
+                                "photo" => $photo
+        					);
+        				}
+    				}
+    				// Free result set
+    				$result->close();
+    			}
+    			$this->response(200, $gallery);
+                break;
+            case 'GET':
+                // Perform query
+			    $result = $this -> dbConnect -> query("SELECT * FROM gallery");
+		
+			    $resultSet = array();
+			    if($result){
+				    // Cycle through results
+				    while ($row = $result -> fetch_assoc()){
+					    extract($row);
+					    $gallery_item = array (
+						    "id" => $id,
+                            "photo" => $photo
+					    );
+					    array_push($resultSet, $gallery_item);
+				    }
+				    // Free result set
+				    $result->close();
+			    }
+			    $this->response(200, $resultSet);
+                break;
+
+            case 'PUT':
+                break;
+
+			case 'DELETE':
+				$id = $_GET['id'];
+			    $result = $this -> dbConnect -> query("DELETE FROM gallery where id = '$id'");
+		  
+		  		$gallery;
+    			if($result) {
+    				// Cycle through results
+    				$result = $this -> dbConnect -> query("SELECT * from gallery where id = '$id'");
+    				if ($result) {
+        				while ($row = $result -> fetch_assoc()){
+        					extract($row);
+						  	$gallery = array (
+								"id" => $id,
+                                "photo" => $photo
+        					);
+        				}
+    				}
+    				// Free result set
+				  	$result->close();
+    			}
+    			$this->response(200, $id);
+				break;
 				break;
 
             default:

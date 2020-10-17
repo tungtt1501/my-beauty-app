@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: PUT, GET, POST");
 
 $response = array();
-$upload_dir = realpath('./images') . '/';
+$upload_dir = realpath('./admin/images') . '/';
 $logic_dir = ('images');
 $server_url = 'http://my-beauty-lausanne.ch';
 

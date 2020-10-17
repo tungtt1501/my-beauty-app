@@ -24,7 +24,8 @@ const useStyles = makeStyles(() => ({
         flexFlow: 1
     },
     tableLayout: {
-        tableLayout: "fixed"
+        tableLayout: "fixed",
+        minWidth: "1200px"
     }
 }));
 

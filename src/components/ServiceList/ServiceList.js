@@ -48,7 +48,7 @@ function ServiceList(props) {
     var result = null;
     if (services) {
       result = services.map((service, index) => {
-        const serviceItems = allServiceItems.filter(entity => entity.categoryId === service.categoryId);
+        const serviceItems = allServiceItems.filter(entity => entity.categoryId === service.categoryName);
         return (
           <ServiceCatelogy
             key={index}
