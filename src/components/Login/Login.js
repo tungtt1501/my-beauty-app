@@ -61,7 +61,7 @@ const TransitionRight = (props) => {
 const SignIn = (props) => {
     const classes = useStyles();
 
-    const loginHandler = (values, {setSubmitting}) => {
+    const loginHandler = (values, { setSubmitting }) => {
 
         const actLogin = async () => {
             try {
@@ -86,6 +86,12 @@ const SignIn = (props) => {
     const error = useSelector(state => state.auth.error);
     const loginStatus = useSelector(state => state.auth.status);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (isAuth) {
+            history.push("/admin");
+        }
+    }, []);
 
     useEffect(() => {
         if (loginStatus == 'succeeded') {
